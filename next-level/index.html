@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Level · Portal de Reportes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06050F;color:#F1F5F9;font-family:'Inter',-apple-system,sans-serif;min-height:100vh}
+
+/* Next Level usa violeta/morado como color firma */
+:root{
+  --brand:#A855F7;
+  --brand-dim:rgba(168,85,247,0.1);
+  --brand-border:rgba(168,85,247,0.25);
+  --brand-glow:rgba(168,85,247,0.08);
+  --surface:#0D0B1A;
+  --surface2:#131027;
+  --border:#1E1A35;
+  --border2:#2A2448;
+  --text-dim:#94A3B8;
+  --text-muted:#475569;
+}
+
+.topbar{background:#040309;border-bottom:1px solid var(--border);padding:0 2rem;height:48px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.7rem;color:#fff;letter-spacing:-.03em}
+.logo-text{font-size:.85rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.topbar-right{font-size:.72rem;color:var(--text-muted)}
+.topbar-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brand);margin-right:.4rem;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:4rem 2.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:.2}
+.hero::after{content:'';position:absolute;top:-60px;right:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,.1) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.eyebrow-bar{width:28px;height:2px;background:var(--brand)}
+.eyebrow-text{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--brand)}
+.hero h1{font-size:3rem;font-weight:900;letter-spacing:-.05em;color:#fff;margin-bottom:.4rem}
+.hero h1 span{color:var(--brand)}
+.hero p{color:var(--text-dim);font-size:.9rem}
+
+.container{max-width:1200px;margin:0 auto;padding:3rem 2.5rem}
+.section-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.client-card{background:var(--surface2);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem;transition:border-color .2s,transform .2s,box-shadow .2s;text-decoration:none;display:block}
+.client-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.client-card.has-sub{border-left:3px solid var(--brand)}
+
+.client-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+.client-icon{width:42px;height:42px;border-radius:10px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:var(--brand-dim)}
+.client-name{font-size:1rem;font-weight:700;color:#fff}
+.client-meta{font-size:.72rem;color:var(--text-muted)}
+
+.reports-list{display:flex;flex-direction:column;gap:.6rem}
+.report-link{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:rgba(168,85,247,.05);border:1px solid var(--border);border-radius:.75rem;text-decoration:none;transition:border-color .15s,background .15s}
+.report-link:hover{border-color:var(--brand);background:var(--brand-dim)}
+.report-link-left{display:flex;align-items:center;gap:.6rem}
+.report-dot{width:6px;height:6px;border-radius:50%;background:var(--brand);flex-shrink:0}
+.report-name{font-size:.82rem;font-weight:600;color:#E2E8F0}
+.report-date{font-size:.7rem;color:var(--text-muted)}
+.report-arrow{color:var(--text-muted);font-size:.9rem;transition:color .15s}
+.report-link:hover .report-arrow{color:var(--brand)}
+
+.sub-badge{display:inline-flex;align-items:center;gap:.3rem;background:var(--brand-dim);border:1px solid var(--brand-border);border-radius:4px;padding:.15rem .5rem;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--brand);margin-bottom:.75rem}
+
+.empty-state{color:var(--text-muted);font-size:.82rem;padding:.4rem 0;font-style:italic}
+
+.footer{background:#040309;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem}
+.footer-left{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.footer-left span{color:var(--brand)}
+.footer-right{font-size:.72rem;color:var(--text-muted)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../" class="logo">
+    <div class="logo-mark">NL</div>
+    <span class="logo-text">Next Level</span>
+  </a>
+  <div class="topbar-right">
+    <span class="topbar-dot"></span>Portal de Reportes · Clientes
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span class="eyebrow-text">Reportes Digitales</span></div>
+    <h1>Next <span>Level</span></h1>
+    <p>Dashboards interactivos de rendimiento publicitario · Meta Ads · Google Ads</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-label">Clientes Activos</div>
+  <div class="clients-grid">
+
+    <!-- Mundo Intercambio -->
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">🌎</div>
+        <div>
+          <div class="client-name">Mundo Intercambio</div>
+          <div class="client-meta">Meta Ads · Performance</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <!-- Battery GO -->
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">⚡</div>
+        <div>
+          <div class="client-name">Battery GO</div>
+          <div class="client-meta">Meta Ads · Performance</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <!-- Franchesco -->
+    <a href="franchesco/" class="client-card has-sub">
+      <div class="client-header">
+        <div class="client-icon">🏢</div>
+        <div>
+          <div class="client-name">Clientes Franchesco</div>
+          <div class="client-meta">Portafolio · Multi-cliente</div>
+        </div>
+      </div>
+      <div class="sub-badge">📁 Portafolio con sub-clientes →</div>
+      <div class="reports-list">
+        <div class="report-link" style="pointer-events:none">
+          <div class="report-link-left">
+            <div class="report-dot"></div>
+            <div>
+              <div class="report-name">Ver todos los clientes</div>
+              <div class="report-date">Haz clic para explorar el portafolio</div>
+            </div>
+          </div>
+          <span class="report-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">NEXT <span>LEVEL</span></div>
+  <div class="footer-right">Portal de Reportes · Meta Ads · Google Ads</div>
+</footer>
+
+</body>
+</html>

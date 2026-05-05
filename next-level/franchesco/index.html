@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchesco · Portafolio de Clientes · Next Level</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06050F;color:#F1F5F9;font-family:'Inter',-apple-system,sans-serif;min-height:100vh}
+:root{
+  --brand:#A855F7;
+  --brand-dim:rgba(168,85,247,0.1);
+  --brand-border:rgba(168,85,247,0.25);
+  --surface:#0D0B1A;
+  --surface2:#131027;
+  --border:#1E1A35;
+  --border2:#2A2448;
+  --text-dim:#94A3B8;
+  --text-muted:#475569;
+}
+.topbar{background:#040309;border-bottom:1px solid var(--border);padding:0 2rem;height:48px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.7rem;color:#fff}
+.logo-text{font-size:.85rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.breadcrumb{font-size:.72rem;color:var(--text-muted);display:flex;align-items:center;gap:.4rem}
+.breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color .15s}
+.breadcrumb a:hover{color:var(--brand)}
+.breadcrumb span{color:var(--brand)}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--border);padding:3rem 2.5rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-60px;right:-60px;width:350px;height:350px;background:radial-gradient(circle,rgba(168,85,247,.1) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
+.eyebrow{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.eyebrow-bar{width:24px;height:2px;background:var(--brand)}
+.hero h1{font-size:2.4rem;font-weight:900;letter-spacing:-.04em;color:#fff}
+.hero p{color:var(--text-dim);font-size:.87rem;margin-top:.4rem}
+.hero-badge{background:var(--brand-dim);border:1px solid var(--brand-border);border-radius:.6rem;padding:.75rem 1.25rem;text-align:right;flex-shrink:0}
+.hero-badge-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--brand);font-weight:700;margin-bottom:.2rem}
+.hero-badge-value{font-size:.88rem;font-weight:700;color:#fff}
+
+.container{max-width:1200px;margin:0 auto;padding:3rem 2.5rem}
+.section-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.client-card{background:var(--surface2);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem;transition:border-color .2s,transform .2s,box-shadow .2s}
+.client-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.client-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.client-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-dim);border:1px solid var(--brand-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.client-name{font-size:.95rem;font-weight:700;color:#fff}
+.client-meta{font-size:.7rem;color:var(--text-muted)}
+.reports-list{display:flex;flex-direction:column;gap:.5rem}
+.report-link{display:flex;align-items:center;justify-content:space-between;padding:.65rem .9rem;background:rgba(168,85,247,.05);border:1px solid var(--border);border-radius:.65rem;text-decoration:none;transition:all .15s}
+.report-link:hover{border-color:var(--brand);background:var(--brand-dim)}
+.report-link-left{display:flex;align-items:center;gap:.5rem}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--brand)}
+.rname{font-size:.8rem;font-weight:600;color:#E2E8F0}
+.rdate{font-size:.67rem;color:var(--text-muted)}
+.rarrow{color:var(--text-muted);font-size:.85rem;transition:color .15s}
+.report-link:hover .rarrow{color:var(--brand)}
+.empty{color:var(--text-muted);font-size:.8rem;font-style:italic;padding:.3rem 0}
+
+/* Add client placeholder */
+.add-card{background:transparent;border:2px dashed var(--border);border-radius:1.25rem;padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;min-height:140px;color:var(--text-muted);font-size:.82rem;cursor:default}
+.add-icon{font-size:1.8rem;opacity:.4}
+
+.footer{background:#040309;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem}
+.footer-left{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.footer-left span{color:var(--brand)}
+.footer-right{font-size:.72rem;color:var(--text-muted)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../" class="logo">
+    <div class="logo-mark">NL</div>
+    <span class="logo-text">Next Level</span>
+  </a>
+  <div class="breadcrumb">
+    <a href="../">Next Level</a> › <span>Franchesco</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow"><div class="eyebrow-bar"></div>Portafolio Multi-cliente</div>
+      <h1>Franchesco</h1>
+      <p>Gestión de clientes · Reportes individuales por cuenta publicitaria</p>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-label">Portafolio</div>
+      <div class="hero-badge-value">Clientes Franchesco</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-label">Clientes del Portafolio</div>
+  <div class="clients-grid" id="clientsGrid">
+
+    <!-- Los sub-clientes se agregarán aquí -->
+    <div class="add-card">
+      <div class="add-icon">＋</div>
+      <div>Los sub-clientes aparecerán aquí</div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">NEXT <span>LEVEL</span> · Franchesco</div>
+  <div class="footer-right">Portafolio Multi-cliente · Meta Ads</div>
+</footer>
+
+</body>
+</html>
