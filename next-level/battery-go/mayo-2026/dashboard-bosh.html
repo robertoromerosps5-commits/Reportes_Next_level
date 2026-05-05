@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard BOSCH · Battery GO · Next Level</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #161a24;
+      --surface2: #1e2535;
+      --border: #2a3045;
+      --accent: #e8b00a;
+      --accent2: #f03a2e;
+      --text: #e8eaf0;
+      --muted: #7a8098;
+      --green: #22c55e;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; }
+
+    /* HEADER */
+    header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .logo-badge { background: var(--accent2); color: #fff; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 8px; letter-spacing: .5px; }
+    .header-title h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+    .header-title p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .header-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-green { background: rgba(34,197,94,.15); color: #22c55e; border: 1px solid rgba(34,197,94,.3); }
+    .badge-blue { background: rgba(59,130,246,.15); color: #93c5fd; border: 1px solid rgba(59,130,246,.3); }
+    .period-label { font-size: 12px; color: var(--muted); }
+    .period-label span { color: var(--accent); font-weight: 600; }
+
+    /* LAYOUT */
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px 20px; }
+    .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+    /* KPI GRID */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform .15s; }
+    .kpi-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+    .kpi-value { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
+    .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .kpi-accent { border-top: 3px solid var(--accent); }
+    .kpi-red { border-top: 3px solid var(--accent2); }
+    .kpi-green { border-top: 3px solid var(--green); }
+    .kpi-blue { border-top: 3px solid var(--blue); }
+    .kpi-purple { border-top: 3px solid var(--purple); }
+    .kpi-orange { border-top: 3px solid var(--orange); }
+
+    /* CHARTS ROW */
+    .charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 900px) { .charts-row { grid-template-columns: 1fr; } }
+    .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .chart-card h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .chart-card p { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+    .chart-wrap { position: relative; height: 220px; }
+
+    /* FUNNEL */
+    .funnel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+    .funnel-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .funnel { display: flex; align-items: stretch; gap: 0; }
+    .funnel-step { flex: 1; text-align: center; }
+    .funnel-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 10px; }
+    .funnel-bar { width: 100%; border-radius: 6px 6px 0 0; transition: height .3s; }
+    .funnel-arrow { color: var(--muted); font-size: 18px; display: flex; align-items: center; padding-top: 20px; }
+    .funnel-num { font-size: 18px; font-weight: 800; color: var(--text); }
+    .funnel-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+    .funnel-pct { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+    /* ADS TABLE */
+    .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; overflow-x: auto; }
+    .table-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    td { padding: 12px 12px; border-bottom: 1px solid rgba(42,48,69,.5); font-size: 13px; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+    .ad-name { font-weight: 600; color: var(--text); }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+    .dot-active { background: var(--green); box-shadow: 0 0 6px rgba(34,197,94,.5); }
+    .dot-paused { background: var(--muted); }
+    .bar-cell { display: flex; align-items: center; gap: 8px; }
+    .mini-bar { height: 6px; border-radius: 3px; background: var(--accent); min-width: 4px; }
+    .metric-hi { color: var(--green); font-weight: 700; }
+    .metric-lo { color: var(--orange); }
+
+    /* PLATFORM SUMMARY */
+    .platform-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 28px; }
+    @media (max-width: 700px) { .platform-row { grid-template-columns: 1fr; } }
+    .platform-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .platform-card .plat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .plat-name { font-weight: 700; font-size: 14px; }
+    .plat-spend { font-size: 20px; font-weight: 800; color: var(--accent); }
+    .plat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .plat-metric { background: var(--surface2); border-radius: 8px; padding: 8px 10px; }
+    .plat-metric-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+    .plat-metric-val { font-size: 15px; font-weight: 700; margin-top: 2px; }
+    .fb-accent { border-top: 3px solid #1877f2; }
+    .ig-accent { border-top: 3px solid #c13584; }
+    .wa-accent { border-top: 3px solid #25d366; }
+
+    /* ADSET INFO */
+    .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 700px) { .info-row { grid-template-columns: 1fr; } }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .info-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 12px; }
+    .info-list { display: flex; flex-direction: column; gap: 8px; }
+    .info-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(42,48,69,.5); }
+    .info-item:last-child { border-bottom: none; }
+    .info-key { color: var(--muted); font-size: 12px; }
+    .info-val { font-weight: 600; font-size: 13px; color: var(--text); }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    footer span { font-size: 11px; color: var(--muted); }
+    footer strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-badge">BOSCH</div>
+    <div class="header-title">
+      <h1>Battery GO · Campaña Marca BOSCH</h1>
+      <p>Battery Go - Mensajes Campaña - MARCA BOSH &nbsp;·&nbsp; Objetivo: Conversaciones</p>
+    </div>
+  </div>
+  <div class="header-meta">
+    <span class="badge badge-green">● ACTIVA</span>
+    <span class="badge badge-blue">Meta Ads</span>
+    <span class="period-label">Período: <span>4 abr – 3 may 2026</span> (últimos 30 días)</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- KPI CARDS -->
+  <p class="section-title">Métricas clave — campaña completa</p>
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-accent">
+      <div class="kpi-label">Inversión</div>
+      <div class="kpi-value">$335</div>
+      <div class="kpi-sub">$335.18 USD · $15/día</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">Impresiones</div>
+      <div class="kpi-value">181K</div>
+      <div class="kpi-sub">181,671 totales</div>
+    </div>
+    <div class="kpi-card kpi-purple">
+      <div class="kpi-label">Alcance</div>
+      <div class="kpi-value">68.7K</div>
+      <div class="kpi-sub">personas únicas</div>
+    </div>
+    <div class="kpi-card kpi-orange">
+      <div class="kpi-label">Frecuencia</div>
+      <div class="kpi-value">2.64</div>
+      <div class="kpi-sub">veces por persona</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Clics totales</div>
+      <div class="kpi-value">3,366</div>
+      <div class="kpi-sub">Link clicks: 1,109</div>
+    </div>
+    <div class="kpi-card kpi-accent">
+      <div class="kpi-label">CTR</div>
+      <div class="kpi-value">1.85%</div>
+      <div class="kpi-sub">clicks / impresiones</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">CPC</div>
+      <div class="kpi-value">$0.10</div>
+      <div class="kpi-sub">costo por clic</div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div class="kpi-label">CPM</div>
+      <div class="kpi-value">$1.84</div>
+      <div class="kpi-sub">por 1,000 impresiones</div>
+    </div>
+    <div class="kpi-card kpi-purple">
+      <div class="kpi-label">Video Views</div>
+      <div class="kpi-value">31K</div>
+      <div class="kpi-sub">31,060 reproducciones</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Engagement</div>
+      <div class="kpi-value">33.2K</div>
+      <div class="kpi-sub">interacciones totales</div>
+    </div>
+  </div>
+
+  <!-- FUNNEL -->
+  <p class="section-title">Embudo de rendimiento</p>
+  <div class="funnel-card">
+    <h3>Impresiones → Alcance → Clics → Video Views → Engagement</h3>
+    <div id="funnelChart" style="height:200px; position:relative;"></div>
+  </div>
+
+  <!-- CHARTS -->
+  <p class="section-title">Distribución por plataforma</p>
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Inversión por plataforma</h3>
+      <p>Distribución del gasto ($335.18 total)</p>
+      <div class="chart-wrap"><canvas id="spendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Impresiones por plataforma</h3>
+      <p>Total: 181,671 impresiones</p>
+      <div class="chart-wrap"><canvas id="impChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>CTR por plataforma</h3>
+      <p>Porcentaje de clics sobre impresiones</p>
+      <div class="chart-wrap"><canvas id="ctrChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- PLATFORM CARDS -->
+  <p class="section-title">Detalle por plataforma</p>
+  <div class="platform-row">
+    <div class="platform-card fb-accent">
+      <div class="plat-header">
+        <span class="plat-name">📘 Facebook</span>
+        <span class="badge badge-blue">66.8%</span>
+      </div>
+      <div class="plat-spend">$223.83</div>
+      <div class="plat-grid" style="margin-top:12px;">
+        <div class="plat-metric"><div class="plat-metric-lbl">Impresiones</div><div class="plat-metric-val">133,217</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Alcance</div><div class="plat-metric-val">51,545</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Clics</div><div class="plat-metric-val">2,720</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CTR</div><div class="plat-metric-val" style="color:var(--green)">2.04%</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CPM</div><div class="plat-metric-val">$1.68</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Video Views</div><div class="plat-metric-val">19,941</div></div>
+      </div>
+    </div>
+    <div class="platform-card ig-accent">
+      <div class="plat-header">
+        <span class="plat-name">📸 Instagram</span>
+        <span class="badge" style="background:rgba(193,53,132,.15);color:#e879be;border:1px solid rgba(193,53,132,.3)">30.7%</span>
+      </div>
+      <div class="plat-spend" style="color:#e879be;">$103.05</div>
+      <div class="plat-grid" style="margin-top:12px;">
+        <div class="plat-metric"><div class="plat-metric-lbl">Impresiones</div><div class="plat-metric-val">43,628</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Alcance</div><div class="plat-metric-val">19,387</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Clics</div><div class="plat-metric-val">630</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CTR</div><div class="plat-metric-val" style="color:var(--orange)">1.44%</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CPM</div><div class="plat-metric-val">$2.36</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Video Views</div><div class="plat-metric-val">11,111</div></div>
+      </div>
+    </div>
+    <div class="platform-card wa-accent">
+      <div class="plat-header">
+        <span class="plat-name">💬 WhatsApp</span>
+        <span class="badge" style="background:rgba(37,211,102,.15);color:#25d366;border:1px solid rgba(37,211,102,.3)">2.5%</span>
+      </div>
+      <div class="plat-spend" style="color:#25d366;">$8.30</div>
+      <div class="plat-grid" style="margin-top:12px;">
+        <div class="plat-metric"><div class="plat-metric-lbl">Impresiones</div><div class="plat-metric-val">4,826</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Alcance</div><div class="plat-metric-val">3,707</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Clics</div><div class="plat-metric-val">16</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CTR</div><div class="plat-metric-val" style="color:var(--muted)">0.33%</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CPM</div><div class="plat-metric-val">$1.72</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Video Views</div><div class="plat-metric-val">8</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADS TABLE -->
+  <p class="section-title">Rendimiento por anuncio (activos)</p>
+  <div class="table-card">
+    <h3>3 anuncios activos en el período · 7 pausados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Anuncio</th>
+          <th>Estado</th>
+          <th>Inversión</th>
+          <th>Impresiones</th>
+          <th>Alcance</th>
+          <th>Clics</th>
+          <th>CTR</th>
+          <th>CPC</th>
+          <th>CPM</th>
+          <th>Video Views</th>
+          <th>Engagement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ad-name">Mensajes - Copia 9</td>
+          <td><span class="status-dot dot-active"></span>Activo</td>
+          <td>$31.77</td>
+          <td>17,587</td>
+          <td>11,961</td>
+          <td>500</td>
+          <td class="metric-hi">2.84%</td>
+          <td class="metric-hi">$0.06</td>
+          <td>$1.81</td>
+          <td>7,219</td>
+          <td>7,543</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Mensajes - Copia 7</td>
+          <td><span class="status-dot dot-active"></span>Activo</td>
+          <td>$137.80</td>
+          <td>71,039</td>
+          <td>39,818</td>
+          <td>1,773</td>
+          <td class="metric-hi">2.50%</td>
+          <td>$0.08</td>
+          <td>$1.94</td>
+          <td class="metric-hi">23,148</td>
+          <td class="metric-hi">24,374</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Mensajes - Copia 8</td>
+          <td><span class="status-dot dot-active"></span>Activo</td>
+          <td>$165.61</td>
+          <td>93,045</td>
+          <td>40,558</td>
+          <td>1,093</td>
+          <td class="metric-lo">1.17%</td>
+          <td class="metric-lo">$0.15</td>
+          <td>$1.78</td>
+          <td class="metric-lo">693</td>
+          <td>1,288</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AD PERFORMANCE CHART -->
+  <p class="section-title">Comparativo visual de anuncios</p>
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Inversión por anuncio</h3>
+      <p>Distribución del gasto entre los 3 activos</p>
+      <div class="chart-wrap"><canvas id="adSpendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>CTR por anuncio</h3>
+      <p>Mayor CTR = mejor relevancia del creativo</p>
+      <div class="chart-wrap"><canvas id="adCtrChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Video Views por anuncio</h3>
+      <p>Copia 7 domina en reproducciones</p>
+      <div class="chart-wrap"><canvas id="adVideoChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ADSET + CAMPAIGN INFO -->
+  <p class="section-title">Configuración de campaña</p>
+  <div class="info-row">
+    <div class="info-card">
+      <h3>Campaña</h3>
+      <div class="info-list">
+        <div class="info-item"><span class="info-key">ID</span><span class="info-val" style="font-size:11px;color:var(--muted)">120234081891470542</span></div>
+        <div class="info-item"><span class="info-key">Nombre</span><span class="info-val">MARCA BOSH</span></div>
+        <div class="info-item"><span class="info-key">Objetivo</span><span class="info-val">OUTCOME_ENGAGEMENT</span></div>
+        <div class="info-item"><span class="info-key">Estado</span><span class="info-val" style="color:var(--green)">ACTIVA</span></div>
+        <div class="info-item"><span class="info-key">Inicio</span><span class="info-val">6 oct 2025</span></div>
+        <div class="info-item"><span class="info-key">Tipo de compra</span><span class="info-val">Subasta</span></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Conjunto de anuncios</h3>
+      <div class="info-list">
+        <div class="info-item"><span class="info-key">Nombre</span><span class="info-val" style="font-size:12px">v2 Conjunto de anuncios</span></div>
+        <div class="info-item"><span class="info-key">Optimización</span><span class="info-val">CONVERSACIONES</span></div>
+        <div class="info-item"><span class="info-key">Estrategia puja</span><span class="info-val">Menor costo</span></div>
+        <div class="info-item"><span class="info-key">Presupuesto diario</span><span class="info-val" style="color:var(--accent)">$15.00 / día</span></div>
+        <div class="info-item"><span class="info-key">Anuncios activos</span><span class="info-val" style="color:var(--green)">3 de 10</span></div>
+        <div class="info-item"><span class="info-key">Facturación</span><span class="info-val">Por impresiones</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Generado por <strong>Next Level</strong> · Claude Code · <strong>battery go — campaña BOSCH</strong></span>
+  <span>Datos: Meta Ads API · Período 4 abr – 3 may 2026 · act_2772496593021365</span>
+</footer>
+
+<script>
+  const PALETTE = {
+    fb: '#1877f2', ig: '#c13584', wa: '#25d366',
+    accent: '#e8b00a', red: '#f03a2e', green: '#22c55e',
+    blue: '#3b82f6', purple: '#a855f7', orange: '#f97316',
+    muted: 'rgba(122,128,152,0.4)'
+  };
+  const commonOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#e8eaf0', font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: '#7a8098', font: { size: 11 } }, grid: { color: 'rgba(42,48,69,.4)' } },
+      y: { ticks: { color: '#7a8098', font: { size: 11 } }, grid: { color: 'rgba(42,48,69,.4)' } }
+    }
+  };
+  const pieOpts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#e8eaf0', font: { size: 11 }, padding: 12 } } } };
+
+  // Spend por plataforma
+  new Chart(document.getElementById('spendChart'), {
+    type: 'doughnut',
+    data: { labels: ['Facebook', 'Instagram', 'WhatsApp'],
+      datasets: [{ data: [223.83, 103.05, 8.30], backgroundColor: [PALETTE.fb, PALETTE.ig, PALETTE.wa], borderWidth: 0, hoverOffset: 8 }] },
+    options: pieOpts
+  });
+
+  // Impresiones por plataforma
+  new Chart(document.getElementById('impChart'), {
+    type: 'doughnut',
+    data: { labels: ['Facebook', 'Instagram', 'WhatsApp'],
+      datasets: [{ data: [133217, 43628, 4826], backgroundColor: [PALETTE.fb, PALETTE.ig, PALETTE.wa], borderWidth: 0, hoverOffset: 8 }] },
+    options: pieOpts
+  });
+
+  // CTR por plataforma
+  new Chart(document.getElementById('ctrChart'), {
+    type: 'bar',
+    data: { labels: ['Facebook', 'Instagram', 'WhatsApp'],
+      datasets: [{ label: 'CTR (%)', data: [2.04, 1.44, 0.33], backgroundColor: [PALETTE.fb, PALETTE.ig, PALETTE.wa], borderRadius: 6 }] },
+    options: { ...commonOpts, plugins: { legend: { display: false } } }
+  });
+
+  // Inversión por anuncio
+  new Chart(document.getElementById('adSpendChart'), {
+    type: 'bar',
+    data: { labels: ['Copia 9', 'Copia 7', 'Copia 8'],
+      datasets: [{ label: 'Inversión $', data: [31.77, 137.80, 165.61], backgroundColor: [PALETTE.green, PALETTE.accent, PALETTE.red], borderRadius: 6 }] },
+    options: { ...commonOpts, plugins: { legend: { display: false } } }
+  });
+
+  // CTR por anuncio
+  new Chart(document.getElementById('adCtrChart'), {
+    type: 'bar',
+    data: { labels: ['Copia 9', 'Copia 7', 'Copia 8'],
+      datasets: [{ label: 'CTR (%)', data: [2.84, 2.50, 1.17], backgroundColor: [PALETTE.green, PALETTE.blue, PALETTE.orange], borderRadius: 6 }] },
+    options: { ...commonOpts, plugins: { legend: { display: false } } }
+  });
+
+  // Video views por anuncio
+  new Chart(document.getElementById('adVideoChart'), {
+    type: 'bar',
+    data: { labels: ['Copia 9', 'Copia 7', 'Copia 8'],
+      datasets: [{ label: 'Video Views', data: [7219, 23148, 693], backgroundColor: [PALETTE.purple, PALETTE.accent, PALETTE.muted], borderRadius: 6 }] },
+    options: { ...commonOpts, plugins: { legend: { display: false } } }
+  });
+
+  // Funnel interactivo
+  (function buildFunnel() {
+    const steps = [
+      { label: 'Impresiones', value: 181671, color: '#3b82f6' },
+      { label: 'Alcance', value: 68746, color: '#a855f7' },
+      { label: 'Clics', value: 3366, color: '#e8b00a' },
+      { label: 'Video Views', value: 31060, color: '#f97316' },
+      { label: 'Engagement', value: 33205, color: '#22c55e' }
+    ];
+    const max = steps[0].value;
+    const container = document.getElementById('funnelChart');
+    container.style.display = 'flex';
+    container.style.alignItems = 'flex-end';
+    container.style.gap = '0';
+    container.style.justifyContent = 'space-between';
+
+    steps.forEach((s, i) => {
+      const pct = (s.value / max * 100).toFixed(1);
+      const convPct = i > 0 ? ((s.value / steps[i-1].value)*100).toFixed(1)+'%' : '100%';
+      const height = Math.max((s.value / max) * 160, 24);
+      const div = document.createElement('div');
+      div.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;';
+      div.innerHTML = `
+        <div style="font-size:11px;color:#7a8098;text-align:center;">${convPct}</div>
+        <div style="height:${height}px;width:80%;background:${s.color};border-radius:6px 6px 0 0;opacity:.85;transition:height .5s;"></div>
+        <div style="font-size:16px;font-weight:800;color:#e8eaf0;">${s.value >= 1000 ? (s.value/1000).toFixed(1)+'K' : s.value}</div>
+        <div style="font-size:10px;color:#7a8098;text-transform:uppercase;letter-spacing:.5px;text-align:center;">${s.label}</div>
+      `;
+      container.appendChild(div);
+      if (i < steps.length - 1) {
+        const arrow = document.createElement('div');
+        arrow.style.cssText = 'display:flex;align-items:flex-end;padding-bottom:52px;color:#2a3045;font-size:20px;';
+        arrow.textContent = '›';
+        container.appendChild(arrow);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
