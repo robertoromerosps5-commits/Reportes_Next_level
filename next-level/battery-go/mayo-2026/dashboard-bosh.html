@@ -106,6 +106,28 @@
     .ig-accent { border-top: 3px solid #c13584; }
     .wa-accent { border-top: 3px solid #25d366; }
 
+    /* CREATIVE CARDS */
+    .creative-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 900px) { .creative-grid { grid-template-columns: 1fr; } }
+    .creative-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .15s, border-color .15s; }
+    .creative-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .creative-card.winner { border-color: var(--green); box-shadow: 0 0 0 1px rgba(34,197,94,.2); }
+    .creative-img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--surface2); }
+    .creative-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+    .creative-card:hover .creative-img-wrap img { transform: scale(1.03); }
+    .creative-type-badge { position: absolute; top: 10px; left: 10px; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+    .type-video { background: rgba(168,85,247,.85); color: #fff; }
+    .type-image { background: rgba(59,130,246,.85); color: #fff; }
+    .winner-badge { position: absolute; top: 10px; right: 10px; background: rgba(34,197,94,.9); color: #fff; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+    .creative-body { padding: 14px; }
+    .creative-name { font-weight: 700; font-size: 13px; color: var(--text); margin-bottom: 6px; }
+    .creative-copy { font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .creative-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .cm { background: var(--surface2); border-radius: 6px; padding: 6px 8px; text-align: center; }
+    .cm-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+    .cm-val { font-size: 14px; font-weight: 800; margin-top: 2px; }
+    .cta-tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(37,211,102,.12); color: #25d366; border: 1px solid rgba(37,211,102,.25); border-radius: 20px; padding: 3px 10px; font-size: 10px; font-weight: 600; margin-bottom: 10px; }
+
     /* ADSET INFO */
     .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
     @media (max-width: 700px) { .info-row { grid-template-columns: 1fr; } }
@@ -195,6 +217,68 @@
       <div class="kpi-value">33.2K</div>
       <div class="kpi-sub">interacciones totales</div>
     </div>
+  </div>
+
+  <!-- CREATIVOS -->
+  <p class="section-title">Creativos activos — vista previa y métricas</p>
+  <div class="creative-grid">
+
+    <!-- Copia 9 — Ganador CTR -->
+    <div class="creative-card winner">
+      <div class="creative-img-wrap">
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664728260_784919311085180_6752465384754259013_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=8N_2CtYmhkwQ7kNvwG5zTKD&_nc_oc=AdrIOFnHTtR1-TlKjYPD3ziOygXuYJp1BZEzowMh4ys7TfvqlHefR9K80S8yvmsdxn38o_d0GwjNAsUL2kNAi8i7&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=K4nl4IQ64b1UklIypEM9Yw&_nc_tpa=Q5bMBQEFoClI_mKtXuhcHtSX2wkbronBwuVWVcqU2_Gk8UUlWT2bdPTGA8GcKiRv8bAjkum8KTm5VUQiYg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_Af7MHYcwToaZYc_CnDxhtdD59I6wuqOQAHz4qGQRiLMyHg&oe=69FF4F95" alt="Copia 9 thumbnail" loading="lazy" onerror="this.parentElement.style.background='#1e2535';this.style.display='none'" />
+        <span class="creative-type-badge type-video">▶ Video</span>
+        <span class="winner-badge">★ Mejor CTR</span>
+      </div>
+      <div class="creative-body">
+        <div class="creative-name">Mensajes - Copia 9</div>
+        <span class="cta-tag">💬 WhatsApp</span>
+        <div class="creative-copy">🚗⚡️Hoy entregamos una batería Bosch a domicilio en el sector de Samborondón📍 Recuerda que Battery Go te salva el día donde estés. 🙌 📲0958691119 — Envíos a todo Guayaquil y Samborondón</div>
+        <div class="creative-metrics">
+          <div class="cm"><div class="cm-lbl">CTR</div><div class="cm-val" style="color:var(--green)">2.84%</div></div>
+          <div class="cm"><div class="cm-lbl">CPC</div><div class="cm-val" style="color:var(--green)">$0.06</div></div>
+          <div class="cm"><div class="cm-lbl">Video Views</div><div class="cm-val">7.2K</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copia 7 — Más video views -->
+    <div class="creative-card">
+      <div class="creative-img-wrap">
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664910104_1656947992158688_6321165400811755667_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=Ka3f1gm5FdoQ7kNvwGqG2bm&_nc_oc=AdpTYtdHKUM44-fPQhXe17iG3owTVEgZ-gVqc7i2EQ0OiNrWdBFqZVbxZv7tHAQWi6QCpLLm9TkdXg-icmnWMoKn&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=usOw8v7Ln09iyWpKw4comw&_nc_tpa=Q5bMBQF4qOW5AmlvFez_UElx6B4x6Tf2lzvJgX1MphdrS3jUemW9wRrL8wY9Z0ZsILrG2Iv4go3kuzncZw&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_Af5yp2r07fMPmTUtLepiraCb2kSlDtEDtm49ls3RgoCY-Q&oe=69FF35A7" alt="Copia 7 thumbnail" loading="lazy" onerror="this.parentElement.style.background='#1e2535';this.style.display='none'" />
+        <span class="creative-type-badge type-video">▶ Video</span>
+        <span style="position:absolute;top:10px;right:10px;background:rgba(249,115,22,.85);color:#fff;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;">★ + Engagement</span>
+      </div>
+      <div class="creative-body">
+        <div class="creative-name">Mensajes - Copia 7</div>
+        <span class="cta-tag">💬 WhatsApp</span>
+        <div class="creative-copy">🚗⚡️Hoy instalamos una batería Bosch a domicilio en el sector de Los Álamos📍 Recuerda que Battery Go te salva el día donde estés. 🙌 📲0958691119 — Envíos a todo Guayaquil y Samborondón</div>
+        <div class="creative-metrics">
+          <div class="cm"><div class="cm-lbl">CTR</div><div class="cm-val" style="color:var(--accent)">2.50%</div></div>
+          <div class="cm"><div class="cm-lbl">CPC</div><div class="cm-val">$0.08</div></div>
+          <div class="cm"><div class="cm-lbl">Video Views</div><div class="cm-val" style="color:var(--orange)">23.1K</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copia 8 — Imagen -->
+    <div class="creative-card">
+      <div class="creative-img-wrap">
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/662098578_26631033343199409_3025601883815395197_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=xPt1C20HRVAQ7kNvwGVdotf&_nc_oc=AdrmQ-eHS8f9dXAAEEmSpDioXuytzKSQ2IzJOrZHmDNTI6MVR_de0x6H80DanQ1q9EtKKYLhD8GfMrZ4OBUWNJRe&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=a2h_VZWGTJXGohPo-P6DGg&_nc_tpa=Q5bMBQHEt6FeZAsgDfxoRZn4hXz_4usa_yBJTcfdC_mDxILuI8CR3t0jXN6wk7Bs3afqpn5THKmC5nMLMg&oh=00_Af5yPdqdizLrRaaR6mZ5bAvXpPJ1FQbDeKwdzHHSTcAAcQ&oe=69FF541F" alt="Copia 8 imagen" loading="lazy" onerror="this.parentElement.style.background='#1e2535';this.style.display='none'" />
+        <span class="creative-type-badge type-image">🖼 Imagen</span>
+      </div>
+      <div class="creative-body">
+        <div class="creative-name">Mensajes - Copia 8</div>
+        <span class="cta-tag">💬 WhatsApp</span>
+        <div class="creative-copy">Recuerda que Battery Go te salva el día llevándote tu batería Bosch a domicilio o donde te encuentres. 🙌 📲0958691119 — Envíos a todo Guayaquil y Samborondón</div>
+        <div class="creative-metrics">
+          <div class="cm"><div class="cm-lbl">CTR</div><div class="cm-val" style="color:var(--orange)">1.17%</div></div>
+          <div class="cm"><div class="cm-lbl">CPC</div><div class="cm-val" style="color:var(--orange)">$0.15</div></div>
+          <div class="cm"><div class="cm-lbl">Video Views</div><div class="cm-val" style="color:var(--muted)">693</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- FUNNEL -->
