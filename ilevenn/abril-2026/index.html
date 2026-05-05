@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iLEVENN · Reporte Estratégico Abril 2026 | PRA2MEDIA</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  /* PRA2MEDIA Brand System */
+  --brand:        #4ADE80;
+  --brand-glow:   rgba(74,222,128,0.18);
+  --brand-border: rgba(74,222,128,0.28);
+  --brand-dim:    rgba(74,222,128,0.08);
+
+  /* Data Colors */
+  --blue:    #38BDF8;
+  --violet:  #A78BFA;
+  --orange:  #FB923C;
+  --red:     #F87171;
+  --amber:   #FCD34D;
+  --pink:    #F472B6;
+  --teal:    #2DD4BF;
+
+  /* Surfaces */
+  --bg:       #050810;
+  --bg2:      #070B18;
+  --surface:  #0B1022;
+  --surface2: #111829;
+  --surface3: #182135;
+  --border:   #1C2840;
+  --border2:  #243250;
+
+  /* Text */
+  --text:      #F1F5F9;
+  --text-dim:  #94A3B8;
+  --text-muted:#475569;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── AGENCY TOPBAR ── */
+.topbar {
+  background: #020408;
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 26px; height: 26px;
+  background: var(--brand);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.75rem;
+  color: #020408;
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
+}
+.logo-text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.logo-text span { color: var(--brand); }
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.topbar-meta strong { color: var(--text-dim); }
+.topbar-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity:1; transform:scale(1); }
+  50%       { opacity:0.5; transform:scale(0.8); }
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(5,8,16,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0 0.9rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.nav a:hover { color: var(--brand); border-bottom-color: var(--brand); }
+.nav-spacer { flex:1; }
+.nav-client {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.nav-client span { color: var(--brand); }
+
+/* ── HERO HEADER ── */
+.hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 2.5rem 3rem;
+}
+/* background grid */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+/* green glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(74,222,128,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.hero-left {}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.eyebrow-line {
+  width: 32px; height: 2px;
+  background: var(--brand);
+}
+.eyebrow-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand);
+}
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.hero h1 .num2 {
+  color: var(--brand);
+}
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.hero-period {
+  background: var(--brand-dim);
+  border: 1px solid var(--brand-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  text-align: right;
+}
+.hero-period-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brand);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.hero-period-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+.hero-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.tag {
+  padding: 0.25rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.tag-green  { background: var(--brand-dim); border: 1px solid var(--brand-border); color: var(--brand); }
+.tag-blue   { background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); color: var(--blue); }
+.tag-orange { background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.2); color: var(--orange); }
+
+/* ── LAYOUT ── */
+.container { max-width:1400px; margin:0 auto; padding:2rem 2.5rem; }
+.section { margin-bottom: 3rem; }
+
+/* ── SECTION HEADER ── */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.section-title-bar {
+  width: 3px; height: 18px;
+  background: var(--brand);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.section-title h2 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.section-title-line {
+  flex:1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border2) 0%, transparent 100%);
+}
+
+/* ── KPI CARDS ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 1rem;
+}
+@media(max-width:1100px){ .kpi-grid{ grid-template-columns:repeat(3,1fr); } }
+@media(max-width:600px) { .kpi-grid{ grid-template-columns:repeat(2,1fr); } }
+
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.kpi:hover {
+  transform: translateY(-3px);
+  border-color: var(--border2);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+.kpi-top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 1px;
+}
+.kpi-bg-glow {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0.2;
+}
+.kpi-semaforo {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  font-size: 0.9rem;
+}
+.kpi-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.kpi-value {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.4rem;
+}
+.kpi-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* KPI color variants */
+.kpi-green .kpi-top-bar { background: linear-gradient(90deg, var(--brand), #86EFAC); }
+.kpi-green .kpi-bg-glow { background: var(--brand); }
+.kpi-green .kpi-value   { color: var(--brand); }
+
+.kpi-blue .kpi-top-bar  { background: linear-gradient(90deg, var(--blue), #7DD3FC); }
+.kpi-blue .kpi-bg-glow  { background: var(--blue); }
+.kpi-blue .kpi-value    { color: var(--blue); }
+
+.kpi-violet .kpi-top-bar { background: linear-gradient(90deg, var(--violet), #C4B5FD); }
+.kpi-violet .kpi-bg-glow { background: var(--violet); }
+.kpi-violet .kpi-value   { color: var(--violet); }
+
+.kpi-orange .kpi-top-bar { background: linear-gradient(90deg, var(--orange), #FDBA74); }
+.kpi-orange .kpi-bg-glow { background: var(--orange); }
+.kpi-orange .kpi-value   { color: var(--orange); }
+
+.kpi-teal .kpi-top-bar  { background: linear-gradient(90deg, var(--teal), #5EEAD4); }
+.kpi-teal .kpi-bg-glow  { background: var(--teal); }
+.kpi-teal .kpi-value    { color: var(--teal); }
+
+.kpi-amber .kpi-top-bar { background: linear-gradient(90deg, var(--amber), #FDE68A); }
+.kpi-amber .kpi-bg-glow { background: var(--amber); }
+.kpi-amber .kpi-value   { color: var(--amber); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border2); }
+.card-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-title-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+canvas { max-height: 280px; }
+
+/* ── GRID LAYOUTS ── */
+.g2   { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+.g3   { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem; }
+.g2-1 { display:grid; grid-template-columns:2fr 1fr; gap:1.25rem; }
+.g1-2 { display:grid; grid-template-columns:1fr 2fr; gap:1.25rem; }
+@media(max-width:900px){ .g2,.g3,.g2-1,.g1-2{ grid-template-columns:1fr; } }
+
+/* ── TABLE ── */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  overflow: auto;
+}
+table { width:100%; border-collapse:collapse; }
+thead { background: var(--surface2); }
+th {
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s;
+  user-select: none;
+}
+th:hover { color: var(--brand); }
+td {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+tr:hover td { background: rgba(74,222,128,0.03); }
+
+.c-name { font-weight: 700; color: var(--text); }
+.c-name small { display:block; font-size:0.68rem; color:var(--text-muted); font-weight:400; margin-top:2px; }
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.badge-on  { background: rgba(74,222,128,0.1);  color: var(--brand); border:1px solid rgba(74,222,128,0.25); }
+.badge-off { background: rgba(248,113,113,0.1); color: var(--red);   border:1px solid rgba(248,113,113,0.2); }
+
+.mini-bar { height:3px; border-radius:2px; margin-top:5px; min-width:4px; }
+.bar-green  { background: linear-gradient(90deg, var(--brand), #86EFAC); }
+.bar-blue   { background: linear-gradient(90deg, var(--blue), #7DD3FC); }
+.bar-orange { background: linear-gradient(90deg, var(--orange), #FDBA74); }
+.bar-red    { background: linear-gradient(90deg, var(--red), #FCA5A5); }
+
+/* ── HEAT TABLE ── */
+.heat-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+.heat-table th {
+  padding: 0.65rem 1rem;
+  background: var(--surface2);
+  text-align: center;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: default;
+}
+.heat-table td { padding:0.7rem 1rem; text-align:center; border:1px solid var(--border); font-weight:600; }
+.h-low  { background:rgba(74,222,128,0.12); color:var(--brand); }
+.h-mid  { background:rgba(252,211,77,0.1);  color:var(--amber); }
+.h-hi   { background:rgba(248,113,113,0.1); color:var(--red); }
+.h-lbl  { text-align:left; color:var(--text-dim); font-weight:500; background:var(--surface2); }
+.h-tot  { background:var(--surface2); font-weight:700; }
+
+/* ── PLATFORM BARS ── */
+.platform-list { display:flex; flex-direction:column; gap:0.7rem; }
+.pl-item { display:flex; align-items:center; gap:0.75rem; }
+.pl-name { width:130px; font-size:0.78rem; color:var(--text-dim); flex-shrink:0; }
+.pl-bar-wrap { flex:1; height:22px; background:var(--surface3); border-radius:5px; overflow:hidden; }
+.pl-bar {
+  height:100%; border-radius:5px;
+  display:flex; align-items:center;
+  padding-left:8px;
+  font-size:0.67rem; font-weight:700; color:#020408;
+  min-width:50px;
+}
+.pl-cpl { width:52px; text-align:right; font-size:0.8rem; font-weight:700; flex-shrink:0; }
+
+/* ── ANALYSIS CARDS (3Qs) ── */
+.analysis-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem; }
+@media(max-width:900px){ .analysis-grid{ grid-template-columns:1fr; } }
+
+.a-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+}
+.a-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.a-num {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.a-num-1 { background: rgba(56,189,248,0.12); color: var(--blue); border:1px solid rgba(56,189,248,0.2); }
+.a-num-2 { background: rgba(252,211,77,0.1);  color: var(--amber); border:1px solid rgba(252,211,77,0.2); }
+.a-num-3 { background: rgba(74,222,128,0.1);  color: var(--brand); border:1px solid var(--brand-border); }
+
+.a-card h3 { font-size:0.92rem; font-weight:700; }
+.a-1 h3 { color: var(--blue); }
+.a-2 h3 { color: var(--amber); }
+.a-3 h3 { color: var(--brand); }
+
+.a-list { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
+.a-list li {
+  font-size:0.84rem; color:var(--text-dim);
+  padding-left:1.5rem; position:relative; line-height:1.5;
+}
+.a-list li::before { content:'→'; position:absolute; left:0; font-weight:700; }
+.a-1 .a-list li::before { color: var(--blue); }
+.a-2 .a-list li::before { color: var(--amber); }
+.a-3 .a-list li::before { color: var(--brand); }
+.a-list strong { color: var(--text); }
+
+/* ── OPT ITEMS ── */
+.opt-list { display:flex; flex-direction:column; gap:0.85rem; }
+.opt-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.1rem 1.25rem 1.1rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.opt-item:hover {
+  border-color: var(--border2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.opt-priority {
+  width: 4px;
+  align-self: stretch;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.p-high { background: var(--red); }
+.p-med  { background: var(--amber); }
+.p-low  { background: var(--brand); }
+
+.opt-icon { font-size:1.3rem; flex-shrink:0; }
+.opt-body {}
+.opt-tag {
+  display:inline-block;
+  padding:0.1rem 0.55rem;
+  border-radius:3px;
+  font-size:0.62rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+  margin-bottom:0.35rem;
+}
+.t-high { background:rgba(248,113,113,0.1); color:var(--red); }
+.t-med  { background:rgba(252,211,77,0.1); color:var(--amber); }
+.t-low  { background:rgba(74,222,128,0.1); color:var(--brand); }
+
+.opt-title { font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; }
+.opt-desc  { font-size:0.8rem; color:var(--text-muted); line-height:1.55; }
+
+/* ── FOOTER ── */
+.footer {
+  background: #020408;
+  border-top: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+}
+.footer-inner {
+  max-width:1400px;
+  margin:0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-logo-mark {
+  width: 28px; height: 28px;
+  background: var(--brand);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: #020408;
+  letter-spacing: -0.03em;
+}
+.footer-logo-name {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.footer-logo-name span { color: var(--brand); }
+.footer-divider { width:1px; height:20px; background:var(--border2); }
+.footer-tagline { font-size:0.72rem; color:var(--text-muted); font-style:italic; }
+.footer-right { font-size:0.72rem; color:var(--text-muted); text-align:right; line-height:1.6; }
+.footer-right strong { color:var(--text-dim); }
+
+/* sort indicators */
+.sort-asc::after  { content:' ↑'; color:var(--brand); }
+.sort-desc::after { content:' ↓'; color:var(--brand); }
+</style>
+</head>
+<body>
+
+<!-- ── AGENCY TOPBAR ── -->
+<div class="topbar">
+  <a href="https://pra2media.com" class="topbar-logo">
+    <div class="logo-mark">P<span style="color:#020408">2</span></div>
+    <span class="logo-text">PRA<span>2</span>MEDIA</span>
+  </a>
+  <div class="topbar-meta">
+    <span><strong>Cliente:</strong> iLEVENN</span>
+    <span><strong>Período:</strong> Abril 2026</span>
+    <span><strong>Canal:</strong> Meta Ads</span>
+    <div class="topbar-dot"></div>
+    <span style="color:var(--brand)">Reporte Activo</span>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="#kpis">KPIs</a>
+  <a href="#campanas">Campañas</a>
+  <a href="#audiencia">Audiencia</a>
+  <a href="#plataformas">Plataformas</a>
+  <a href="#analisis">Análisis</a>
+  <a href="#plan">Plan</a>
+  <div class="nav-spacer"></div>
+  <span class="nav-client">iLEVENN <span>·</span> Abril 2026</span>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Reporte de Rendimiento · Meta Ads</span>
+      </div>
+      <h1>iLE<span class="num2">V</span>ENN</h1>
+      <p class="hero-sub">Dashboard estratégico — Gestión Pra2media · Análisis de campañas de generación de leads</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-period">
+        <div class="hero-period-label">Período de análisis</div>
+        <div class="hero-period-value">01 – 30 de Abril, 2026</div>
+      </div>
+      <div class="hero-tags">
+        <span class="tag tag-green">4 Campañas</span>
+        <span class="tag tag-blue">365 Leads</span>
+        <span class="tag tag-orange">$1,032 Invertidos</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     KPIs
+══════════════════════════════════════ -->
+<section class="section" id="kpis">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Indicadores Clave · Abril 2026</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi kpi-green">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟢</div>
+      <div class="kpi-label">Inversión Total</div>
+      <div class="kpi-value">$1,032</div>
+      <div class="kpi-sub">4 campañas · Abril 2026</div>
+    </div>
+    <div class="kpi kpi-blue">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟢</div>
+      <div class="kpi-label">Leads Generados</div>
+      <div class="kpi-value">365</div>
+      <div class="kpi-sub">Formularios completados en el mes</div>
+    </div>
+    <div class="kpi kpi-violet">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟢</div>
+      <div class="kpi-label">Costo por Lead</div>
+      <div class="kpi-value">$2.83</div>
+      <div class="kpi-sub">Bench. &lt;$5 · 44% bajo benchmark</div>
+    </div>
+    <div class="kpi kpi-orange">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟢</div>
+      <div class="kpi-label">CTR Promedio</div>
+      <div class="kpi-value">2.03%</div>
+      <div class="kpi-sub">Bench. industria 1.5% — por encima</div>
+    </div>
+    <div class="kpi kpi-teal">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟢</div>
+      <div class="kpi-label">CPM Promedio</div>
+      <div class="kpi-value">$3.64</div>
+      <div class="kpi-sub">283,719 impresiones totales</div>
+    </div>
+    <div class="kpi kpi-amber">
+      <div class="kpi-top-bar"></div>
+      <div class="kpi-bg-glow"></div>
+      <div class="kpi-semaforo">🟡</div>
+      <div class="kpi-label">Frecuencia Prom.</div>
+      <div class="kpi-value">2.03x</div>
+      <div class="kpi-sub">Monitorear · umbral fatiga 3x</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CAMPAÑAS
+══════════════════════════════════════ -->
+<section class="section" id="campanas">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Rendimiento por Campaña</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="g2-1" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Leads e Inversión por Campaña</div>
+      <canvas id="cCampaignBar"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Distribución del Presupuesto</div>
+      <canvas id="cSpendDonut"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title"><div class="card-title-dot"></div>Mapa de Eficiencia · CPL vs CTR (tamaño = leads generados)</div>
+    <canvas id="cBubble"></canvas>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:0">
+    <table id="tCampaigns">
+      <thead>
+        <tr>
+          <th onclick="sortT('tCampaigns',0)">Campaña</th>
+          <th onclick="sortT('tCampaigns',1)">Estado</th>
+          <th onclick="sortT('tCampaigns',2)">Inversión</th>
+          <th onclick="sortT('tCampaigns',3)">Impresiones</th>
+          <th onclick="sortT('tCampaigns',4)">Alcance</th>
+          <th onclick="sortT('tCampaigns',5)">Leads</th>
+          <th onclick="sortT('tCampaigns',6)">CPL</th>
+          <th onclick="sortT('tCampaigns',7)">CTR</th>
+          <th onclick="sortT('tCampaigns',8)">CPC</th>
+          <th onclick="sortT('tCampaigns',9)">Frec.</th>
+          <th>Eval.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="c-name">Leads · Abierto<small>Mejor rendimiento del mes</small></div></td>
+          <td><span class="badge badge-on">Activa</span></td>
+          <td>$595.85</td><td>156,163</td><td>83,279</td>
+          <td><strong>213</strong><div class="mini-bar bar-green" style="width:100%"></div></td>
+          <td style="color:var(--brand);font-weight:700">$2.80</td><td>2.04%</td><td>$0.19</td><td>1.88x</td>
+          <td>🟢</td>
+        </tr>
+        <tr>
+          <td><div class="c-name">Leads · v2<small>Mejor CPL activo</small></div></td>
+          <td><span class="badge badge-on">Activa</span></td>
+          <td>$193.28</td><td>49,874</td><td>28,470</td>
+          <td>74<div class="mini-bar bar-blue" style="width:35%"></div></td>
+          <td style="color:var(--blue);font-weight:700">$2.61</td><td>2.19%</td><td>$0.18</td><td>1.75x</td>
+          <td>🟢</td>
+        </tr>
+        <tr>
+          <td><div class="c-name">Asesores<small>Frecuencia elevada · pausada</small></div></td>
+          <td><span class="badge badge-off">Pausada</span></td>
+          <td>$188.40</td><td>64,859</td><td>23,684</td>
+          <td>69<div class="mini-bar bar-orange" style="width:32%"></div></td>
+          <td style="color:var(--amber);font-weight:700">$2.73</td><td>1.83%</td><td>$0.16</td><td>2.74x</td>
+          <td>🟡</td>
+        </tr>
+        <tr>
+          <td><div class="c-name">Leads (original)<small>CPL fuera de rango · revisar</small></div></td>
+          <td><span class="badge badge-off">Pausada</span></td>
+          <td>$54.82</td><td>12,823</td><td>8,742</td>
+          <td>9<div class="mini-bar bar-red" style="width:4%"></div></td>
+          <td style="color:var(--red);font-weight:700">$6.09</td><td>2.18%</td><td>$0.20</td><td>1.47x</td>
+          <td>🔴</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     AUDIENCIA
+══════════════════════════════════════ -->
+<section class="section" id="audiencia">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Análisis de Audiencia</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Leads por Edad y Género</div>
+      <canvas id="cAge"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Distribución por Género · 365 leads</div>
+      <canvas id="cGender"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title"><div class="card-title-dot"></div>Mapa de Calor · CPL por Edad × Género (verde = más eficiente)</div>
+    <div style="overflow:auto">
+      <table class="heat-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Edad</th>
+            <th>♀ Leads</th><th>♀ CPL</th>
+            <th>♂ Leads</th><th>♂ CPL</th>
+            <th>Total</th><th>CPL Combinado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="h-lbl">18–24</td><td>3</td><td class="h-mid">$2.93</td><td>4</td><td class="h-hi">$3.61</td><td>7</td><td class="h-mid">$3.32</td></tr>
+          <tr><td class="h-lbl">25–34</td><td>24</td><td class="h-low">$2.82</td><td>46</td><td class="h-low">$2.79</td><td>70</td><td class="h-low">$2.80</td></tr>
+          <tr><td class="h-lbl">35–44</td><td>43</td><td class="h-mid">$3.51</td><td><strong>122</strong></td><td class="h-low"><strong>$2.53</strong></td><td><strong>165</strong></td><td class="h-low">$2.79</td></tr>
+          <tr><td class="h-lbl">45–54</td><td>34</td><td class="h-low">$2.32</td><td>73</td><td class="h-mid">$3.04</td><td>107</td><td class="h-low">$2.79</td></tr>
+          <tr><td class="h-lbl">55–64</td><td>3</td><td class="h-low">$2.74</td><td>8</td><td class="h-hi">$3.84</td><td>11</td><td class="h-mid">$3.54</td></tr>
+          <tr><td class="h-lbl">65+</td><td>1</td><td class="h-low">$2.00</td><td>1</td><td class="h-hi">$4.78</td><td>2</td><td class="h-mid">$3.39</td></tr>
+          <tr class="h-tot"><td class="h-lbl" style="font-weight:700">TOTAL</td><td>108</td><td>$2.93</td><td>254</td><td>$2.79</td><td>362</td><td>$2.83</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="card-title-dot"></div>CPL por Edad y Género — Comparativa</div>
+    <canvas id="cCplAge"></canvas>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PLATAFORMAS
+══════════════════════════════════════ -->
+<section class="section" id="plataformas">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Plataformas y Placements</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="g2" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>CPL por Placement — menor es mejor</div>
+      <canvas id="cPlCPL"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Volumen de Leads por Placement</div>
+      <canvas id="cPlLeads"></canvas>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Facebook · Eficiencia de Placements</div>
+      <div class="platform-list" id="fbList"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-title-dot"></div>Instagram · Eficiencia de Placements</div>
+      <div class="platform-list" id="igList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     3Qs ANÁLISIS
+══════════════════════════════════════ -->
+<section class="section" id="analisis">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Análisis Estratégico · Las 3 Preguntas</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="analysis-grid">
+    <div class="a-card a-1">
+      <div class="a-card-header">
+        <div class="a-num a-num-1">01</div>
+        <h3>¿Qué pasó?</h3>
+      </div>
+      <ul class="a-list">
+        <li><strong>365 leads</strong> generados con inversión de <strong>$1,032</strong> en abril</li>
+        <li>CPL de <strong>$2.83</strong> — 44% bajo el benchmark de $5</li>
+        <li>"Leads · Abierto" generó el <strong>58% de todos los leads</strong></li>
+        <li>Facebook superó a Instagram en eficiencia en todos los placements</li>
+        <li>Campaña "Leads" original operó a <strong>$6.09 CPL</strong> — 2× más cara</li>
+        <li>Hombres 35–44 fueron el segmento más rentable: <strong>122 leads a $2.53</strong></li>
+        <li>Mujeres 45–54 mostraron el <strong>CTR más alto</strong>: 3.03%</li>
+      </ul>
+    </div>
+    <div class="a-card a-2">
+      <div class="a-card-header">
+        <div class="a-num a-num-2">02</div>
+        <h3>¿Por qué pasó?</h3>
+      </div>
+      <ul class="a-list">
+        <li>"Leads · Abierto" tiene audiencia amplia — <strong>Meta optimiza sin restricciones</strong></li>
+        <li>FB Feed tiene menor competencia → CPM <strong>$2.21 vs $6.54 en IG Feed</strong></li>
+        <li>"Leads" original con segmentación estrecha → <strong>menor volumen y mayor costo</strong></li>
+        <li>Hombres 35–44 son el perfil decisor típico del producto iLEVENN</li>
+        <li>Frecuencia de 2.74× en "Asesores" indica <strong>inicio de saturación</strong></li>
+        <li>Facebook Marketplace subexplotado: <strong>$1.67 CPL</strong> con buena intención</li>
+        <li>IG Stories consume 25% del presupuesto con <strong>31% más caro</strong> que FB</li>
+      </ul>
+    </div>
+    <div class="a-card a-3">
+      <div class="a-card-header">
+        <div class="a-num a-num-3">03</div>
+        <h3>¿Qué haremos?</h3>
+      </div>
+      <ul class="a-list">
+        <li>Pausar "Leads" original → <strong>redistribuir a "Leads v2"</strong> ($2.61 CPL)</li>
+        <li>Escalar presupuesto en <strong>Facebook Feed</strong> ($2.17 CPL — el mejor)</li>
+        <li>Lanzar campaña dedicada a <strong>Facebook Marketplace</strong> ($1.67 CPL)</li>
+        <li>Crear adset específico <strong>Hombres 35–44</strong> con creativos adaptados</li>
+        <li>Refrescar creativos en "Asesores" — <strong>frecuencia en 2.74×</strong></li>
+        <li>Probar creativos para <strong>Mujeres 45–54</strong> (CTR 3.03%, CPL $2.32)</li>
+        <li>Reducir en <strong>Instagram Feed</strong> ($4.75 CPL = 119% más caro)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PLAN DE OPTIMIZACIÓN
+══════════════════════════════════════ -->
+<section class="section" id="plan">
+  <div class="section-title">
+    <div class="section-title-bar"></div>
+    <h2>Plan de Optimización · Próximos 30 Días</h2>
+    <div class="section-title-line"></div>
+  </div>
+
+  <div class="opt-list">
+    <div class="opt-item">
+      <div class="opt-priority p-high"></div>
+      <div class="opt-icon">🔴</div>
+      <div class="opt-body">
+        <div class="opt-tag t-high">Urgente · Semana 1</div>
+        <div class="opt-title">Pausar "Leads" original — CPL de $6.09 insostenible</div>
+        <div class="opt-desc">Opera a 2.3× el costo de las otras campañas. Reasignar ~$55/mes a "Leads v2" ($2.61 CPL) generaría +21 leads adicionales con el mismo presupuesto. Impacto estimado: +15% en volumen sin incrementar inversión.</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-high"></div>
+      <div class="opt-icon">🔴</div>
+      <div class="opt-body">
+        <div class="opt-tag t-high">Urgente · Semana 1</div>
+        <div class="opt-title">Activar campaña dedicada a Facebook Marketplace</div>
+        <div class="opt-desc">CPL de $1.67 — el placement más eficiente de toda la cuenta con 19 leads en abril. Completamente subexplotado. Probar con $50–80/mes, monitorear CPL y escalar si se mantiene bajo $2.50.</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-med"></div>
+      <div class="opt-icon">🟡</div>
+      <div class="opt-body">
+        <div class="opt-tag t-med">Medio Plazo · Semanas 2–3</div>
+        <div class="opt-title">Crear adset específico Hombres 35–44 en "Leads · Abierto"</div>
+        <div class="opt-desc">El mejor segmento del mes: 122 leads a $2.53 CPL. Aislarlo en adset propio con creativos adaptados (tono, propuesta de valor, imágenes de decisores) sin afectar el rendimiento general de la campaña.</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-med"></div>
+      <div class="opt-icon">🟡</div>
+      <div class="opt-body">
+        <div class="opt-tag t-med">Medio Plazo · Semana 2</div>
+        <div class="opt-title">Refrescar creativos en "Asesores" antes de reactivar</div>
+        <div class="opt-desc">Frecuencia de 2.74× — cerca del umbral crítico de 3×. Nuevos formatos (Reels cortos, carruseles, imágenes renovadas) antes de reactivar. Sin creativos frescos, el presupuesto se desperdicia en audiencia saturada.</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-med"></div>
+      <div class="opt-icon">🟡</div>
+      <div class="opt-body">
+        <div class="opt-tag t-med">Medio Plazo · Semana 3</div>
+        <div class="opt-title">Probar creativos específicos para Mujeres 45–54</div>
+        <div class="opt-desc">CTR más alto del mes (3.03%) con CPL de $2.32 — el mejor entre mujeres. Crear una pieza orientada a sus motivaciones y probarla en adset dedicado dentro de "Leads · Abierto".</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-low"></div>
+      <div class="opt-icon">🟢</div>
+      <div class="opt-body">
+        <div class="opt-tag t-low">Largo Plazo · Mayo en adelante</div>
+        <div class="opt-title">Reducir inversión en Instagram Feed y rotar a Facebook</div>
+        <div class="opt-desc">IG Feed: $4.75 CPL — 119% más caro que FB Feed. Reducir 30–40% y redistribuir hacia FB Feed y FB Stories. Mantener presencia mínima en IG para visibilidad de marca sin comprometer eficiencia.</div>
+      </div>
+    </div>
+    <div class="opt-item">
+      <div class="opt-priority p-low"></div>
+      <div class="opt-icon">🟢</div>
+      <div class="opt-body">
+        <div class="opt-tag t-low">Largo Plazo · Mayo en adelante</div>
+        <div class="opt-title">Escalar Facebook Stories ($2.35 CPL — subutilizado)</div>
+        <div class="opt-desc">Solo $47 en abril con 20 leads a $2.35 CPL. Aumentar a $100/mes con creativos verticales optimizados para Stories. Si el CPL se mantiene estable al escalar, aumentar progresivamente hasta 20% del presupuesto total.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-logo">
+        <div class="footer-logo-mark">P2</div>
+        <span class="footer-logo-name">PRA<span>2</span>MEDIA</span>
+      </div>
+      <div class="footer-divider"></div>
+      <span class="footer-tagline">Marketing como sistema. Crecimiento como propósito.</span>
+    </div>
+    <div class="footer-right">
+      <strong>iLEVENN · Reporte Meta Ads · Abril 2026</strong><br>
+      Datos extraídos: 4 de mayo 2026 · pra2media.com
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CHART.JS DEFAULTS ───
+Chart.defaults.color = '#475569';
+Chart.defaults.borderColor = '#1C2840';
+Chart.defaults.font.family = "'Inter',-apple-system,sans-serif";
+Chart.defaults.font.size = 11;
+
+// Brand palette
+const G = '#4ADE80', B = '#38BDF8', O = '#FB923C', V = '#A78BFA',
+      R = '#F87171', A = '#FCD34D', P = '#F472B6', T = '#2DD4BF';
+const GA = v => `rgba(74,222,128,${v})`;
+const BA = v => `rgba(56,189,248,${v})`;
+const OA = v => `rgba(251,146,60,${v})`;
+const RA = v => `rgba(248,113,113,${v})`;
+
+// ─── 1. Campaign Bar ───
+new Chart(document.getElementById('cCampaignBar'), {
+  data: {
+    labels: ['Leads · Abierto','Leads · v2','Asesores','Leads orig.'],
+    datasets: [
+      {
+        type:'bar', label:'Leads',
+        data:[213,74,69,9],
+        backgroundColor:[GA(0.85),BA(0.85),OA(0.85),RA(0.85)],
+        borderRadius:6, yAxisID:'y'
+      },
+      {
+        type:'line', label:'Inversión ($)',
+        data:[595.85,193.28,188.40,54.82],
+        borderColor:'#64748B', backgroundColor:'rgba(100,116,139,0.06)',
+        tension:0.3, pointRadius:5, pointBackgroundColor:'#64748B', yAxisID:'y1'
+      }
+    ]
+  },
+  options:{
+    responsive:true,
+    interaction:{mode:'index'},
+    plugins:{legend:{position:'top',labels:{boxWidth:10,padding:14}}},
+    scales:{
+      y:{type:'linear',position:'left',title:{display:true,text:'Leads'}},
+      y1:{type:'linear',position:'right',title:{display:true,text:'Inversión ($)'},grid:{drawOnChartArea:false}}
+    }
+  }
+});
+
+// ─── 2. Spend Donut ───
+new Chart(document.getElementById('cSpendDonut'), {
+  type:'doughnut',
+  data:{
+    labels:['Leads · Abierto','Leads · v2','Asesores','Leads orig.'],
+    datasets:[{
+      data:[595.85,193.28,188.40,54.82],
+      backgroundColor:[G,B,O,R],
+      borderColor:'#0B1022', borderWidth:3, hoverOffset:6
+    }]
+  },
+  options:{
+    responsive:true, cutout:'65%',
+    plugins:{
+      legend:{position:'right',labels:{boxWidth:10,padding:12}},
+      tooltip:{callbacks:{label:ctx=>` $${ctx.parsed.toFixed(2)} · ${((ctx.parsed/1032.35)*100).toFixed(1)}%`}}
+    }
+  }
+});
+
+// ─── 3. Efficiency Bubble ───
+new Chart(document.getElementById('cBubble'), {
+  type:'bubble',
+  data:{
+    datasets:[
+      {label:'Leads · Abierto', data:[{x:2.80,y:2.04,r:20}], backgroundColor:GA(0.8), borderColor:G},
+      {label:'Leads · v2',      data:[{x:2.61,y:2.19,r:11}], backgroundColor:BA(0.8), borderColor:B},
+      {label:'Asesores',        data:[{x:2.73,y:1.83,r:10}], backgroundColor:OA(0.8), borderColor:O},
+      {label:'Leads orig.',     data:[{x:6.09,y:2.18,r:5}],  backgroundColor:RA(0.8), borderColor:R},
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{
+      legend:{position:'top',labels:{boxWidth:10}},
+      tooltip:{callbacks:{label:ctx=>` CPL: $${ctx.parsed.x} · CTR: ${ctx.parsed.y}%`}}
+    },
+    scales:{
+      x:{title:{display:true,text:'CPL ($) — menor es mejor'},ticks:{callback:v=>'$'+v}},
+      y:{title:{display:true,text:'CTR (%) — mayor es mejor'},ticks:{callback:v=>v+'%'}}
+    }
+  }
+});
+
+// ─── 4. Age Chart ───
+new Chart(document.getElementById('cAge'), {
+  type:'bar',
+  data:{
+    labels:['18–24','25–34','35–44','45–54','55–64','65+'],
+    datasets:[
+      {label:'Mujeres', data:[3,24,43,34,3,1], backgroundColor:'rgba(244,114,182,0.8)', borderRadius:4},
+      {label:'Hombres', data:[4,46,122,73,8,1], backgroundColor:BA(0.8), borderRadius:4}
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{boxWidth:10}}},
+    scales:{y:{title:{display:true,text:'Leads'}}}
+  }
+});
+
+// ─── 5. Gender Donut ───
+new Chart(document.getElementById('cGender'), {
+  type:'doughnut',
+  data:{
+    labels:['Hombres · 254','Mujeres · 108','Desconocido · 3'],
+    datasets:[{
+      data:[254,108,3],
+      backgroundColor:[B,P,'#334155'],
+      borderColor:'#0B1022', borderWidth:3, hoverOffset:6
+    }]
+  },
+  options:{
+    responsive:true, cutout:'60%',
+    plugins:{
+      legend:{position:'right',labels:{boxWidth:10,padding:12}},
+      tooltip:{callbacks:{label:ctx=>` ${ctx.parsed} leads · ${((ctx.parsed/365)*100).toFixed(1)}%`}}
+    }
+  }
+});
+
+// ─── 6. CPL Age/Gender ───
+new Chart(document.getElementById('cCplAge'), {
+  type:'bar',
+  data:{
+    labels:['18–24','25–34','35–44','45–54','55–64','65+'],
+    datasets:[
+      {label:'CPL Mujeres', data:[2.93,2.82,3.51,2.32,2.74,2.00], backgroundColor:'rgba(244,114,182,0.75)', borderRadius:4},
+      {label:'CPL Hombres', data:[3.61,2.79,2.53,3.04,3.84,4.78], backgroundColor:BA(0.75), borderRadius:4}
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{boxWidth:10}},tooltip:{callbacks:{label:ctx=>` $${ctx.parsed.y.toFixed(2)} CPL`}}},
+    scales:{y:{min:0,title:{display:true,text:'CPL ($)'},ticks:{callback:v=>'$'+v}}}
+  }
+});
+
+// ─── Platform data ───
+const placements = [
+  {name:'FB · Marketplace', leads:19, cpl:1.67, platform:'fb'},
+  {name:'FB · Feed',        leads:129,cpl:2.17, platform:'fb'},
+  {name:'FB · Stories',     leads:20, cpl:2.35, platform:'fb'},
+  {name:'FB · Reels',       leads:68, cpl:2.66, platform:'fb'},
+  {name:'IG · Reels',       leads:32, cpl:3.38, platform:'ig'},
+  {name:'IG · Stories',     leads:69, cpl:3.70, platform:'ig'},
+  {name:'IG · Feed',        leads:26, cpl:4.75, platform:'ig'},
+];
+const plLabels = placements.map(p=>p.name);
+const plCPL    = placements.map(p=>p.cpl);
+const plLeads  = placements.map(p=>p.leads);
+const cplColor = v => v<2.5?GA(0.85):v<3.5?'rgba(252,211,77,0.8)':RA(0.8);
+const plBgColors = plCPL.map(cplColor);
+
+// ─── 7. Placement CPL ───
+new Chart(document.getElementById('cPlCPL'), {
+  type:'bar',
+  data:{labels:plLabels,datasets:[{label:'CPL ($)',data:plCPL,backgroundColor:plBgColors,borderRadius:4}]},
+  options:{
+    indexAxis:'y',responsive:true,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` $${ctx.parsed.x.toFixed(2)} CPL`}}},
+    scales:{x:{ticks:{callback:v=>'$'+v},title:{display:true,text:'CPL ($)'}}}
+  }
+});
+
+// ─── 8. Placement Leads ───
+new Chart(document.getElementById('cPlLeads'), {
+  type:'bar',
+  data:{
+    labels:plLabels,
+    datasets:[{
+      label:'Leads',
+      data:plLeads,
+      backgroundColor:[GA(0.85),BA(0.85),T+'CC','rgba(167,139,250,0.8)',OA(0.8),'rgba(244,114,182,0.8)',RA(0.8)],
+      borderRadius:4
+    }]
+  },
+  options:{
+    indexAxis:'y',responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{x:{title:{display:true,text:'Leads'}}}
+  }
+});
+
+// ─── Platform Mini Bars ───
+function buildPlatformBars(id, items) {
+  const el = document.getElementById(id);
+  const max = Math.max(...items.map(i=>i.cpl));
+  items.forEach(it=>{
+    const pct = (it.cpl/max*100).toFixed(0);
+    const col = it.cpl<2.5 ? '#4ADE80' : it.cpl<3.5 ? '#FCD34D' : '#F87171';
+    const div = document.createElement('div');
+    div.className = 'pl-item';
+    div.innerHTML = `
+      <div class="pl-name">${it.name.replace(/^(FB|IG) · /,'')}</div>
+      <div class="pl-bar-wrap">
+        <div class="pl-bar" style="width:${pct}%;background:${col}">${it.leads} leads</div>
+      </div>
+      <div class="pl-cpl" style="color:${col}">$${it.cpl.toFixed(2)}</div>`;
+    el.appendChild(div);
+  });
+}
+buildPlatformBars('fbList', placements.filter(p=>p.platform==='fb'));
+buildPlatformBars('igList', placements.filter(p=>p.platform==='ig'));
+
+// ─── Table Sort ───
+const sortState = {};
+function sortT(id, col) {
+  const tbody = document.getElementById(id).querySelector('tbody');
+  const rows  = Array.from(tbody.querySelectorAll('tr'));
+  sortState[id] = sortState[id] || {};
+  sortState[id][col] = !sortState[id][col];
+
+  rows.sort((a,b)=>{
+    let av = a.cells[col].textContent.replace(/[$,%×x↑↓🟢🟡🔴]/g,'').trim();
+    let bv = b.cells[col].textContent.replace(/[$,%×x↑↓🟢🟡🔴]/g,'').trim();
+    const an=parseFloat(av), bn=parseFloat(bv);
+    if(!isNaN(an)&&!isNaN(bn)) return sortState[id][col]?an-bn:bn-an;
+    return sortState[id][col]?av.localeCompare(bv):bv.localeCompare(av);
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+  document.getElementById(id).querySelectorAll('th').forEach((th,i)=>{
+    th.classList.remove('sort-asc','sort-desc');
+    if(i===col) th.classList.add(sortState[id][col]?'sort-asc':'sort-desc');
+  });
+}
+</script>
+</body>
+</html>

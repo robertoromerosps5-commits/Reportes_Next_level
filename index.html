@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportes Pra2media</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050810;color:#F1F5F9;font-family:'Inter',-apple-system,sans-serif;min-height:100vh}
+.topbar{background:#020408;border-bottom:1px solid #1C2840;padding:0 2rem;height:48px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-mark{width:28px;height:28px;background:#4ADE80;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.75rem;color:#020408}
+.logo-text{font-size:.85rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.logo-text span{color:#4ADE80}
+.topbar-right{font-size:.75rem;color:#475569}
+.hero{background:#070B18;border-bottom:1px solid #1C2840;padding:4rem 2.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(#1C2840 1px,transparent 1px),linear-gradient(90deg,#1C2840 1px,transparent 1px);background-size:40px 40px;opacity:.2}
+.hero::after{content:'';position:absolute;top:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(74,222,128,.07) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.eyebrow-bar{width:28px;height:2px;background:#4ADE80}
+.eyebrow-text{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#4ADE80}
+.hero h1{font-size:2.8rem;font-weight:900;letter-spacing:-.04em;color:#fff;margin-bottom:.5rem}
+.hero p{color:#94A3B8;font-size:.95rem}
+.container{max-width:1200px;margin:0 auto;padding:3rem 2.5rem}
+.section-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#475569;margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#243250,transparent)}
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.client-card{background:#0B1022;border:1px solid #1C2840;border-radius:1.25rem;padding:1.5rem;transition:border-color .2s,transform .2s,box-shadow .2s;text-decoration:none}
+.client-card:hover{border-color:#243250;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.client-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+.client-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(56,189,248,.15));border:1px solid rgba(74,222,128,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.client-name{font-size:1rem;font-weight:700;color:#fff}
+.client-meta{font-size:.72rem;color:#475569}
+.reports-list{display:flex;flex-direction:column;gap:.6rem}
+.report-link{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:#111829;border:1px solid #1C2840;border-radius:.75rem;text-decoration:none;transition:border-color .15s,background .15s}
+.report-link:hover{border-color:#4ADE80;background:rgba(74,222,128,.04)}
+.report-link-left{display:flex;align-items:center;gap:.6rem}
+.report-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;flex-shrink:0}
+.report-name{font-size:.82rem;font-weight:600;color:#E2E8F0}
+.report-date{font-size:.7rem;color:#475569}
+.report-arrow{color:#475569;font-size:.9rem;transition:color .15s}
+.report-link:hover .report-arrow{color:#4ADE80}
+.empty-state{color:#475569;font-size:.82rem;padding:.5rem 0}
+.footer{background:#020408;border-top:1px solid #1C2840;padding:1.5rem 2.5rem;text-align:center;font-size:.72rem;color:#475569;margin-top:3rem}
+.footer span{color:#4ADE80}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="logo">
+    <div class="logo-mark">P2</div>
+    <span class="logo-text">PRA<span>2</span>MEDIA</span>
+  </a>
+  <div class="topbar-right">Portal de Reportes · Clientes</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span class="eyebrow-text">Reportes Digitales</span></div>
+    <h1>Reportes<br>Next Level</h1>
+    <p>Dashboards interactivos de rendimiento publicitario · Meta Ads · Google Ads</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-label">Clientes Activos</div>
+  <div class="clients-grid">
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">🏢</div>
+        <div>
+          <div class="client-name">iLEVENN</div>
+          <div class="client-meta">Meta Ads · Generación de Leads</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <a href="ilevenn/abril-2026/" class="report-link">
+          <div class="report-link-left">
+            <div class="report-dot"></div>
+            <div>
+              <div class="report-name">Dashboard Abril 2026</div>
+              <div class="report-date">365 leads · $1,032 invertidos · CPL $2.83</div>
+            </div>
+          </div>
+          <span class="report-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">🌊</div>
+        <div>
+          <div class="client-name">CostaSol Ads</div>
+          <div class="client-meta">Meta Ads · Mayor cuenta del portafolio</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">🔧</div>
+        <div>
+          <div class="client-name">Lanfor S.A.</div>
+          <div class="client-meta">Meta Ads · Performance</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">🏦</div>
+        <div>
+          <div class="client-name">PM · ASOBANCA ADS</div>
+          <div class="client-meta">Meta Ads · Sector financiero</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">⚡</div>
+        <div>
+          <div class="client-name">Eurotech</div>
+          <div class="client-meta">Meta Ads · Performance</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-icon">📈</div>
+        <div>
+          <div class="client-name">EnterpriseNationalEc</div>
+          <div class="client-meta">Meta Ads · Performance</div>
+        </div>
+      </div>
+      <div class="reports-list">
+        <div class="empty-state">Próximamente · Reporte en preparación</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <span>PRA2MEDIA</span> · Marketing como sistema. Crecimiento como propósito. · pra2media.com
+</footer>
+</body>
+</html>
