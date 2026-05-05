@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliminación de Datos · Pra2media</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050810;color:#F1F5F9;font-family:'Inter',-apple-system,sans-serif;line-height:1.7}
+.topbar{background:#020408;border-bottom:1px solid #1C2840;padding:0 2rem;height:48px;display:flex;align-items:center;gap:.6rem}
+.logo-mark{width:26px;height:26px;background:#4ADE80;border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.72rem;color:#020408}
+.logo-text{font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.logo-text span{color:#4ADE80}
+.hero{background:#070B18;border-bottom:1px solid #1C2840;padding:3rem 2rem}
+.hero-inner{max-width:800px;margin:0 auto}
+.eyebrow{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#4ADE80;margin-bottom:.75rem}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:-.03em;color:#fff}
+.hero p{color:#94A3B8;font-size:.85rem;margin-top:.5rem}
+.content{max-width:800px;margin:0 auto;padding:3rem 2rem}
+h2{font-size:1rem;font-weight:700;color:#4ADE80;margin:2rem 0 .75rem;text-transform:uppercase;letter-spacing:.05em}
+p,li{font-size:.9rem;color:#94A3B8;margin-bottom:.75rem}
+ul{padding-left:1.5rem;margin-bottom:.75rem}
+li{margin-bottom:.4rem}
+strong{color:#E2E8F0}
+.card{background:#0B1022;border:1px solid #1C2840;border-radius:1rem;padding:1.5rem;margin-bottom:1.5rem}
+.steps{counter-reset:steps;list-style:none;padding:0}
+.steps li{counter-increment:steps;display:flex;gap:1rem;margin-bottom:1rem;align-items:flex-start}
+.steps li::before{content:counter(steps);background:#4ADE80;color:#020408;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;flex-shrink:0;margin-top:.1rem}
+.highlight{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:.75rem;padding:1rem 1.25rem;margin:1rem 0}
+.highlight strong{color:#4ADE80}
+.footer{background:#020408;border-top:1px solid #1C2840;padding:1.5rem 2rem;text-align:center;font-size:.72rem;color:#475569;margin-top:3rem}
+.footer span{color:#4ADE80}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo-mark">P2</div>
+  <span class="logo-text">PRA<span>2</span>MEDIA</span>
+</div>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Legal · Datos</div>
+    <h1>Instrucciones de Eliminación de Datos</h1>
+    <p>Última actualización: 4 de mayo de 2026 · Aplicación: Asistente de pautas Next Level</p>
+  </div>
+</div>
+<div class="content">
+  <div class="card">
+    <h2>Cómo eliminar tus datos</h2>
+    <p>Si deseas que eliminemos cualquier dato asociado a tu cuenta de Meta que haya sido procesado por la aplicación <strong>Asistente de pautas Next Level</strong>, puedes hacerlo de dos formas:</p>
+
+    <h2 style="margin-top:1.5rem">Opción 1 — Revocar acceso desde Meta (recomendado)</h2>
+    <p>Esta es la forma más rápida. Al revocar el acceso, la aplicación pierde inmediatamente la capacidad de acceder a tus datos:</p>
+    <ul class="steps">
+      <li><span>Inicia sesión en <strong>facebook.com</strong> o tu cuenta de Meta Business</span></li>
+      <li><span>Ve a <strong>Configuración → Seguridad e inicio de sesión → Aplicaciones y sitios web</strong></span></li>
+      <li><span>Busca <strong>"Asistente de pautas Next Level"</strong> en la lista</span></li>
+      <li><span>Haz clic en <strong>"Eliminar"</strong> para revocar el acceso completamente</span></li>
+    </ul>
+
+    <h2 style="margin-top:1.5rem">Opción 2 — Solicitud directa por correo</h2>
+    <p>Envía un correo a <strong>roberto.romero123.rr@gmail.com</strong> con el asunto <strong>"Solicitud de eliminación de datos"</strong> e incluye:</p>
+    <ul>
+      <li>Tu nombre completo</li>
+      <li>El ID de tu cuenta publicitaria de Meta (act_XXXXXXX)</li>
+      <li>Descripción de los datos que deseas eliminar</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>Tiempo de respuesta:</strong> Procesamos todas las solicitudes de eliminación en un plazo máximo de <strong>30 días hábiles</strong> desde la recepción de la solicitud.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Qué datos eliminamos</h2>
+    <p>Al procesar tu solicitud, eliminamos:</p>
+    <ul>
+      <li>Cualquier token de acceso almacenado vinculado a tu cuenta</li>
+      <li>Reportes y archivos generados con datos de tu cuenta publicitaria</li>
+      <li>Registros de actividad (logs) relacionados con tu cuenta</li>
+    </ul>
+    <p>Ten en cuenta que la aplicación opera principalmente en modo de solo lectura en tiempo real. No mantenemos bases de datos con historial de datos de Meta de forma permanente.</p>
+  </div>
+
+  <div class="card">
+    <h2>Confirmación de eliminación</h2>
+    <p>Una vez procesada tu solicitud, recibirás una confirmación por correo electrónico indicando que todos los datos han sido eliminados. Si no recibes respuesta en 72 horas hábiles, por favor reenvía tu solicitud.</p>
+    <p>Contacto: <strong>roberto.romero123.rr@gmail.com</strong></p>
+  </div>
+</div>
+<footer class="footer"><span>PRA2MEDIA</span> · Asistente de pautas Next Level · pra2media.com</footer>
+</body>
+</html>
