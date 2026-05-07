@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard CLAB · Asobanca · PRA2MEDIA</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #161a24;
+      --surface2: #1e2535;
+      --border: #2a3045;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+      --accent2: #0ea5e9;
+      --gold: #e8b00a;
+      --text: #e8eaf0;
+      --muted: #7a8098;
+      --green: #22c55e;
+      --orange: #f97316;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --red: #f03a2e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; }
+
+    /* HEADER */
+    header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .logo-badge { background: var(--accent); color: #fff; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 8px; letter-spacing: .5px; }
+    .header-title h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+    .header-title p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .header-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-green { background: rgba(34,197,94,.15); color: #22c55e; border: 1px solid rgba(34,197,94,.3); }
+    .badge-blue { background: rgba(37,99,235,.15); color: #93c5fd; border: 1px solid rgba(37,99,235,.3); }
+    .period-label { font-size: 12px; color: var(--muted); }
+    .period-label span { color: var(--gold); font-weight: 600; }
+
+    /* LAYOUT */
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px 20px; }
+    .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+    /* KPI GRID */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: transform .15s; }
+    .kpi-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+    .kpi-value { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
+    .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .kpi-accent  { border-top: 3px solid var(--accent); }
+    .kpi-gold    { border-top: 3px solid var(--gold); }
+    .kpi-green   { border-top: 3px solid var(--green); }
+    .kpi-blue    { border-top: 3px solid var(--blue); }
+    .kpi-purple  { border-top: 3px solid var(--purple); }
+    .kpi-orange  { border-top: 3px solid var(--orange); }
+    .kpi-red     { border-top: 3px solid var(--red); }
+    .kpi-teal    { border-top: 3px solid var(--accent2); }
+
+    /* CHARTS ROW */
+    .charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .charts-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 900px) { .charts-row { grid-template-columns: 1fr; } .charts-row-2 { grid-template-columns: 1fr; } }
+    .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .chart-card h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .chart-card p { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+    .chart-wrap { position: relative; height: 220px; }
+    .chart-wrap-tall { position: relative; height: 280px; }
+
+    /* FUNNEL */
+    .funnel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+    .funnel-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+
+    /* TABLE */
+    .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; overflow-x: auto; }
+    .table-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .table-card .table-sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    td { padding: 12px 12px; border-bottom: 1px solid rgba(42,48,69,.5); font-size: 13px; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+    tr.total-row td { background: var(--surface2); font-weight: 700; border-top: 1px solid var(--border); }
+    .ad-name { font-weight: 600; color: var(--text); }
+    .metric-hi { color: var(--green); font-weight: 700; }
+    .metric-lo { color: var(--orange); }
+    .metric-blue { color: var(--blue); font-weight: 600; }
+    .metric-gold { color: var(--gold); font-weight: 600; }
+
+    /* PLATFORM CARDS */
+    .platform-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    @media (max-width: 700px) { .platform-row-2 { grid-template-columns: 1fr; } }
+    .platform-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .platform-card .plat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .plat-name { font-weight: 700; font-size: 14px; }
+    .plat-spend { font-size: 22px; font-weight: 800; }
+    .plat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .plat-metric { background: var(--surface2); border-radius: 8px; padding: 8px 10px; }
+    .plat-metric-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+    .plat-metric-val { font-size: 15px; font-weight: 700; margin-top: 2px; }
+    .fb-accent { border-top: 3px solid #1877f2; }
+    .ig-accent { border-top: 3px solid #c13584; }
+
+    /* HALLAZGOS */
+    .insight-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .insight-item { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; display: flex; gap: 18px; align-items: flex-start; transition: border-color .15s; }
+    .insight-item:hover { border-left-color: var(--gold); }
+    .insight-num { font-size: 34px; font-weight: 900; color: var(--accent); opacity: 0.22; min-width: 44px; line-height: 1; margin-top: 2px; }
+    .insight-body { font-size: 14px; color: var(--text); line-height: 1.8; }
+    .insight-body strong { color: var(--gold); font-weight: 700; }
+
+    /* ADSET TABLE */
+    .adset-group { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); background: var(--surface2); }
+    .adset-group td { padding: 6px 12px; }
+
+    /* INFO CARDS */
+    .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    @media (max-width: 700px) { .info-row { grid-template-columns: 1fr; } }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .info-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 12px; }
+    .info-list { display: flex; flex-direction: column; gap: 8px; }
+    .info-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(42,48,69,.5); }
+    .info-item:last-child { border-bottom: none; }
+    .info-key { color: var(--muted); font-size: 12px; }
+    .info-val { font-weight: 600; font-size: 13px; color: var(--text); }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    footer span { font-size: 11px; color: var(--muted); }
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-badge">ASOBANCA</div>
+    <div class="header-title">
+      <h1>CLAB · Campaña WhatsApp</h1>
+      <p>Meta Ads · Objetivo: Conversaciones WhatsApp &nbsp;·&nbsp; 3 conjuntos de anuncios activos</p>
+    </div>
+  </div>
+  <div class="header-meta">
+    <span class="badge badge-green">● ACTIVA</span>
+    <span class="badge badge-blue">Meta Ads</span>
+    <span class="period-label">Período: <span>13 mar – 7 may 2026</span></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- KPI TOTALES -->
+  <p class="section-title">Métricas clave — acumulado 13 mar · 7 may 2026</p>
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-gold">
+      <div class="kpi-label">Inversión total</div>
+      <div class="kpi-value">$1,268</div>
+      <div class="kpi-sub">USD acumulado</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Conversaciones WA</div>
+      <div class="kpi-value">577</div>
+      <div class="kpi-sub">chats iniciados</div>
+    </div>
+    <div class="kpi-card kpi-accent">
+      <div class="kpi-label">Costo / conversación</div>
+      <div class="kpi-value">$2.20</div>
+      <div class="kpi-sub">promedio del período</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">Impresiones</div>
+      <div class="kpi-value">492K</div>
+      <div class="kpi-sub">~492,000 totales</div>
+    </div>
+    <div class="kpi-card kpi-purple">
+      <div class="kpi-label">Alcance últ. mes</div>
+      <div class="kpi-value">108K</div>
+      <div class="kpi-sub">personas únicas</div>
+    </div>
+    <div class="kpi-card kpi-teal">
+      <div class="kpi-label">Link Clicks</div>
+      <div class="kpi-value">2,836</div>
+      <div class="kpi-sub">clics directos</div>
+    </div>
+    <div class="kpi-card kpi-orange">
+      <div class="kpi-label">Tasa conv. click→WA</div>
+      <div class="kpi-value">20.3%</div>
+      <div class="kpi-sub">1 de cada 5 clics</div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div class="kpi-label">CPM últ. mes</div>
+      <div class="kpi-value">$2.21</div>
+      <div class="kpi-sub">por 1,000 impresiones</div>
+    </div>
+  </div>
+
+  <!-- EVOLUCIÓN MENSUAL — CHARTS -->
+  <p class="section-title">Evolución mensual — inversión, conversaciones y eficiencia</p>
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Conversaciones por mes</h3>
+      <p>Total acumulado: 577 chats WhatsApp</p>
+      <div class="chart-wrap"><canvas id="convChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Inversión por mes</h3>
+      <p>Distribución del presupuesto ejecutado</p>
+      <div class="chart-wrap"><canvas id="spendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Costo por conversación</h3>
+      <p>Eficiencia: menor = mejor</p>
+      <div class="chart-wrap"><canvas id="cpcChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TABLA EVOLUCIÓN MENSUAL -->
+  <div class="table-card">
+    <h3>Evolución mensual detallada</h3>
+    <div class="table-sub">Datos por período · campaña Asobanca_Clab_Whatsapp</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Período</th>
+          <th>Inversión</th>
+          <th>Impresiones</th>
+          <th>Clics</th>
+          <th>CTR</th>
+          <th>CPM</th>
+          <th>Conversaciones</th>
+          <th>Costo / Conv.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ad-name">Marzo 13 – 31</td>
+          <td>$419</td>
+          <td>160,318</td>
+          <td>2,700</td>
+          <td class="metric-hi">1.68%</td>
+          <td>$2.62</td>
+          <td class="metric-blue">236</td>
+          <td class="metric-hi">$1.78</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Abril 1 – 30</td>
+          <td>$713</td>
+          <td>221,082</td>
+          <td>2,623</td>
+          <td>1.19%</td>
+          <td class="metric-lo">$3.23</td>
+          <td class="metric-blue">271</td>
+          <td class="metric-lo">$2.63</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Mayo 1 – 7</td>
+          <td>$135</td>
+          <td>110,996</td>
+          <td>970</td>
+          <td>0.87%</td>
+          <td class="metric-hi">$1.22</td>
+          <td class="metric-blue">70</td>
+          <td>$1.93</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total período</td>
+          <td class="metric-gold">$1,268</td>
+          <td>492,396</td>
+          <td>6,293</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="metric-green" style="color:var(--green)">577</td>
+          <td class="metric-gold">$2.20</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HALLAZGOS CLAVE -->
+  <p class="section-title">Hallazgos clave — análisis del período</p>
+  <div class="insight-list">
+
+    <div class="insight-item">
+      <div class="insight-num">01</div>
+      <div class="insight-body">
+        Desde su lanzamiento el 13 de marzo, las campañas de CLAB en Meta han generado <strong>577 conversaciones directas por WhatsApp</strong>, con una inversión total de $1,267. Cada contacto interesado en el evento le costó a la cuenta un promedio de <strong>$2.20</strong> en todo el período — una cifra muy competitiva para un evento de perfil corporativo y financiero.
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <div class="insight-num">02</div>
+      <div class="insight-body">
+        <strong>El arranque fue el momento de mayor eficiencia.</strong> En las últimas dos semanas de marzo, la campaña generó <strong>236 conversaciones a solo $1.78 cada una</strong>, con un CTR que superó el 1.85% — casi el doble del promedio regional para este tipo de objetivo. Los creativos eran nuevos y la audiencia respondió con alta intención desde el primer momento.
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <div class="insight-num">03</div>
+      <div class="insight-body">
+        <strong>Abril fue el mes de mayor volumen pero también el más costoso.</strong> Se alcanzó el pico de <strong>271 conversaciones</strong>, sin embargo el costo por conversación subió a $2.63. La razón es clara: el adset local más activo había alcanzado una frecuencia de <strong>3.2 veces por persona</strong>, que estaría dentro de nuestro tope de frecuencia para recibir una acción de valor.
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <div class="insight-num">04</div>
+      <div class="insight-body">
+        <strong>Mayo está arrancando con una recuperación notable.</strong> En apenas 7 días, el costo por conversación bajó a <strong>$1.93</strong> y el CPM cayó de $3.35 (abril) a <strong>$1.22</strong> — casi un tercio del valor. Gracias a la optimización de audiencia y rotación de creativos. Si esa tendencia se mantiene, mayo podría ser el <strong>mes más eficiente desde el lanzamiento</strong>.
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <div class="insight-num">05</div>
+      <div class="insight-body">
+        <strong>El conjunto dirigido a países ha sido la sorpresa positiva de la campaña.</strong> Arrancó en marzo con el costo por conversación más bajo de todos ($1.30), escaló en abril a $2.58 y en mayo se mantiene estable en $2.07. Demuestra que existe demanda real del evento fuera de Ecuador, y que la audiencia regional <strong>responde consistentemente al mensaje de CLAB</strong>.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FUNNEL -->
+  <p class="section-title">Embudo de rendimiento — últimos 30 días</p>
+  <div class="funnel-card">
+    <h3>Impresiones → Alcance → Clics → Link Clicks → Conversaciones WhatsApp</h3>
+    <div id="funnelChart" style="height:200px; position:relative;"></div>
+  </div>
+
+  <!-- PLATAFORMAS -->
+  <p class="section-title">Distribución por plataforma — últimos 30 días</p>
+  <div class="charts-row">
+    <div class="chart-card">
+      <h3>Inversión por plataforma</h3>
+      <p>$559.59 total · últimos 30 días</p>
+      <div class="chart-wrap"><canvas id="platSpendChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Impresiones por plataforma</h3>
+      <p>253,162 impresiones totales</p>
+      <div class="chart-wrap"><canvas id="platImpChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>CTR por plataforma</h3>
+      <p>% de clics sobre impresiones</p>
+      <div class="chart-wrap"><canvas id="platCtrChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="platform-row-2">
+    <div class="platform-card fb-accent">
+      <div class="plat-header">
+        <span class="plat-name">📘 Facebook</span>
+        <span class="badge badge-blue">47% inversión</span>
+      </div>
+      <div class="plat-spend" style="color:#3b82f6;">$262.63</div>
+      <div class="plat-grid">
+        <div class="plat-metric"><div class="plat-metric-lbl">Impresiones</div><div class="plat-metric-val">149,689</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Alcance</div><div class="plat-metric-val">69,030</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Clics</div><div class="plat-metric-val">1,898</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CTR</div><div class="plat-metric-val" style="color:var(--green)">1.27%</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CPM</div><div class="plat-metric-val" style="color:var(--green)">$1.75</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Video Views</div><div class="plat-metric-val">57</div></div>
+      </div>
+    </div>
+    <div class="platform-card ig-accent">
+      <div class="plat-header">
+        <span class="plat-name">📸 Instagram</span>
+        <span class="badge" style="background:rgba(193,53,132,.15);color:#e879be;border:1px solid rgba(193,53,132,.3)">53% inversión</span>
+      </div>
+      <div class="plat-spend" style="color:#e879be;">$296.95</div>
+      <div class="plat-grid">
+        <div class="plat-metric"><div class="plat-metric-lbl">Impresiones</div><div class="plat-metric-val">103,451</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Alcance</div><div class="plat-metric-val">49,460</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Clics</div><div class="plat-metric-val">658</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CTR</div><div class="plat-metric-val" style="color:var(--orange)">0.64%</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">CPM</div><div class="plat-metric-val" style="color:var(--orange)">$2.87</div></div>
+        <div class="plat-metric"><div class="plat-metric-lbl">Video Views</div><div class="plat-metric-val" style="color:var(--accent2)">721</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONJUNTOS DE ANUNCIOS — EVOLUCIÓN -->
+  <p class="section-title">Rendimiento por conjunto de anuncios — evolución mensual</p>
+  <div class="charts-row-2">
+    <div class="chart-card">
+      <h3>Conversaciones por conjunto — mensual</h3>
+      <p>Comparativo mes a mes entre los 3 adsets activos</p>
+      <div class="chart-wrap-tall"><canvas id="adsetConvChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Costo por conversación — por conjunto</h3>
+      <p>Eficiencia individual de cada conjunto de anuncios</p>
+      <div class="chart-wrap-tall"><canvas id="adsetCpcChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <h3>Detalle por conjunto de anuncios</h3>
+    <div class="table-sub">Conversaciones e inversión mes a mes · 3 conjuntos activos</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Conjunto de anuncios</th>
+          <th>Mar conv.</th>
+          <th>Mar CPC/C</th>
+          <th>Abr conv.</th>
+          <th>Abr CPC/C</th>
+          <th>May conv.</th>
+          <th>May CPC/C</th>
+          <th>Total conv.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ad-name">Local A — Ecuador</td>
+          <td class="metric-hi">181</td>
+          <td class="metric-hi">$1.62</td>
+          <td>113</td>
+          <td>$1.94</td>
+          <td>27</td>
+          <td>$1.87</td>
+          <td class="metric-blue">321</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Local B — Ecuador</td>
+          <td>31</td>
+          <td class="metric-lo">$3.08</td>
+          <td>53</td>
+          <td class="metric-lo">$4.21</td>
+          <td class="metric-hi">26</td>
+          <td class="metric-hi">$1.91</td>
+          <td class="metric-blue">110</td>
+        </tr>
+        <tr>
+          <td class="ad-name">Conjunto Países ★</td>
+          <td>24</td>
+          <td class="metric-hi">$1.30</td>
+          <td class="metric-hi">105</td>
+          <td>$2.58</td>
+          <td>17</td>
+          <td>$2.06</td>
+          <td class="metric-blue">146</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total</td>
+          <td style="color:var(--green)">236</td>
+          <td style="color:var(--gold)">$1.78</td>
+          <td style="color:var(--green)">271</td>
+          <td style="color:var(--orange)">$2.63</td>
+          <td style="color:var(--green)">70</td>
+          <td style="color:var(--blue)">$1.93</td>
+          <td style="color:var(--green)">577</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AUDIENCIA -->
+  <p class="section-title">Audiencia — demografía · últimos 30 días</p>
+  <div class="charts-row-2">
+    <div class="chart-card">
+      <h3>CTR por grupo de edad</h3>
+      <p>El segmento 35–54 tiene el mejor engagement</p>
+      <div class="chart-wrap-tall"><canvas id="ageChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Inversión por género</h3>
+      <p>Distribución del gasto entre hombres y mujeres</p>
+      <div class="chart-wrap-tall"><canvas id="genderChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- CONFIGURACIÓN DE CAMPAÑA -->
+  <p class="section-title">Configuración de campaña</p>
+  <div class="info-row">
+    <div class="info-card">
+      <h3>Campaña activa</h3>
+      <div class="info-list">
+        <div class="info-item"><span class="info-key">ID</span><span class="info-val" style="font-size:11px;color:var(--muted)">120242874984440283</span></div>
+        <div class="info-item"><span class="info-key">Nombre</span><span class="info-val">Asobanca_Clab_Whatsapp</span></div>
+        <div class="info-item"><span class="info-key">Objetivo</span><span class="info-val">OUTCOME_SALES · Conversaciones</span></div>
+        <div class="info-item"><span class="info-key">Estado</span><span class="info-val" style="color:var(--green)">ACTIVA</span></div>
+        <div class="info-item"><span class="info-key">Inicio</span><span class="info-val">13 mar 2026</span></div>
+        <div class="info-item"><span class="info-key">Tipo de compra</span><span class="info-val">Subasta</span></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Conjuntos de anuncios</h3>
+      <div class="info-list">
+        <div class="info-item"><span class="info-key">Conjuntos activos</span><span class="info-val" style="color:var(--green)">3 activos</span></div>
+        <div class="info-item"><span class="info-key">Optimización</span><span class="info-val">CONVERSACIONES</span></div>
+        <div class="info-item"><span class="info-key">Estrategia de puja</span><span class="info-val">Menor costo</span></div>
+        <div class="info-item"><span class="info-key">Presupuesto diario c/u</span><span class="info-val" style="color:var(--gold)">$5.00 EUR / día</span></div>
+        <div class="info-item"><span class="info-key">Plataformas</span><span class="info-val">Facebook + Instagram</span></div>
+        <div class="info-item"><span class="info-key">Cuenta pausada</span><span class="info-val" style="color:var(--muted)">Clab_Tráfico ($4,000 pendiente)</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Generado por <strong>PRA2MEDIA</strong> · Claude Code · <strong>CLAB · Asobanca</strong></span>
+  <span>Datos: Meta Ads API · Período 13 mar – 7 may 2026 · act_356461570101315</span>
+</footer>
+
+<script>
+  const PAL = {
+    fb: '#1877f2', ig: '#c13584',
+    blue: '#2563eb', blueL: '#3b82f6',
+    green: '#22c55e', orange: '#f97316',
+    gold: '#e8b00a', purple: '#a855f7',
+    teal: '#0ea5e9', red: '#f03a2e',
+    muted: 'rgba(122,128,152,0.35)'
+  };
+  const gridColor = 'rgba(42,48,69,.4)';
+  const tickColor = '#7a8098';
+
+  const baseOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#e8eaf0', font: { size: 11 } } } },
+    scales: {
+      x: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } },
+      y: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } }
+    }
+  };
+  const noLegend = { ...baseOpts, plugins: { legend: { display: false } } };
+  const pieOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { color: '#e8eaf0', font: { size: 11 }, padding: 14 } } }
+  };
+
+  // Conversaciones por mes
+  new Chart(document.getElementById('convChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mar 13–31', 'Abril', 'May 1–7'],
+      datasets: [{
+        label: 'Conversaciones',
+        data: [236, 271, 70],
+        backgroundColor: [PAL.green, PAL.orange, PAL.blue],
+        borderRadius: 8
+      }]
+    },
+    options: noLegend
+  });
+
+  // Inversión por mes
+  new Chart(document.getElementById('spendChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mar 13–31', 'Abril', 'May 1–7'],
+      datasets: [{
+        label: 'Inversión $',
+        data: [419, 713, 135],
+        backgroundColor: [PAL.blueL, PAL.gold, PAL.teal],
+        borderRadius: 8
+      }]
+    },
+    options: noLegend
+  });
+
+  // Costo por conversación por mes
+  new Chart(document.getElementById('cpcChart'), {
+    type: 'line',
+    data: {
+      labels: ['Mar 13–31', 'Abril', 'May 1–7'],
+      datasets: [{
+        label: 'CPC/Conv $',
+        data: [1.78, 2.63, 1.93],
+        borderColor: PAL.gold,
+        backgroundColor: 'rgba(232,176,10,.12)',
+        pointBackgroundColor: PAL.gold,
+        pointRadius: 6,
+        tension: 0.35,
+        fill: true
+      }]
+    },
+    options: {
+      ...noLegend,
+      scales: {
+        x: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } },
+        y: { ticks: { color: tickColor, font: { size: 11 }, callback: v => '$'+v }, grid: { color: gridColor }, min: 1.5, max: 3.0 }
+      }
+    }
+  });
+
+  // Plataforma — inversión
+  new Chart(document.getElementById('platSpendChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Facebook', 'Instagram'],
+      datasets: [{ data: [262.63, 296.95], backgroundColor: [PAL.fb, PAL.ig], borderWidth: 0, hoverOffset: 8 }]
+    },
+    options: pieOpts
+  });
+
+  // Plataforma — impresiones
+  new Chart(document.getElementById('platImpChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Facebook', 'Instagram'],
+      datasets: [{ data: [149689, 103451], backgroundColor: [PAL.fb, PAL.ig], borderWidth: 0, hoverOffset: 8 }]
+    },
+    options: pieOpts
+  });
+
+  // Plataforma — CTR
+  new Chart(document.getElementById('platCtrChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Facebook', 'Instagram'],
+      datasets: [{ label: 'CTR (%)', data: [1.27, 0.64], backgroundColor: [PAL.fb, PAL.ig], borderRadius: 8 }]
+    },
+    options: noLegend
+  });
+
+  // Adsets — conversaciones por mes (grouped)
+  new Chart(document.getElementById('adsetConvChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mar 13–31', 'Abril', 'May 1–7'],
+      datasets: [
+        { label: 'Local A', data: [181, 113, 27], backgroundColor: PAL.green, borderRadius: 6 },
+        { label: 'Local B', data: [31, 53, 26], backgroundColor: PAL.orange, borderRadius: 6 },
+        { label: 'Países ★', data: [24, 105, 17], backgroundColor: PAL.teal, borderRadius: 6 }
+      ]
+    },
+    options: { ...baseOpts, plugins: { legend: { labels: { color: '#e8eaf0', font: { size: 11 } } } } }
+  });
+
+  // Adsets — CPC/Conv por mes (grouped)
+  new Chart(document.getElementById('adsetCpcChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mar 13–31', 'Abril', 'May 1–7'],
+      datasets: [
+        { label: 'Local A', data: [1.62, 1.94, 1.87], backgroundColor: PAL.green, borderRadius: 6 },
+        { label: 'Local B', data: [3.08, 4.21, 1.91], backgroundColor: PAL.orange, borderRadius: 6 },
+        { label: 'Países ★', data: [1.30, 2.58, 2.06], backgroundColor: PAL.teal, borderRadius: 6 }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      plugins: { legend: { labels: { color: '#e8eaf0', font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: tickColor, font: { size: 11 } }, grid: { color: gridColor } },
+        y: { ticks: { color: tickColor, font: { size: 11 }, callback: v => '$'+v }, grid: { color: gridColor } }
+      }
+    }
+  });
+
+  // Audiencia — CTR por edad
+  new Chart(document.getElementById('ageChart'), {
+    type: 'bar',
+    data: {
+      labels: ['18–24', '25–34', '35–44', '45–54', '55–64', '65+'],
+      datasets: [{
+        label: 'CTR (%)',
+        data: [0.48, 0.81, 1.13, 1.40, 1.37, 1.31],
+        backgroundColor: [PAL.muted, PAL.muted, PAL.blueL, PAL.green, PAL.green, PAL.blueL],
+        borderRadius: 6
+      }]
+    },
+    options: noLegend
+  });
+
+  // Audiencia — género
+  new Chart(document.getElementById('genderChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Hombres (61%)', 'Mujeres (38%)', 'Sin definir (1%)'],
+      datasets: [{
+        data: [340.79, 211.80, 7.01],
+        backgroundColor: [PAL.blueL, PAL.ig, PAL.muted],
+        borderWidth: 0, hoverOffset: 8
+      }]
+    },
+    options: pieOpts
+  });
+
+  // Funnel
+  (function buildFunnel() {
+    const steps = [
+      { label: 'Impresiones', value: 253162, color: PAL.blue },
+      { label: 'Alcance',     value: 108322, color: PAL.purple },
+      { label: 'Clics',       value: 2556,   color: PAL.gold },
+      { label: 'Link Clicks', value: 1362,   color: PAL.orange },
+      { label: 'Conv. WA',    value: 232,    color: PAL.green }
+    ];
+    const max = steps[0].value;
+    const container = document.getElementById('funnelChart');
+    container.style.cssText = 'display:flex;align-items:flex-end;justify-content:space-between;';
+    steps.forEach((s, i) => {
+      const convPct = i > 0 ? ((s.value / steps[i-1].value)*100).toFixed(1)+'%' : '100%';
+      const height = Math.max((s.value / max) * 160, 24);
+      const div = document.createElement('div');
+      div.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;';
+      div.innerHTML = `
+        <div style="font-size:11px;color:#7a8098;">${convPct}</div>
+        <div style="height:${height}px;width:80%;background:${s.color};border-radius:6px 6px 0 0;opacity:.85;"></div>
+        <div style="font-size:16px;font-weight:800;color:#e8eaf0;">${s.value>=1000?(s.value/1000).toFixed(1)+'K':s.value}</div>
+        <div style="font-size:10px;color:#7a8098;text-transform:uppercase;letter-spacing:.5px;text-align:center;">${s.label}</div>
+      `;
+      container.appendChild(div);
+      if (i < steps.length - 1) {
+        const arrow = document.createElement('div');
+        arrow.style.cssText = 'display:flex;align-items:flex-end;padding-bottom:52px;color:#2a3045;font-size:22px;';
+        arrow.textContent = '›';
+        container.appendChild(arrow);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
