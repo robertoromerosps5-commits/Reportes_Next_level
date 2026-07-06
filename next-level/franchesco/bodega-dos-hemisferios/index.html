@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Bodega Dos Hemisferios · Julio 2026</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a21;
+    --panel-2:#1d222c;
+    --border:#262d3a;
+    --text:#e7ecf3;
+    --muted:#8a94a6;
+    --accent:#c8a165;
+    --accent-2:#e5c58a;
+    --good:#4ade80;
+    --warn:#fbbf24;
+    --bad:#f87171;
+    --purple:#a78bfa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,sans-serif;
+    line-height:1.5;
+    padding:24px;
+    min-height:100vh;
+  }
+  .container{max-width:1400px;margin:0 auto}
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:24px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .brand h1{
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .brand .sub{color:var(--muted);font-size:13px}
+  .live{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;background:rgba(74,222,128,0.12);
+    border:1px solid rgba(74,222,128,0.3);border-radius:20px;
+    font-size:12px;color:var(--good);font-weight:500;
+  }
+  .live::before{
+    content:"";width:8px;height:8px;background:var(--good);border-radius:50%;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .meta-bar{
+    display:flex;gap:16px;flex-wrap:wrap;
+    font-size:12px;color:var(--muted);margin-top:8px;
+  }
+  .meta-bar span strong{color:var(--text)}
+
+  .kpi-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;margin-bottom:32px;
+  }
+  .kpi{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:12px;padding:18px 20px;
+  }
+  .kpi .label{
+    font-size:11px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:0.08em;font-weight:600;margin-bottom:8px;
+  }
+  .kpi .value{font-size:26px;font-weight:700;letter-spacing:-0.02em}
+  .kpi .value.money::before{content:"$";color:var(--accent)}
+  .kpi .foot{font-size:12px;color:var(--muted);margin-top:4px}
+
+  h2.section{
+    font-size:18px;font-weight:600;margin:8px 0 16px;
+    display:flex;align-items:center;gap:8px;
+  }
+  h2.section::before{
+    content:"";width:3px;height:18px;background:var(--accent);border-radius:2px;
+  }
+
+  .campaign-block{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    margin-bottom:22px;overflow:hidden;
+  }
+  .camp-head{
+    padding:18px 22px;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:12px;
+    background:linear-gradient(180deg,rgba(200,161,101,0.06),transparent);
+    border-bottom:1px solid var(--border);
+  }
+  .camp-title{
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .camp-title .name{
+    font-size:16px;font-weight:600;
+  }
+  .camp-title .obj{
+    font-size:11px;color:var(--muted);letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .badge{
+    display:inline-block;padding:3px 8px;font-size:10px;
+    border-radius:6px;font-weight:600;letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .b-traffic{background:rgba(167,139,250,0.15);color:var(--purple);border:1px solid rgba(167,139,250,0.35)}
+  .b-sales{background:rgba(74,222,128,0.15);color:var(--good);border:1px solid rgba(74,222,128,0.35)}
+  .b-awareness{background:rgba(251,191,36,0.15);color:var(--warn);border:1px solid rgba(251,191,36,0.35)}
+  .b-engagement{background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.35)}
+
+  .camp-metrics{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:6px;padding:14px 22px;background:var(--panel-2);
+    border-bottom:1px solid var(--border);
+  }
+  .cm{padding:6px 8px}
+  .cm .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
+  .cm .val{font-size:16px;font-weight:600;margin-top:2px}
+
+  .ads-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:14px;padding:18px 22px;
+  }
+  .ad{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform 0.15s ease,border-color 0.15s ease;
+  }
+  .ad:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .ad-media{
+    position:relative;width:100%;aspect-ratio:1/1;background:#0a0d13;
+    overflow:hidden;
+  }
+  .ad-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .ad-media .no-media{
+    display:flex;align-items:center;justify-content:center;height:100%;
+    color:var(--muted);font-size:12px;text-align:center;padding:20px;
+  }
+  .ad-media .type-tag{
+    position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.65);
+    color:#fff;font-size:10px;padding:3px 7px;border-radius:5px;
+    font-weight:600;letter-spacing:0.05em;
+  }
+  .ad-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .ad-name{
+    font-size:13px;font-weight:600;line-height:1.3;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .ad-copy{
+    font-size:11px;color:var(--muted);line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .ad-stats{
+    display:grid;grid-template-columns:1fr 1fr;gap:6px;
+    margin-top:auto;padding-top:8px;border-top:1px solid var(--border);
+  }
+  .ad-stats .st{display:flex;flex-direction:column;font-size:10px}
+  .ad-stats .st .k{color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+  .ad-stats .st .v{color:var(--text);font-size:13px;font-weight:600;margin-top:1px}
+  .ad-stats .st .v.money::before{content:"$";color:var(--accent);margin-right:1px}
+
+  .no-spend{opacity:0.55}
+  .no-spend .ad-media{filter:grayscale(0.5)}
+
+  /* Video play overlay */
+  .ad-media[data-video-id]{cursor:pointer}
+  .play-btn{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(0,0,0,0.7);color:#fff;font-size:20px;
+    border:2px solid rgba(255,255,255,0.9);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    padding-left:4px;line-height:1;
+    transition:transform .15s ease,background .15s ease;
+    z-index:2;
+  }
+  .ad-media[data-video-id]:hover .play-btn{
+    transform:translate(-50%,-50%) scale(1.1);
+    background:var(--accent);
+    color:#0a0d13;
+    border-color:var(--accent);
+  }
+  .ad-media.playing img,
+  .ad-media.playing .play-btn,
+  .ad-media.playing .type-tag{display:none}
+  .ad-media iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;
+  }
+  .ad-media .fallback-link{
+    position:absolute;bottom:8px;right:8px;font-size:10px;
+    background:rgba(0,0,0,0.65);color:#fff;padding:3px 7px;
+    border-radius:5px;text-decoration:none;font-weight:500;z-index:2;
+    opacity:0;transition:opacity .15s ease;
+  }
+  .ad-media[data-video-id]:hover .fallback-link{opacity:1}
+  .fallback-link:hover{background:var(--accent);color:#0a0d13}
+
+  footer{
+    text-align:center;padding:24px 0 8px;color:var(--muted);font-size:12px;
+    border-top:1px solid var(--border);margin-top:24px;
+  }
+
+  @media (max-width:640px){
+    body{padding:16px}
+    .brand h1{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="brand">
+    <h1>Bodega Dos Hemisferios · Meta Ads</h1>
+    <div class="sub">Cuenta: B2H Ads · <code>act_2836455319797730</code></div>
+    <div class="meta-bar">
+      <span>Período: <strong>1 – 6 julio 2026</strong></span>
+      <span>Moneda: <strong>USD</strong></span>
+      <span>Zona: <strong>America/Guayaquil</strong></span>
+    </div>
+  </div>
+  <div>
+    <div class="live">EN VIVO · Datos del mes actual</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:right">
+      Actualizado: <span id="ts"></span>
+    </div>
+  </div>
+</header>
+
+<!-- KPIs GLOBALES -->
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="label">Inversión del mes</div>
+    <div class="value money">604.81</div>
+    <div class="foot">4 campañas activas gastando</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Impresiones</div>
+    <div class="value">471,644</div>
+    <div class="foot">Alcance: 251,971 personas</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Clics en enlace</div>
+    <div class="value">13,438</div>
+    <div class="foot">CTR promedio: 2.85%</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Anuncios activos</div>
+    <div class="value">20</div>
+    <div class="foot">Distribuidos en 4 campañas</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Leads / conversaciones</div>
+    <div class="value">7</div>
+    <div class="foot">1 alcance + 6 WhatsApp</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Visitas a landing</div>
+    <div class="value">4,569</div>
+    <div class="foot">Principalmente Tráfico Web</div>
+  </div>
+</div>
+
+<h2 class="section">Campañas activas · Artes por campaña</h2>
+
+<!-- ============= CAMPAÑA 1: 2026 - WHATSAPP ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">2026 - WHATSAPP</div>
+      <div class="obj">Objetivo: Interacción · Destino: WhatsApp</div>
+    </div>
+    <span class="badge b-engagement">Engagement</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$309.06</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">58,017</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">27,564</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.10</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$5.33</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">1,265</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.24</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">6</div></div>
+    <div class="cm"><div class="lbl">CPL</div><div class="val">$51.51</div></div>
+  </div>
+  <div class="ads-grid">
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/729348655_1304856311424138_7086472045059081164_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=BX0Dz6ZghuMQ7kNvwFF1OjS&_nc_oc=AdrR4KLD8tnGKvkXK0ODd06Q90buW_IWyG_kCtLRgxBz5vpjCN96JLjlRQjBwkOO3sacmV7pEg3abRyesdbxrej3&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=bCnxgQiG6JO_8YVWjLLCNQ&_nc_tpa=Q5bMBQEPuzJycY-x6G6bBRy9Mr5f-P_qN4duNYlKfvQLUXv1aEzjrtksKO3xp0833vM9hN8w9ip5QrHQqg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQDX9pcgCKOuZZWsMbZZ2kgxHFkgEMOy-Fy9RBnY156uUg&oe=6A51CC20" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Casa Juliana</div>
+        <div class="ad-copy">Un recorrido que vale la pena. 🍷 Los mejores vinos producidos en Ecuador están más cerca de lo que imaginas...</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">82.76</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">13,795</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">2.68%</span></div>
+          <div class="st"><span class="k">Leads</span><span class="v">2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/736053815_1019288663981489_6205903147803196225_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=xtW7qFLco58Q7kNvwEtXmEl&_nc_oc=AdqZghGnIASwKPs0Bgf4KtkeprVFNGDH2Op42ah-humckuGscARFYptz6gPJWWjqYWUrPWl7pJNwE-JHR9KVtqag&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=LjCkQL_xUFHcLnfCFCgTWg&_nc_tpa=Q5bMBQFEyf0MqX5uiDNM3dHS5Jl0XmaQVGXJs8mCAU7_sH_mFWQY3wKm2YGEch7bjuv1b3x5xaShML-59g&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_AQANW_Vxy2rtjuVZXh-RAHoIm98igRic6G7PZP5Uxom-QQ&oe=6A51B0CB" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Juliana v2</div>
+        <div class="ad-copy">¡Juliana y sus Próceres reciben al chef Luis Cerón de Bodega Dos Hemisferios!</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">56.16</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,362</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">1.06%</span></div>
+          <div class="st"><span class="k">CPM</span><span class="v money">23.78</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">IMG</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/561827467_24430411933327731_7633182467769239666_n.png?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=8JficPtZou8Q7kNvwHhIpqa&_nc_oc=Adr5UlwHlmlhxiEZzhkoeMHxt5fx8cvrbD18S6jFzutv27IY67xEUbPExCfw2caOsqI1l2OXG86l9waj06Eij4nI&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=nAeDK1957oVQhbbQlUvJKg&_nc_tpa=Q5bMBQGD027PQ3oJlh60-xCWybXL9Mk9E2keuUZsJKdaf_acrs7KaMa2VKP2qoy8Z-7tUCcz4ZbLwCSHDw&oh=00_AQBcOqqaB9OGm6IMq_ax-Zya2Rml8ZvjpTg4QuXYx-SErg&oe=6A51D664" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">FULL DAY — Copia</div>
+        <div class="ad-copy">Reserva Ahora · CTA WhatsApp</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">61.58</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,966</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">2.39%</span></div>
+          <div class="st"><span class="k">Leads</span><span class="v">1</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.13418-10/464307858_1196143231855745_1367795886568354588_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=zkhRQ5L9w2sQ7kNvwFiN85E&_nc_oc=AdqUfUHpYKTmmUizIftIfMcOosGTu3o1Pzau43AE4D3kHYjIguW0SYX5slhQAyOnOBHOFBso9TjFBjaOZL0Ptrw1&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=2zBC8l1tpwT4oGF7edHBSg&_nc_tpa=Q5bMBQFjyrTsWF28difz3gIhk4X0DkrZ5JISuDFiURlgsfl714mymO7hI7RgBimEsBgre7FFZyG40F8bdA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=7ca6ff&_nc_sid=58080a&oh=00_AQDny5CMm8ygqlzI9DRnBtQaAtYqLK1hgMgO07Mtjo-eTA&oe=6A51A82C" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">FULL DAY</div>
+        <div class="ad-copy">Reserva Ahora · CTA WhatsApp</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">37.66</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">1,256</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">1.67%</span></div>
+          <div class="st"><span class="k">CPM</span><span class="v money">29.98</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">IMG</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736314072_10162607803312330_8743003671914465420_n.png?stp=dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=1dP5EzPcViYQ7kNvwFHOkq7&_nc_oc=AdpDawPsS_e-h7zh253EvHQ71SqjwsTyhEOpPt0sgas6lNKdleGigZ1drXzTw-hJMzc6VQ2qPx8xE7niMtnB_j1B&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=0K4D3kB0KjEZ0COG06QPlw&_nc_tpa=Q5bMBQF-qtQZ_TSFw8upIOr764Tn8keYTzvV63lVx7VwzkwcLz9dJ9NvgKXZ1jvg7GpdO8fexFwXU7YZ2A&oh=00_AQAcZZg7Wi4h4Pl3oT2RGYhJdHG867Le8W2crmJWsnzwCg&oe=6A51ACD6" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Packs Padres — Copia</div>
+        <div class="ad-copy">Reserva Ahora · CTA WhatsApp</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">4.43</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,115</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">1.18%</span></div>
+          <div class="st"><span class="k">Leads</span><span class="v">3</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============= CAMPAÑA 2: Visitas al perfil AON ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON</div>
+      <div class="obj">Objetivo: Tráfico · Destino: Instagram @citywinery.ec</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$201.78</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">132,124</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">86,919</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.52</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$1.53</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">6,988</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.029</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.29%</div></div>
+    <div class="cm"><div class="lbl">Engagement</div><div class="val">18,308</div></div>
+  </div>
+  <div class="ads-grid">
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">IMG</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736201704_10162598368707330_889138536163743415_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=amnVBNwzTPkQ7kNvwFzXkch&_nc_oc=AdoVZpRrqbd3D-KDID_S4cJ_ulh5lRwZHa0Kc4InpGyZ37GKmfvSMhLOgNe33cQ3BbJThJ9HC2FJ3BIue1HRvv9_&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=0L4eT2g6svYA6uvxOXYSoQ&_nc_tpa=Q5bMBQE1UkdMhfhmdxMrHM2T5P66ar5bLB51G7VdcSETJSb_YLZlULVrP5Apu_vQ-AFL4K8qC4TRy4OCkA&oh=00_AQCeWEyS8pIYnv2kOzOVpBzNDGdcTgTt4DddOrdrkPpkvQ&oe=6A51C64E" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Visitas al perfil_AON — 3</div>
+        <div class="ad-copy">Ver perfil de Instagram · @citywinery.ec</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">74.18</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">33,136</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">12.31%</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">4,137</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">IMG</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736289291_10162598727477330_3678175595474723535_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=4FqsEts5j6cQ7kNvwGfavo5&_nc_oc=AdrprMmVvlv55552aY6wShBK-wAKPnp7t8XWB7kkGhk-vqKDVwFh1k24sXaSNbWBjPKtfww0jBtgFaSfLKRvm8GZ&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=lMA6RlNv9Wq5sAv9RDDjEA&_nc_tpa=Q5bMBQHSMwRTCgCWHi7tfQrfiUTvHyhP5EmXFLTlQedaj-JLDRghMDY4-joaxudU6DaWA3GYTb1M2bSXRw&oh=00_AQDfBd4OekHveQHgIiwmaNrjcH6Za_med9u0Gq2MVnnluQ&oe=6A51CD52" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
+        <div class="ad-copy">Ver perfil de Instagram · @citywinery.ec</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">26.20</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">10,038</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">14.34%</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">1,462</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/736172636_1339084691703025_7968678413024041983_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=HZVK2TCTiuEQ7kNvwFK-hv5&_nc_oc=AdrwlIIlX9H1PZRIS--fAaTmC_J5IdoS-53pkj3FWXXFOAAi_DlOtl3Uan8WUoTkcZyJavHvartIVRhiWlur8Wg5&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=JHL_7RVwiF7jYuQBfFY-gQ&_nc_tpa=Q5bMBQH-OBpZYyk-jrfaCIhkNG7DdT_jIcLbpJS0_ajgNWm3ysxq-pXLU24DOEzvP05WZ6kizUFwZChwZQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQAYLwRX2NGcGDWisnwLrJJpNhB5rCa72JFYik24sxP59w&oe=6A51A5E3" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Wine O'Clock — Copia (Video)</div>
+        <div class="ad-copy">Si no lo sabías, ahora ya no tienes excusa. 🍷 De lunes a jueves, de 4:00 a 6:00 p.m., Wine O'Clock con refill ilimitado...</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.01</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">66</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">7.58%</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">5</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad no-spend">
+      <div class="ad-media">
+        <span class="type-tag">IMG</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/739312524_10162625084497330_8742976361716954656_n.png?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=0i_b3I7-GXYQ7kNvwHCvbWE&_nc_oc=AdoPrdCmYioPPxn2SI2bHFedtIkYPqOWkgCfEJX4gCzZzp62dJ7jeikSjBesaA3duQesvgkxbspLUqK0UR-ZuYBw&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=k4UGpYnz6Dr_Jg07bNkpqw&_nc_tpa=Q5bMBQFw_t6yq_YkfFRkZQ8xDkJ1LNe2of7UH1ik0brAPx6wJUPnwM26Lg2-bvDt189-5_0g4grQVXWRBw&oh=00_AQDd9IdRBlJ001e2-RKTLrEPoXRzhdYznMq1azT0kG3WOg&oe=6A51B41E" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Visitas al perfil_AON — 3 (Copia 2)</div>
+        <div class="ad-copy">Ver perfil de Instagram · Recién creado hoy</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.00</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">—</span></div>
+          <div class="st"><span class="k">Estado</span><span class="v">Nuevo</span></div>
+          <div class="st"><span class="k">Creado</span><span class="v">06 jul</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============= CAMPAÑA 3: BDH ALCANCE Junio ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">BDH · ALCANCE · Junio</div>
+      <div class="obj">Objetivo: Awareness · Marca Dos Hemisferios / City Winery</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$40.19</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">174,418</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">97,084</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.80</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.23</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">10,240</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">84</div></div>
+    <div class="cm"><div class="lbl">Post engagement</div><div class="val">10,409</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">1</div></div>
+  </div>
+  <div class="ads-grid">
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664365115_2485641811854134_8313138335241626136_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=PtVHaXJ3UD8Q7kNvwHwsuN7&_nc_oc=AdoM_N4KVv-1wojx_HxctB7IFrP3BtxzHXVIV_IEUUJ0jPQwY8gxs0ccHewHQ6bIlqfEzpf4MgpcHod86ae1QzMK&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=mORGR8XLG7pjyLk-ylHXZw&_nc_tpa=Q5bMBQE6A7AGsBrnPFZzZThoanwTVAbF3Juwx-i6djmGQuOXKWmwCQQBCijAx_OGGkgKPsLsG0vPTFQ_Jg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCbfod3pisx5LbIcqkpa5hGgV2sL1pGEh56uFLgYgdvVQ&oe=6A51CB87" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 5 — Un recorrido que vale la pena</div>
+        <div class="ad-copy">Un recorrido que vale la pena. 🍷 Los mejores vinos producidos en Ecuador están más cerca de lo que imaginas...</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">9.91</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">48,676</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">2,765</span></div>
+          <div class="st"><span class="k">Leads</span><span class="v">1</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664741969_759151347133098_1248916725157907617_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=chAy-x4K-sIQ7kNvwFN9D-g&_nc_oc=AdoVE28wFXGAu3Ux7MBw6fjjFqlbZ3_GY2cHy6J4Jee1le-opJG41zAvg1h-s9g7Zhzg4osJes6ElCidbZHb2-qZ&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=V-XMcTTleES0bMnLPzWdfQ&_nc_tpa=Q5bMBQHToMRZoraVJWqxWzZZzuntdwnDuCi77JAiasltvTwJWCjvmFb7_3LZm7fNAtpAXaUfgi-tRwDceQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQB8Z5F-qSTYAutOMx6bHRkqiZQDekkYDk-f0b8qCPByiA&oe=6A51D159" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 1 — Del Portal</div>
+        <div class="ad-copy">Si vas a llenar el carrito… que sea con lo mejor. 🍷 Vinos ecuatorianos que valen cada copa. Consíguelos en Del Portal.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">10.07</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">26,829</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">2,051</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">38</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/734591499_988426713992219_8055430540959227135_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=rmoKve_nAzsQ7kNvwFb3NCI&_nc_oc=Adqzq5eWcVhNgShgJsp6H2mqn8B0GfQ7PJht2ItT_D0y6T33f-Vw4MS9MGQ_TsS4aT8qMRCGnQhOHuaELeTKUUrQ&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=bzN21h0Tocw6P0AaB63l7g&_nc_tpa=Q5bMBQFWhY0BU5ay9uTucL2aqmC6jqkXDS89KD4H5pZIPMkHT8ifA4pA-y0NowoUp8V8ea17soS-GkW4dA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCd55Ca7weeyY0NYx_IqfOkeBZJsbeTi0dAimNW1iyKhw&oe=6A51B0E2" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD3 — Mi Comisariato</div>
+        <div class="ad-copy">¿El que más te gusta? También lo tenemos. 🍷 Blancos, tintos, intensos, suaves… el vino perfecto ya está esperándote en Mi Comisariato.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">5.83</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">27,492</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,223</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">10</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/738745312_1046213621697062_2876816875708877131_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=xN0DpW_EJCoQ7kNvwGhfPsl&_nc_oc=AdobVFpB1-9GcAGN4_BLCnPEBTBr_uP5KCI0f15WrykJAQBxRFbxg-cCAyVQ2QbNGNp88bIZrO05Gvt1ikUVRt0a&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=-t_lSD_BYy5IFgrZzBIhcA&_nc_tpa=Q5bMBQHNVoZxxuU0KFnkbeHPxXmxrtyrcEL7SP7eAjEiDQ9VIf3xOhY5xXr8Al5PYXcJn-slalkRvtyotg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCbiiDBfgb-BY7IfKTNJXd6Q0QmW6KtT7V7IR1IVwcvAg&oe=6A51CE57" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 2 — Copia (Favoritos)</div>
+        <div class="ad-copy">Sea cual sea tu favorito… 🍷 Hay un Dos Hemisferios esperándote. Disponible en tu supermercado.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">6.56</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">31,836</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,371</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">11</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/729867452_1320119363605765_8033063400605478718_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=oRShudv8xQ0Q7kNvwEOWIe3&_nc_oc=AdrocaKLGuoCqR0vWCffTyptCzPFGtMl1HRm3qef8bQ9776cK8tcUby1ZEog1C6aOfZLzKprq-8aDrZ1ymrGZ4Px&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=kjG4bahmfNwooCGaCmApZw&_nc_tpa=Q5bMBQHtegXd54K3p4AjKTKyXOIeud3b3DADcKf6mB-z7LS3JiAf7u0bJgwI-92zij6acLjemMxMWK23Hg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQDPrx8xp5T9dPRdTVzxfRivxDpKC1tcIVBsxMKE8GqmfA&oe=6A51D099" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 2 — Mi Comisariato</div>
+        <div class="ad-copy">¿El que más te gusta? También lo tenemos. 🍷 Blancos, tintos, intensos, suaves… el vino perfecto ya está esperándote.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">4.29</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">21,482</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,226</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">12</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/729348655_1304856311424138_7086472045059081164_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=BX0Dz6ZghuMQ7kNvwFF1OjS&_nc_oc=AdrR4KLD8tnGKvkXK0ODd06Q90buW_IWyG_kCtLRgxBz5vpjCN96JLjlRQjBwkOO3sacmV7pEg3abRyesdbxrej3&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=bCnxgQiG6JO_8YVWjLLCNQ&_nc_tpa=Q5bMBQEPuzJycY-x6G6bBRy9Mr5f-P_qN4duNYlKfvQLUXv1aEzjrtksKO3xp0833vM9hN8w9ip5QrHQqg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQDX9pcgCKOuZZWsMbZZ2kgxHFkgEMOy-Fy9RBnY156uUg&oe=6A51CC20" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 1 — Casa Juliana</div>
+        <div class="ad-copy">Un recorrido que vale la pena. 🍷 Los mejores vinos producidos en Ecuador están más cerca de lo que imaginas.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">2.78</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">14,112</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,263</span></div>
+          <div class="st"><span class="k">Alcance</span><span class="v">12,582</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/730083168_2377062302826210_1250450146326970664_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=arFdKx7gPbIQ7kNvwFExbuK&_nc_oc=Adp5l3YnYrqBDGdNTZWw9xX43s_vVyXaVgQdBplpTa1-tARJeSXNNHlrcXMZIoYxRvL5jH80H-TsgsTEROhtT924&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=tcrnR094a4IVDEBH5bCjQg&_nc_tpa=Q5bMBQEpvF3nuIS6OQZ5ksT4cPBz5aasGHthLnDt0b_4aiLUCCzi8KpCpOqGdX0bWLJsByCwcqOVjPAV0w&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCsLfS1fCCtvsmQfVi5NlpXPXZli0ZfIkbNLykLhWUiMw&oe=6A51ACE1" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 2 — Recorrido Ecuador</div>
+        <div class="ad-copy">Un recorrido que vale la pena. 🍷 Los mejores vinos producidos en Ecuador están más cerca de lo que imaginas.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.72</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">3,675</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">318</span></div>
+          <div class="st"><span class="k">Alcance</span><span class="v">3,613</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/698859136_1581252137355200_469574063910077909_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=LmetExlDNUUQ7kNvwHKuRxe&_nc_oc=AdqkJ_SjFKawaGinMTcgtav11KyuP0p4_Q6XSTpuoE_L_jrf6kOcpFp5qtkczIJj0OB_eqw3Nre0jo_T13V1cKMo&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=ju43EeMKyz4ewiy_-85RnQ&_nc_tpa=Q5bMBQFrAeSxx2D9T-JQknJWvhtr4aPKvjZU_1YCEmD247sfsafxbWiu88ItTbaqXmBircFfOS7cii7trg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQBjZLwWTTnOpkubvfomE6e7uxqpt6AoK_fFX-TFCNak6g&oe=6A51CC79" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 1 — City Winery $12.99</div>
+        <div class="ad-copy">En City Winery no vienes a comer lo que toca… vienes a escoger lo que te provoca. 🍷 Por $12.99 eliges entrada + plato fuerte...</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.04</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">329</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">9</span></div>
+          <div class="st"><span class="k">Alcance</span><span class="v">182</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/698859136_1581252137355200_469574063910077909_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=LmetExlDNUUQ7kNvwHKuRxe&_nc_oc=AdqkJ_SjFKawaGinMTcgtav11KyuP0p4_Q6XSTpuoE_L_jrf6kOcpFp5qtkczIJj0OB_eqw3Nre0jo_T13V1cKMo&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=iR4yEPnoxaokKpaxvVufvQ&_nc_tpa=Q5bMBQEgqLIMkNm98MuEyzUzMe3eUXYavYnI4bEUjeu_UD84QIrmUo2YBqcc6-J_K-d0YvwLN3HM4aKV4g&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQAbXnphaucYQhiKbPWW4eOWXKlFpnpw-aVI0KuiBj5msw&oe=6A51CC79" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 1 — City Winery ($12.99) v2</div>
+        <div class="ad-copy">En City Winery no vienes a comer lo que toca… vienes a escoger lo que te provoca. 🍷 Por $12.99 eliges entrada + plato fuerte.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.04</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">237</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">12</span></div>
+          <div class="st"><span class="k">Alcance</span><span class="v">156</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad no-spend">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/738976584_4348978605366949_5701256051070524328_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=yUzTbf59UegQ7kNvwHzvJDK&_nc_oc=Adryt6ZN64p2UJM3ETN0f6bTmKdxAZRoOb9IP3ahDbVh260fd38Y2cEVTJduPxvPttm7oK1Ea1Ulm5HCqXS4BXnA&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=E_9xyRpJDp0nP819js4LIw&_nc_tpa=Q5bMBQFgCYYbHP0ucncP4o_7SE8Tuuayabdp81NfLjhAiTPKCjDyVQDGOeylscVvmCs8n8oldFsJe4EWmQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQB2ntldb4QiRxChskk9B84PDAYw4vymQVh4-unpNmxoZQ&oe=6A51BE6E" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">AD 5 — Copia (Nuevo)</div>
+        <div class="ad-copy">El maridaje perfecto empieza con la elección correcta. 🍷 Recién creado hoy.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.00</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">59</span></div>
+          <div class="st"><span class="k">Estado</span><span class="v">Nuevo</span></div>
+          <div class="st"><span class="k">Creado</span><span class="v">06 jul</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============= CAMPAÑA 4: Tráfico Web ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Tráfico_web</div>
+      <div class="obj">Objetivo: Ventas · Destino: doshemisferios.com</div>
+    </div>
+    <span class="badge b-sales">Sales</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$53.78</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">107,085</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">40,404</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.65</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.50</div></div>
+    <div class="cm"><div class="lbl">Clics enlace</div><div class="val">5,611</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.010</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.26%</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">4,471</div></div>
+  </div>
+  <div class="ads-grid">
+
+    <div class="ad">
+      <div class="ad-media">
+        <span class="type-tag">VIDEO</span>
+        <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/695281120_914686814867090_4234448961506741965_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=rdyMIiycIQoQ7kNvwHDU45f&_nc_oc=AdqFd3vh-iYrakYBcq2Lxwf9BT0C0RRAuitdwvZ5qZQY_PhTEk1tDUKDVDwbyqjak9-2Qd_cTkwS6TR3bFl9Di8D&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=eEXNtSp-aRUiVUOKwxdtMg&_nc_tpa=Q5bMBQHPI4-FrufEBhIdD-67iim9MYmr1-ei54uLAIKAJxAqAjwL0nv6qRq2JAlnyI1JzTI10wKgY9s81g&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_AQABjSbG_gZ4RAthn7cdDcH3RGHXFclDolcO7BWMPPq5DQ&oe=6A51AA92" alt="">
+      </div>
+      <div class="ad-body">
+        <div class="ad-name">Performance Web</div>
+        <div class="ad-copy">Antojo de vino… resuelto en segundos. 🍷 Un clic, eliges el tuyo y listo. Pídelo en nuestra página.</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">53.79</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">4,471</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">5.27%</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.010</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Dashboard generado con datos en vivo de Meta Marketing API · Período: 1–6 julio 2026 · Presupuesto: $604.81
+  <br>Los datos se refrescan cada vez que se regenera este archivo desde el chat.
+</footer>
+
+</div>
+
+<script>
+  // Timestamp local
+  const ts = new Date();
+  document.getElementById('ts').textContent =
+    ts.toLocaleDateString('es-EC', {day:'2-digit',month:'short',year:'numeric'}) +
+    ' · ' +
+    ts.toLocaleTimeString('es-EC', {hour:'2-digit',minute:'2-digit'});
+
+  // ==========================================================
+  // Embed inline de video (Facebook video plugin)
+  // Mapeo: substring único del thumbnail → video_id de Facebook
+  // ==========================================================
+  const VIDEO_MAP = [
+    // Los ítems con nameContains se evalúan primero (para desambiguar thumbs repetidos)
+    {key: '698859136_1581252137355200', nameContains: 'v2',          videoId: '984548920719522'},
+    {key: '698859136_1581252137355200',                              videoId: '1845146309779016'},
+    {key: '736053815_1019288663981489',                              videoId: '1019288633981492'},
+    {key: '464307858_1196143231855745',                              videoId: '1970254033590332'},
+    {key: '736172636_1339084691703025',                              videoId: '1556242499194284'},
+    {key: '664365115_2485641811854134',                              videoId: '4180893862043998'},
+    {key: '664741969_759151347133098',                               videoId: '1486526686500323'},
+    {key: '734591499_988426713992219',                               videoId: '1006516898907027'},
+    {key: '738745312_1046213621697062',                              videoId: '1688053166378090'},
+    {key: '729867452_1320119363605765',                              videoId: '1325192102482754'},
+    {key: '729348655_1304856311424138',                              videoId: '1723743655304658'},
+    {key: '730083168_2377062302826210',                              videoId: '3111204602561516'},
+    {key: '738976584_4348978605366949',                              videoId: '1978009419565959'},
+    {key: '695281120_914686814867090',                               videoId: '914686794867092'},
+  ];
+
+  function findVideoId(imgSrc, adName){
+    for (const item of VIDEO_MAP){
+      if (!imgSrc.includes(item.key)) continue;
+      if (item.nameContains && !adName.includes(item.nameContains)) continue;
+      return item.videoId;
+    }
+    return null;
+  }
+
+  function buildEmbedUrl(videoId){
+    const inner = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
+    return `https://www.facebook.com/plugins/video.php?href=${inner}&show_text=false&width=400&t=0`;
+  }
+
+  function fbPermalink(videoId){
+    return `https://www.facebook.com/watch/?v=${videoId}`;
+  }
+
+  document.querySelectorAll('.ad').forEach(card => {
+    const media = card.querySelector('.ad-media');
+    const tag = media && media.querySelector('.type-tag');
+    if (!media || !tag || tag.textContent.trim() !== 'VIDEO') return;
+
+    const img = media.querySelector('img');
+    if (!img) return;
+    const src = img.getAttribute('src') || '';
+    const adName = (card.querySelector('.ad-name')?.textContent || '').trim();
+
+    const videoId = findVideoId(src, adName);
+    if (!videoId) return;
+
+    media.dataset.videoId = videoId;
+
+    // Botón play
+    const btn = document.createElement('button');
+    btn.className = 'play-btn';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Reproducir video');
+    btn.textContent = '▶';
+    media.appendChild(btn);
+
+    // Fallback: abrir en Facebook (nueva pestaña)
+    const fallback = document.createElement('a');
+    fallback.className = 'fallback-link';
+    fallback.href = fbPermalink(videoId);
+    fallback.target = '_blank';
+    fallback.rel = 'noopener noreferrer';
+    fallback.textContent = 'Abrir en Facebook';
+    fallback.addEventListener('click', ev => ev.stopPropagation());
+    media.appendChild(fallback);
+
+    // Click en el media → embed
+    media.addEventListener('click', () => {
+      if (media.classList.contains('playing')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = buildEmbedUrl(videoId);
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('scrolling', 'no');
+      media.appendChild(iframe);
+      media.classList.add('playing');
+    });
+  });
+</script>
+</body>
+</html>
