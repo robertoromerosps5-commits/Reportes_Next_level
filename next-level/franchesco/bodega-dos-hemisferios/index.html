@@ -240,10 +240,131 @@
   }
   footer strong{color:var(--text)}
 
+  /* ============ TABS ============ */
+  .tabs-nav{
+    display:flex;gap:2px;margin-bottom:26px;
+    border-bottom:1px solid var(--border);
+    overflow-x:auto;
+  }
+  .tab-btn{
+    background:none;border:none;padding:14px 22px;font-size:13.5px;
+    font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;
+    border-bottom:2px solid transparent;transition:color .15s,border-color .15s;
+    letter-spacing:0.02em;white-space:nowrap;
+  }
+  .tab-btn:hover{color:var(--text)}
+  .tab-btn.is-active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab-panel{display:none}
+  .tab-panel.is-active{display:block}
+
+  /* ============ PLAN DE MEDIOS ============ */
+  .plan-header{
+    background:linear-gradient(135deg,rgba(200,161,101,0.12),rgba(74,222,128,0.05));
+    border:1px solid rgba(200,161,101,0.30);border-radius:14px;
+    padding:22px 26px;margin-bottom:22px;
+  }
+  .plan-header h2{
+    font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .plan-header .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .plan-header-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:16px}
+  .plan-header-item{background:rgba(0,0,0,0.15);border-radius:8px;padding:10px 14px}
+  .plan-header-item .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:700}
+  .plan-header-item .val{font-size:14px;font-weight:600;color:var(--text);margin-top:3px}
+  .plan-header-item .val.money::before{content:"$";color:var(--accent);margin-right:1px}
+
+  .plan-alerts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:22px}
+  .plan-alert{
+    background:rgba(96,165,250,0.10);border:1px solid rgba(96,165,250,0.32);
+    border-radius:10px;padding:14px 16px;font-size:13px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .plan-alert.warn{background:rgba(251,191,36,0.10);border-color:rgba(251,191,36,0.32)}
+  .plan-alert.new{background:rgba(34,211,238,0.10);border-color:rgba(34,211,238,0.32)}
+  .plan-alert .ico{font-size:18px;flex-shrink:0;line-height:1}
+  .plan-alert b{color:var(--text)}
+  .plan-alert .lb{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:2px}
+
+  .plan-table-wrap{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    overflow-x:auto;margin-bottom:22px;
+  }
+  .plan-table{width:100%;border-collapse:collapse;font-size:13px;min-width:820px}
+  .plan-table thead{background:var(--panel-3)}
+  .plan-table th{
+    text-align:left;padding:14px 14px;font-size:10.5px;font-weight:700;
+    color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;
+    border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  .plan-table th.num{text-align:right}
+  .plan-table td{padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .plan-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .plan-table tbody tr:hover{background:var(--panel-2)}
+  .plan-table .linea{font-weight:600;color:var(--text)}
+  .plan-table .nota{font-size:11.5px;color:var(--muted)}
+  .plan-table .invest{font-weight:700;color:var(--accent);font-size:14px}
+  .plan-table .invest::before{content:"$";margin-right:1px}
+  .plan-table tfoot td{
+    padding:16px 14px;font-weight:700;background:var(--panel-3);
+    border-top:2px solid var(--accent);font-size:15px;
+  }
+  .plan-table tfoot td.total{color:var(--accent);font-size:17px}
+  .plan-table tfoot td.total::before{content:"$";margin-right:1px}
+
+  .ch-badge{display:inline-block;padding:3px 9px;font-size:10px;border-radius:5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap}
+  .ch-meta{background:rgba(96,165,250,0.15);color:var(--blue);border:1px solid rgba(96,165,250,0.35)}
+  .ch-linkedin{background:rgba(34,211,238,0.15);color:var(--cyan);border:1px solid rgba(34,211,238,0.35)}
+  .ch-buffer{background:rgba(167,139,250,0.15);color:var(--purple);border:1px solid rgba(167,139,250,0.35)}
+  .obj-badge{display:inline-block;padding:2px 8px;font-size:10px;border-radius:5px;font-weight:600;letter-spacing:0.04em}
+  .obj-conv{background:rgba(74,222,128,0.12);color:var(--good)}
+  .obj-traf{background:rgba(167,139,250,0.12);color:var(--purple)}
+  .obj-awa{background:rgba(251,191,36,0.12);color:var(--warn)}
+
+  .plan-notes{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+  .plan-notes h3{font-size:13px;margin-bottom:12px;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase}
+  .plan-notes ul{list-style:none;padding:0;margin:0}
+  .plan-notes li{padding:7px 0 7px 20px;font-size:13px;color:var(--text);position:relative;line-height:1.55}
+  .plan-notes li::before{content:"◆";color:var(--accent);position:absolute;left:2px;font-size:10px;top:10px}
+  .plan-notes li b{color:var(--accent-2)}
+
+  /* ============ COMENTARIOS (Netlify Forms) ============ */
+  .comments-block{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border);border-radius:14px;
+    padding:24px 26px;margin-bottom:24px;
+  }
+  .comments-block h3{font-size:16px;margin-bottom:4px;font-weight:700}
+  .comments-block .cs-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .comments-form{display:flex;flex-direction:column;gap:14px}
+  .comments-form label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:6px}
+  .comments-form input[type=text],.comments-form input[type=email],.comments-form textarea{
+    width:100%;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:8px;
+    padding:11px 13px;color:var(--text);font-family:inherit;font-size:13.5px;transition:border-color .15s,background .15s;
+  }
+  .comments-form input:focus,.comments-form textarea:focus{outline:none;border-color:var(--accent);background:rgba(0,0,0,0.35)}
+  .comments-form textarea{resize:vertical;min-height:110px;line-height:1.55}
+  .comments-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .comments-form button{
+    align-self:flex-start;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0d13;border:none;border-radius:8px;
+    padding:12px 26px;font-weight:700;font-size:13px;cursor:pointer;transition:transform .15s,box-shadow .15s;
+    font-family:inherit;letter-spacing:0.04em;text-transform:uppercase;
+  }
+  .comments-form button:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(200,161,101,0.25)}
+  .sent-msg{
+    background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.4);color:var(--good);
+    padding:14px 18px;border-radius:10px;font-size:13.5px;margin-bottom:16px;
+    display:flex;gap:10px;align-items:center;
+  }
+  .sent-msg .ico{font-size:20px}
+
   @media (max-width:640px){
     body{padding:16px}
     .brand h1{font-size:22px}
     .ads-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    .comments-form .form-row{grid-template-columns:1fr}
+    .tab-btn{padding:12px 14px;font-size:12.5px}
   }
 </style>
 </head>
@@ -255,7 +376,7 @@
     <h1>Bodega Dos Hemisferios · Meta Ads</h1>
     <div class="sub">Cuenta: B2H Ads · <code>act_2836455319797730</code></div>
     <div class="meta-bar">
-      <span>Período: <strong>1 – 7 julio 2026</strong></span>
+      <span>Período: <strong>1 – 8 julio 2026</strong></span>
       <span>Moneda: <strong>USD</strong></span>
       <span>Zona: <strong>America/Guayaquil</strong></span>
     </div>
@@ -268,37 +389,46 @@
   </div>
 </header>
 
+<!-- ============ TABS NAV ============ -->
+<nav class="tabs-nav" role="tablist">
+  <button class="tab-btn is-active" role="tab" data-tab="tab-dashboard">Dashboard de Pautas</button>
+  <button class="tab-btn" role="tab" data-tab="tab-plan">Plan de Medios · Julio</button>
+</nav>
+
+<!-- ============ TAB · DASHBOARD ============ -->
+<section id="tab-dashboard" class="tab-panel is-active">
+
 <!-- KPIs GLOBALES -->
 <div class="kpi-grid">
   <div class="kpi">
     <div class="label">Inversión del mes</div>
-    <div class="value money">717.19</div>
+    <div class="value money">740.42</div>
     <div class="foot">6 campañas activas gastando</div>
   </div>
   <div class="kpi">
     <div class="label">Impresiones</div>
-    <div class="value">638,949</div>
-    <div class="foot">Alcance: ~281,144 personas</div>
+    <div class="value">678,900</div>
+    <div class="foot">Alcance combinado: ~310,000 personas</div>
   </div>
   <div class="kpi">
     <div class="label">Clics en enlace</div>
-    <div class="value">15,673</div>
-    <div class="foot">CTR promedio ponderado: 2.45%</div>
+    <div class="value">16,296</div>
+    <div class="foot">CTR promedio ponderado: 2.40%</div>
   </div>
   <div class="kpi">
     <div class="label">Visitas a landing</div>
-    <div class="value">5,641</div>
+    <div class="value">6,023</div>
     <div class="foot">Principalmente Tráfico Web</div>
   </div>
   <div class="kpi">
     <div class="label">Conversaciones WhatsApp</div>
-    <div class="value">99</div>
-    <div class="foot">Costo promedio: $2.12 / conversación</div>
+    <div class="value">155</div>
+    <div class="foot">Costo promedio: $2.46 / conversación</div>
   </div>
   <div class="kpi">
     <div class="label">Anuncios activos</div>
-    <div class="value">20</div>
-    <div class="foot">Distribuidos en 12 conjuntos</div>
+    <div class="value">25</div>
+    <div class="foot">Distribuidos en 14 conjuntos</div>
   </div>
 </div>
 
@@ -306,8 +436,8 @@
 <div class="highlight-strip">
   <div class="icon">✨</div>
   <div class="txt">
-    <strong>Actualización clave:</strong> <b>Juliana v3</b> estabilizada — bajó de ~$30 a <b>$1.78 por conversación</b> con 11 conversaciones · <b>Packs_Padres</b> sigue siendo la estrella con 70 conversaciones a $1.18 · Tráfico Web suma nuevo contenido (<b>Juliana Trafico</b>) · 2 campañas nuevas encendidas.
-    <div>Total campaña WhatsApp: <b>99 conversaciones · $2.12 costo promedio</b> · Datos del 7 julio.</div>
+    <strong>Actualización clave:</strong> <b>Packs_Padres</b> sigue liderando con <b>$1.19/conv</b> · <b>Casa Juliana</b> (adset nuevo) sumó fuerte con $82.80 en un día · Juliana v2/v3 se dividió en 2 adsets nuevos · <b>Tráfico Web</b> mantiene CTR 5.09% y CPC $0.010.
+    <div>Total campaña WhatsApp: <b>155 conversaciones · $2.46 costo promedio</b> · Datos del 8 julio · +56 conversaciones vs día anterior.</div>
   </div>
 </div>
 
@@ -323,25 +453,25 @@
     <span class="badge b-engagement">Engagement</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$371.71</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">70,358</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">31,275</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.25</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$5.28</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">1,438</div></div>
-    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">99</div></div>
-    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$2.12</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$380.98</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">72,843</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">31,888</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.28</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$5.23</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">1,476</div></div>
+    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">155</div></div>
+    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$2.46</div></div>
   </div>
 
-  <!-- Adset: Juliana v3 (NEW & STABLE) -->
+  <!-- Adset: Juliana v2/v3 -->
   <div class="adset-block">
     <div class="adset-head">
-      <div class="adset-name">Juliana v3 <span class="badge badge-stable">Estabilizado</span></div>
+      <div class="adset-name">Juliana v2/v3 <span class="badge badge-stable">Activo</span></div>
       <div class="adset-perf">
-        <span><b>11</b> conversaciones</span>
-        <span><b>$1.78</b> / conv.</span>
-        <span class="pill-info">Bajó de $30 a $1.78 en 1 día</span>
-        <span class="pill-budget">$20 / día</span>
+        <span>Gasto <b>$23.53</b></span>
+        <span>3,057 clics visitas</span>
+        <span class="pill-info">Evento Chef 16 jul · Rampa final</span>
+        <span class="pill-budget">$5 / día</span>
       </div>
     </div>
     <div class="ads-grid">
@@ -355,10 +485,10 @@
           <div class="ad-name">Juliana v2 (video)</div>
           <div class="ad-copy">¡Juliana y sus Próceres reciben al chef Luis Cerón de Bodega Dos Hemisferios! Los esperamos este 16 de julio…</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">14.55</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">3,505</span></div>
-            <div class="st"><span class="k">Video views</span><span class="v">768</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">34</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">16.58</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">3,913</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">889</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">37</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1675322890356205" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
         </div>
@@ -373,10 +503,10 @@
           <div class="ad-name">Juliana v3 (imagen)</div>
           <div class="ad-copy">Reserva ahora · ¡Juliana y sus Próceres reciben al chef Luis Cerón! · CTA WhatsApp</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">5.08</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">2,281</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">40</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">1.75%</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">6.95</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">3,057</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">56</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">1.83%</span></div>
           </div>
           <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/998771706110266" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
         </div>
@@ -389,8 +519,8 @@
     <div class="adset-head">
       <div class="adset-name">Packs_Padres <span class="badge badge-star">Estrella del mes</span></div>
       <div class="adset-perf">
-        <span><b>70</b> conversaciones</span>
-        <span><b>$1.18</b> / conv.</span>
+        <span><b>72</b> conversaciones</span>
+        <span><b>$1.19</b> / conv.</span>
         <span class="pill-good">Mejor costo por conversación</span>
         <span class="pill-budget">$8 / día</span>
       </div>
@@ -406,10 +536,10 @@
           <div class="ad-name">Packs_Padres — Copia</div>
           <div class="ad-copy">Reserva Ahora · Packs Día del Padre · CTA WhatsApp</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">15.78</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">18.69</span></div>
             <div class="st"><span class="k">Leads</span><span class="v">4</span></div>
-            <div class="st"><span class="k">Costo/lead</span><span class="v money">3.95</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">87</span></div>
+            <div class="st"><span class="k">Costo/lead</span><span class="v money">4.67</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">98</span></div>
           </div>
           <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993974243256679" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
         </div>
@@ -438,11 +568,11 @@
   <!-- Adset: VIÑEDO General -->
   <div class="adset-block">
     <div class="adset-head">
-      <div class="adset-name">VIÑEDO General</div>
+      <div class="adset-name">VIÑEDO General (FULL DAY)</div>
       <div class="adset-perf">
-        <span><b>18</b> conversaciones</span>
-        <span><b>$6.01</b> / conv.</span>
-        <span class="pill-budget">$5 / día</span>
+        <span>Gasto <b>$110.57</b></span>
+        <span>1 lead · $72.80</span>
+        <span class="pill-budget">$10 / día</span>
       </div>
     </div>
     <div class="ads-grid">
@@ -455,9 +585,9 @@
           <div class="ad-name">FULL DAY — Copia</div>
           <div class="ad-copy">Reserva Ahora · Full Day Viñedo · CTA WhatsApp</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">70.34</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">3,589</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">89</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">72.80</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">3,767</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">97</span></div>
             <div class="st"><span class="k">Leads</span><span class="v">1</span></div>
           </div>
           <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993983279922442" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
@@ -495,14 +625,14 @@
     <span class="badge b-traffic">Traffic</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$209.85</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">136,425</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">88,125</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.55</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$211.87</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">137,394</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">88,322</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.56</div></div>
     <div class="cm"><div class="lbl">CPM</div><div class="val">$1.54</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">7,460</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">7,593</div></div>
     <div class="cm"><div class="lbl">CPC</div><div class="val">$0.028</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">5.47%</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.53%</div></div>
   </div>
 
   <div class="adset-block">
@@ -593,14 +723,14 @@
     <span class="badge b-awareness">Awareness</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$53.21</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">238,192</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">111,005</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.15</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$55.82</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">250,656</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">113,057</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.22</div></div>
     <div class="cm"><div class="lbl">CPM</div><div class="val">$0.22</div></div>
-    <div class="cm"><div class="lbl">Video views</div><div class="val">14,203</div></div>
-    <div class="cm"><div class="lbl">Landing views</div><div class="val">113</div></div>
-    <div class="cm"><div class="lbl">Post engagement</div><div class="val">14,436</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">14,827</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">116</div></div>
+    <div class="cm"><div class="lbl">Post engagement</div><div class="val">15,058</div></div>
   </div>
 
   <div class="adset-block">
@@ -784,14 +914,14 @@
     <span class="badge b-sales">Sales</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$67.11</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">137,258</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">45,859</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.99</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$71.93</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">146,851</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">47,738</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.08</div></div>
     <div class="cm"><div class="lbl">CPM</div><div class="val">$0.49</div></div>
-    <div class="cm"><div class="lbl">Clics enlace</div><div class="val">6,960</div></div>
+    <div class="cm"><div class="lbl">Clics enlace</div><div class="val">7,431</div></div>
     <div class="cm"><div class="lbl">CPC</div><div class="val">$0.010</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">5.10%</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.09%</div></div>
   </div>
 
   <div class="adset-block">
@@ -814,9 +944,9 @@
           <div class="ad-name">Performance Web</div>
           <div class="ad-copy">Antojo de vino… resuelto en segundos. 🍷 Un clic, eliges el tuyo y listo. Pídelo en nuestra página.</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">67.07</span></div>
-            <div class="st"><span class="k">Landing</span><span class="v">5,491</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">5.10%</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">71.72</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">5,858</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">5.11%</span></div>
             <div class="st"><span class="k">CPC</span><span class="v money">0.010</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=914686794867092" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
@@ -833,10 +963,10 @@
           <div class="ad-name">Juliana Trafico</div>
           <div class="ad-copy">¡Juliana y sus Próceres reciben al chef Luis Cerón de Bodega Dos Hemisferios! 16 de julio · Menú de bites, cócteles y vinos…</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">0.08</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">645</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">3.41%</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">22</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">0.21</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">1,218</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">2.79%</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">34</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1031520825926635" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
         </div>
@@ -852,27 +982,249 @@
     <h3>City Winery – Alcance <span class="badge b-new">Nueva</span></h3>
     <div class="mini-obj">Objetivo: Awareness · Enfoque restaurante</div>
     <div class="mini-metrics">
-      <div><span class="mk">Inversión</span><span class="mv">$9.85</span></div>
-      <div><span class="mk">Alcance</span><span class="mv">38,452</span></div>
-      <div><span class="mk">Video views</span><span class="mv">4,305</span></div>
+      <div><span class="mk">Inversión</span><span class="mv">$12.36</span></div>
+      <div><span class="mk">Alcance</span><span class="mv">45,670</span></div>
+      <div><span class="mk">Video views</span><span class="mv">5,303</span></div>
     </div>
-    <div class="mini-note">Impresiones: 49,080 · CPM $0.20 · Detalle de anuncios en próxima actualización.</div>
+    <div class="mini-note">Impresiones: 61,098 · CPM $0.20 · 4 adsets escalando reach.</div>
   </div>
 
   <div class="mini-camp">
     <h3>Visitas al perfil_AON – BODEGA <span class="badge b-new">Nueva</span></h3>
     <div class="mini-obj">Objetivo: Tráfico · Perfil de Bodega Dos Hemisferios</div>
     <div class="mini-metrics">
-      <div><span class="mk">Inversión</span><span class="mv">$5.46</span></div>
-      <div><span class="mk">Clics</span><span class="mv">212</span></div>
-      <div><span class="mk">CTR</span><span class="mv">2.62%</span></div>
+      <div><span class="mk">Inversión</span><span class="mv">$7.46</span></div>
+      <div><span class="mk">Clics</span><span class="mv">293</span></div>
+      <div><span class="mk">CTR</span><span class="mv">2.70%</span></div>
     </div>
-    <div class="mini-note">Impresiones: 7,636 · CPC $0.027 · Detalle de anuncios en próxima actualización.</div>
+    <div class="mini-note">Impresiones: 10,058 · CPC $0.025 · Escalando bien.</div>
   </div>
 </div>
 
+</section>
+<!-- ============ /TAB · DASHBOARD ============ -->
+
+
+<!-- ============ TAB · PLAN DE MEDIOS ============ -->
+<section id="tab-plan" class="tab-panel">
+
+  <div class="plan-header">
+    <h2>Plan de Medios — Julio 2026</h2>
+    <div class="sub">Bodega Dos Hemisferios · Campaña AON + Performance · Ecuador</div>
+    <div class="plan-header-grid">
+      <div class="plan-header-item"><div class="lbl">Campaña</div><div class="val">AON + Performance</div></div>
+      <div class="plan-header-item"><div class="lbl">Vigencia</div><div class="val">Julio 2026</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Principal</div><div class="val">Conversaciones WhatsApp · Tráfico Web</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Secundario</div><div class="val">Reconocimiento · Visitas al Perfil · B2B</div></div>
+      <div class="plan-header-item"><div class="lbl">Presupuesto Total</div><div class="val money">2,500</div></div>
+      <div class="plan-header-item"><div class="lbl">Canales</div><div class="val">Meta Ads · LinkedIn</div></div>
+    </div>
+  </div>
+
+  <div class="plan-alerts">
+    <div class="plan-alert warn">
+      <div class="ico">⏳</div>
+      <div>
+        <span class="lb">Vigencia parcial</span>
+        <b>Juliana</b> corre solo del <b>1 al 16 de julio</b> (evento del 16 con chef Luis Cerón). Después del 16, ese presupuesto se libera al buffer para escalar ganadores.
+      </div>
+    </div>
+    <div class="plan-alert new">
+      <div class="ico">✨</div>
+      <div>
+        <span class="lb">Canal nuevo</span>
+        <b>LinkedIn $200</b> — Awareness corporativo. Enfoque B2B: catas privadas para empresas, eventos corporativos, viñedo como venue premium.
+      </div>
+    </div>
+  </div>
+
+  <div class="plan-table-wrap">
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Canal</th>
+          <th>Línea / Campaña</th>
+          <th>Objetivo</th>
+          <th>Formato</th>
+          <th>Vigencia</th>
+          <th class="num">Inversión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Juliana</div>
+            <div class="nota">Adset activo estable: $1.78 / conv. · Evento chef Luis Cerón</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">1 – 16 jul</td>
+          <td class="num invest">320</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Packs_Padres</div>
+            <div class="nota">Estrella del portafolio · $1.18 / conv · 70 conversaciones en julio</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">340</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Reservas</div>
+            <div class="nota">Reservas restaurante / viñedo — segmentación geo + intereses gastronómicos</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">240</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Tráfico Web — Vinos / E-commerce</div>
+            <div class="nota">doshemisferios.com · CTR actual 5.10% · CPC $0.010 · Continuidad de "Juliana Tráfico"</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Ventas / Tráfico</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">340</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Visitas al Perfil — City Winery</div>
+            <div class="nota">@citywinery.ec · CTR 5.47% · Crecimiento de comunidad restaurante</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Tráfico IG</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">300</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Awareness — Autoservicio (Punto de Venta)</div>
+            <div class="nota">Distribución multicanal offline · CPM $0.22 · 4 adsets activos ($2/día c/u)</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">250</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Awareness Julio — Batán y Urdesa</div>
+            <div class="nota">Local awareness · Geo-segmentación radio 3km alrededor de puntos de venta</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">250</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="ch-badge ch-buffer">Buffer</span></td>
+          <td>
+            <div class="linea">Reserva / Optimización</div>
+            <div class="nota">Escalado post-Juliana (17-31 jul) para ganadores identificados · Ajustes en marcha</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Flexible</span></td>
+          <td>—</td>
+          <td class="nota">17 – 31 jul</td>
+          <td class="num invest">260</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="ch-badge ch-linkedin">LinkedIn</span></td>
+          <td>
+            <div class="linea">Awareness B2B — Corporativo</div>
+            <div class="nota">Catas privadas · Eventos corporativos · Viñedo premium · Segmentación por cargo (Gerencias)</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Sponsored Post / Video</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">200</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">TOTAL INVERSIÓN — JULIO 2026</td>
+          <td class="num total">2,500</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="plan-notes">
+    <h3>Notas y Estrategia</h3>
+    <ul>
+      <li><b>Meta – WhatsApp (líneas 1-3):</b> priorizar <b>Packs_Padres</b> (estrella con $1.18/conv). Juliana concentrada al 16 de julio por el evento del chef Luis Cerón. Reservas se mantiene activo con presupuesto conservador.</li>
+      <li><b>Meta – Tráfico Web (línea 4):</b> conservar continuidad post-Juliana con el contenido de "Juliana Tráfico" que ya escaló bien (CTR 5.10%). Destino: e-commerce de vinos.</li>
+      <li><b>Meta – Visitas al Perfil (línea 5):</b> City Winery mantiene ritmo de crecimiento de comunidad — CTR sobre 5% justifica sostener inversión.</li>
+      <li><b>Meta – Awareness Batán y Urdesa (línea 7):</b> campaña nueva de julio con foco local en las dos zonas de venta. Segmentación geo 3km + intereses gastronómicos/vino.</li>
+      <li><b>Buffer $260 (línea 8):</b> reserva estratégica para escalar los adsets ganadores en la segunda quincena, una vez cerrada Juliana. Se decide en revisión del 17 de julio.</li>
+      <li><b>LinkedIn $200 (línea 9):</b> primer piloto B2B. Segmentación por cargo (C-Level, Marketing, RRHH corporativo), industrias premium (banca, consultoría, tecnología). Métrica de éxito inicial: CTR + costo por lead corporativo.</li>
+      <li><b>Rango de presupuesto por adset:</b> todos entre $1 y $10 USD/día según política de seguridad Meta. Ningún adset excede $10/día.</li>
+    </ul>
+  </div>
+
+  <!-- ============ COMENTARIOS DEL CLIENTE (Netlify Forms) ============ -->
+  <div class="comments-block">
+    <h3>Comentarios del Cliente</h3>
+    <div class="cs-sub">¿Alguna observación sobre el plan? ¿Ajustes que quieras proponer? Déjanos tu comentario y llegará directo al equipo.</div>
+
+    <div id="sentMsg" class="sent-msg" style="display:none">
+      <span class="ico">✓</span>
+      <div><b>¡Gracias!</b> Recibimos tu comentario. El equipo lo revisará y te contactaremos si es necesario.</div>
+    </div>
+
+    <form name="comentarios-plan" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="comments-form" action="?enviado=1">
+      <input type="hidden" name="form-name" value="comentarios-plan">
+      <input type="hidden" name="cliente" value="Bodega Dos Hemisferios">
+      <input type="hidden" name="periodo" value="Julio 2026">
+      <p style="display:none"><label>No completar: <input name="bot-field"></label></p>
+
+      <div class="form-row">
+        <div>
+          <label for="c-nombre">Nombre</label>
+          <input type="text" id="c-nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label for="c-email">Email (opcional)</label>
+          <input type="email" id="c-email" name="email" placeholder="tu@email.com">
+        </div>
+      </div>
+
+      <div>
+        <label for="c-mensaje">Comentario</label>
+        <textarea id="c-mensaje" name="comentario" placeholder="Escribe aquí tu observación, ajuste sugerido o pregunta sobre el plan de medios…" required></textarea>
+      </div>
+
+      <button type="submit">Enviar comentario</button>
+    </form>
+  </div>
+
+</section>
+<!-- ============ /TAB · PLAN DE MEDIOS ============ -->
+
+
 <footer>
-  <strong>Bodega Dos Hemisferios · Dashboard de Pautas</strong> · Datos en vivo desde Meta Marketing API · Período: 1–7 julio 2026 · Inversión total: $717.19
+  <strong>Bodega Dos Hemisferios · Dashboard de Pautas + Plan de Medios</strong> · Datos en vivo desde Meta Marketing API · Período: 1–8 julio 2026 · Inversión mes: $740.42
   <br>Click en la miniatura de video → reproduce embed inline · Click en "Ver video en Facebook" → abre en Facebook directamente
 </footer>
 
@@ -944,6 +1296,34 @@
       media.classList.add('playing');
     });
   });
+
+  // ============ TABS SWITCHING ============
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  function activateTab(tabId){
+    tabBtns.forEach(b => b.classList.toggle('is-active', b.dataset.tab === tabId));
+    tabPanels.forEach(p => p.classList.toggle('is-active', p.id === tabId));
+    try { history.replaceState(null, '', '#' + tabId); } catch(e){}
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
+
+  // Deep-link: si viene #tab-plan o ?enviado=1, abrir el tab correcto
+  const initialHash = (location.hash || '').replace('#','');
+  const params = new URLSearchParams(location.search);
+  if (params.get('enviado') === '1'){
+    activateTab('tab-plan');
+    const msg = document.getElementById('sentMsg');
+    if (msg){
+      msg.style.display = 'flex';
+      setTimeout(() => msg.scrollIntoView({behavior:'smooth', block:'center'}), 100);
+    }
+  } else if (initialHash === 'tab-plan' || initialHash === 'tab-dashboard'){
+    activateTab(initialHash);
+  }
 </script>
 </body>
 </html>
