@@ -196,6 +196,19 @@
   .ad-cta.video:hover{background:rgba(244,114,182,0.2)}
   .no-spend{opacity:0.7}
 
+  /* Compact ads (no media) - for ads without creative preview */
+  .ad.compact{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:110px}
+  .ad.compact .ad-tag-row{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .ad.compact .type-mini{background:rgba(255,255,255,0.05);color:var(--muted);font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700;letter-spacing:0.05em}
+  .ad.compact .ad-name{font-size:12.5px;font-weight:600;line-height:1.35;color:var(--text)}
+  .ad.compact .ad-meta{font-size:10px;color:var(--muted);font-style:italic}
+  .ad.compact .ad-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;padding-top:8px;border-top:1px solid var(--border)}
+  .ad.compact .ad-stats .st{display:flex;flex-direction:column;font-size:10px}
+  .ad.compact .ad-stats .st .k{color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+  .ad.compact .ad-stats .st .v{color:var(--text);font-size:12.5px;font-weight:600;margin-top:1px}
+  .ad.compact .ad-stats .st .v.money::before{content:"$";color:var(--accent);margin-right:1px}
+  .ads-grid.compact-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+
   .ad-media[data-video-id]{cursor:pointer}
   .play-btn{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -427,8 +440,8 @@
   </div>
   <div class="kpi">
     <div class="label">Anuncios activos</div>
-    <div class="value">25</div>
-    <div class="foot">Distribuidos en 14 conjuntos</div>
+    <div class="value">36</div>
+    <div class="foot">Distribuidos en 19 conjuntos · 6 campañas</div>
   </div>
 </div>
 
@@ -613,6 +626,95 @@
       </div>
     </div>
   </div>
+
+  <!-- Adset: Casa Juliana (NEW - alto gasto) -->
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Casa Juliana <span class="badge b-new">Nuevo</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$82.80</b></span>
+        <span><b>2</b> leads</span>
+        <span class="pill-info">Impresiones 13,803 · CTR 2.68%</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row">
+          <span class="type-mini">VIDEO</span>
+          <span class="type-mini" style="color:var(--good);border-color:rgba(74,222,128,0.35)">2 LEADS</span>
+        </div>
+        <div class="ad-name">Casa Juliana</div>
+        <div class="ad-meta">Evento chef 16 jul · Ver detalle en Meta Ads Manager</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">82.80</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">13,803</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">4,299</span></div>
+          <div class="st"><span class="k">Clics enlace</span><span class="v">138</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adset: Juliana v2/v3 (variante 2 - alto gasto) -->
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Juliana v2/v3 – Variante 2 <span class="badge b-new">Nuevo</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$78.65</b></span>
+        <span class="pill-info">Adset separado de la variante 1</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">Juliana v2</div>
+        <div class="ad-meta">Video del evento · CPM $23.95</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">65.97</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,754</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,367</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">32</span></div>
+        </div>
+      </div>
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">IMG</span></div>
+        <div class="ad-name">Juliana v3</div>
+        <div class="ad-meta">Imagen · Bajo gasto — en rampa</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">12.68</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">626</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">9</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">1.44%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ad extra en adset Packs_Padres -->
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Packs_Padres – Ad testing</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$0.08</b></span>
+        <span class="pill-info">En prueba · bajo volumen</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">IMG</span></div>
+        <div class="ad-name">Packs_Padres — Copia 2</div>
+        <div class="ad-meta">Variante en testing · muy baja entrega</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.08</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">41</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">2</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">4.88%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ============= CAMPAÑA 2: Visitas al perfil AON - Promos City Winery ============= -->
@@ -654,10 +756,10 @@
           <div class="ad-name">Visitas al perfil_AON — 3</div>
           <div class="ad-copy">Ver perfil de Instagram · @citywinery.ec</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">74.18</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">33,136</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">12.31%</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">4,137</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">81.88</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">36,944</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">12.39%</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">4,644</span></div>
           </div>
           <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118032301260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
         </div>
@@ -672,41 +774,96 @@
           <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
           <div class="ad-copy">Ver perfil de Instagram · @citywinery.ec</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">26.20</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">10,038</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">14.34%</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">1,462</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">26.98</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">10,357</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">14.30%</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">1,504</span></div>
           </div>
           <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118030447260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">IMG</span></div>
+        <div class="ad-name">Visitas al perfil_AON — 3 (Copia 2)</div>
+        <div class="ad-meta">Variante en testing · baja entrega</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.07</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">65</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">3</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">4.62%</span></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Adset: Historias/Feed Mix (5 ads) - anteriormente incompleto -->
   <div class="adset-block">
     <div class="adset-head">
-      <div class="adset-name">Visitas al perfil_AON – Post (Feed)</div>
+      <div class="adset-name">Visitas al perfil_AON – Mix Formatos (5 ads)</div>
       <div class="adset-perf">
-        <span>Post orgánico impulsado</span>
-        <span class="pill-budget">$5 / día</span>
+        <span>Gasto <b>$103.34</b></span>
+        <span class="pill-info">5 variantes activas</span>
+        <span class="pill-budget">$10 / día</span>
       </div>
     </div>
-    <div class="ads-grid">
-      <div class="ad no-spend">
-        <div class="ad-media">
-          <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/736172636_1339084691703025_7968678413024041983_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=HZVK2TCTiuEQ7kNvwFK-hv5&_nc_oc=AdrwlIIlX9H1PZRIS--fAaTmC_J5IdoS-53pkj3FWXXFOAAi_DlOtl3Uan8WUoTkcZyJavHvartIVRhiWlur8Wg5&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=JHL_7RVwiF7jYuQBfFY-gQ&_nc_tpa=Q5bMBQH-OBpZYyk-jrfaCIhkNG7DdT_jIcLbpJS0_ajgNWm3ysxq-pXLU24DOEzvP05WZ6kizUFwZChwZQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQAYLwRX2NGcGDWisnwLrJJpNhB5rCa72JFYik24sxP59w&oe=6A51A5E3" alt="">
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">POST</span></div>
+        <div class="ad-name">Visitas al perfil_AON</div>
+        <div class="ad-meta">Post original · CTR 1.23%</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">24.64</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">35,970</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">441</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.06</span></div>
         </div>
-        <div class="ad-body">
-          <div class="ad-name">Wine O'Clock — Copia</div>
-          <div class="ad-copy">Si no lo sabías, ahora ya no tienes excusa. 🍷 De lunes a jueves, de 4:00 a 6:00 p.m., Wine O'Clock con refill ilimitado…</div>
-          <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">0.01</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">66</span></div>
-            <div class="st"><span class="k">CTR</span><span class="v">7.58%</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">5</span></div>
-          </div>
-          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1556242499194284" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+      </div>
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">Visitas al perfil_AON — 2</div>
+        <div class="ad-meta">Video · 1,478 views · CTR 2.00%</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">14.94</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">9,480</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">192</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.08</span></div>
+        </div>
+      </div>
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">Visitas al perfil_AON — 3</div>
+        <div class="ad-meta">Video · CTR 2.01% · bajo volumen</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">1.89</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,541</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">51</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.04</span></div>
+        </div>
+      </div>
+      <div class="ad compact">
+        <div class="ad-tag-row">
+          <span class="type-mini">VIDEO</span>
+          <span class="type-mini" style="color:var(--good);border-color:rgba(74,222,128,0.35)">TOP</span>
+        </div>
+        <div class="ad-name">Visitas al perfil_AON — 4</div>
+        <div class="ad-meta">Video · 9,324 views · CTR 1.92%</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">59.95</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">40,905</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">677</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.09</span></div>
+        </div>
+      </div>
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
+        <div class="ad-meta">Copia · CTR 5.74% · alto engagement</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">1.52</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">1,132</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">64</span></div>
+          <div class="st"><span class="k">CPC</span><span class="v money">0.02</span></div>
         </div>
       </div>
     </div>
@@ -751,12 +908,24 @@
           <div class="ad-name">AD 5 — Un recorrido que vale la pena</div>
           <div class="ad-copy">Un recorrido que vale la pena. 🍷 Los mejores vinos producidos en Ecuador están más cerca de lo que imaginas…</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">9.91</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">48,676</span></div>
-            <div class="st"><span class="k">Video views</span><span class="v">2,765</span></div>
-            <div class="st"><span class="k">Landing</span><span class="v">19</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">11.15</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">54,821</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">3,069</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">23</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=4180893862043998" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 5 — Copia</div>
+        <div class="ad-meta">Variante · bajo volumen</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">2.38</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">12,210</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">713</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">10</span></div>
         </div>
       </div>
     </div>
@@ -780,9 +949,9 @@
           <div class="ad-name">AD3 — Mi Comisariato</div>
           <div class="ad-copy">¿El que más te gusta? También lo tenemos. 🍷 el vino perfecto ya está en Mi Comisariato.</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">5.83</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">27,492</span></div>
-            <div class="st"><span class="k">Video views</span><span class="v">1,223</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">6.22</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">29,469</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">1,304</span></div>
             <div class="st"><span class="k">Landing</span><span class="v">10</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1006516898907027" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
@@ -798,10 +967,10 @@
           <div class="ad-name">AD 2 — Mi Comisariato</div>
           <div class="ad-copy">¿El que más te gusta? También lo tenemos. 🍷 Vinos ecuatorianos esperándote en Mi Comisariato.</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">4.29</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">21,482</span></div>
-            <div class="st"><span class="k">Video views</span><span class="v">1,226</span></div>
-            <div class="st"><span class="k">Clics</span><span class="v">19</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">7.45</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">37,339</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">2,084</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">27</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1325192102482754" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
         </div>
@@ -827,10 +996,10 @@
           <div class="ad-name">AD 1 — Del Portal</div>
           <div class="ad-copy">Si vas a llenar el carrito… que sea con lo mejor. 🍷 Vinos ecuatorianos que valen cada copa. Del Portal.</div>
           <div class="ad-stats">
-            <div class="st"><span class="k">Gasto</span><span class="v money">10.07</span></div>
-            <div class="st"><span class="k">Impresiones</span><span class="v">26,829</span></div>
-            <div class="st"><span class="k">Video views</span><span class="v">2,051</span></div>
-            <div class="st"><span class="k">Landing</span><span class="v">38</span></div>
+            <div class="st"><span class="k">Gasto</span><span class="v money">14.22</span></div>
+            <div class="st"><span class="k">Impresiones</span><span class="v">44,223</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">3,126</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">48</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1486526686500323" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
         </div>
@@ -898,6 +1067,66 @@
             <div class="st"><span class="k">Alcance</span><span class="v">3,613</span></div>
           </div>
           <a class="ad-cta video" href="https://www.facebook.com/watch/?v=3111204602561516" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 4 — Autoservicio</div>
+        <div class="ad-meta">Variante adicional del adset</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">1.18</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">6,159</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">386</span></div>
+          <div class="st"><span class="k">Landing</span><span class="v">3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adset: Micromercado 1 (bajo gasto) -->
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Micromercado 1 – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$0.46</b></span>
+        <span class="pill-info">Ramp-up · adset nuevo</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Adset piloto · entrega mínima</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.46</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,761</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">177</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adset: Micromercado 2 (bajo gasto) -->
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Micromercado 2 – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$0.48</b></span>
+        <span class="pill-info">Ramp-up · adset nuevo</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Adset piloto · entrega mínima</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">0.48</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">2,757</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">172</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">0</span></div>
         </div>
       </div>
     </div>
@@ -975,29 +1204,165 @@
   </div>
 </div>
 
-<h2 class="section">Campañas recién encendidas</h2>
-
-<div class="mini-camp-grid">
-  <div class="mini-camp">
-    <h3>City Winery – Alcance <span class="badge b-new">Nueva</span></h3>
-    <div class="mini-obj">Objetivo: Awareness · Enfoque restaurante</div>
-    <div class="mini-metrics">
-      <div><span class="mk">Inversión</span><span class="mv">$12.36</span></div>
-      <div><span class="mk">Alcance</span><span class="mv">45,670</span></div>
-      <div><span class="mk">Video views</span><span class="mv">5,303</span></div>
+<!-- ============= CAMPAÑA 5: City Winery - ALCANCE ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">City winery – ALCANCE</div>
+      <div class="obj">Objetivo: Awareness · Enfoque restaurante</div>
     </div>
-    <div class="mini-note">Impresiones: 61,098 · CPM $0.20 · 4 adsets escalando reach.</div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$12.36</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">61,098</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">45,670</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.34</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.20</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">5,303</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">34</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">0.06%</div></div>
   </div>
 
-  <div class="mini-camp">
-    <h3>Visitas al perfil_AON – BODEGA <span class="badge b-new">Nueva</span></h3>
-    <div class="mini-obj">Objetivo: Tráfico · Perfil de Bodega Dos Hemisferios</div>
-    <div class="mini-metrics">
-      <div><span class="mk">Inversión</span><span class="mv">$7.46</span></div>
-      <div><span class="mk">Clics</span><span class="mv">293</span></div>
-      <div><span class="mk">CTR</span><span class="mv">2.70%</span></div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Alcance – Adset 1</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$2.82</b></span>
+        <span class="pill-info">CPM $0.21</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
     </div>
-    <div class="mini-note">Impresiones: 10,058 · CPC $0.025 · Escalando bien.</div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Awareness City Winery</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">2.82</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">13,194</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,041</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">7</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Alcance – Adset 2</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$3.26</b></span>
+        <span class="pill-info">CPM $0.20</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Awareness City Winery</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">3.26</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">16,598</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,185</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">8</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Alcance – Adset 3</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$3.27</b></span>
+        <span class="pill-info">CPM $0.19</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Awareness City Winery</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">3.27</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">16,795</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,537</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">13</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Alcance – Adset 4</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$3.01</b></span>
+        <span class="pill-info">CPM $0.21</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">VIDEO</span></div>
+        <div class="ad-name">AD 1</div>
+        <div class="ad-meta">Awareness City Winery</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">3.01</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">14,511</span></div>
+          <div class="st"><span class="k">Video views</span><span class="v">1,540</span></div>
+          <div class="st"><span class="k">Clics</span><span class="v">6</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= CAMPAÑA 6: Visitas al perfil_AON - BODEGA ============= -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON – BODEGA</div>
+      <div class="obj">Objetivo: Tráfico · Perfil de Bodega Dos Hemisferios</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$7.46</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">10,058</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">7,980</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.26</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.74</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">293</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.025</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">2.70%</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Visitas al perfil_AON – BODEGA</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$7.46</b></span>
+        <span class="pill-info">CTR 2.70% · CPC $0.025</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid compact-grid">
+      <div class="ad compact">
+        <div class="ad-tag-row"><span class="type-mini">POST</span></div>
+        <div class="ad-name">Visitas al perfil_AON — 3</div>
+        <div class="ad-meta">Tráfico al perfil de BDH · Adset escalando</div>
+        <div class="ad-stats">
+          <div class="st"><span class="k">Gasto</span><span class="v money">7.46</span></div>
+          <div class="st"><span class="k">Impresiones</span><span class="v">10,058</span></div>
+          <div class="st"><span class="k">Clics enlace</span><span class="v">293</span></div>
+          <div class="st"><span class="k">CTR</span><span class="v">2.70%</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
