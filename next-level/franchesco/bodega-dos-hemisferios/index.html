@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Bodega Dos Hemisferios · Julio 2026</title>
+<title>Dashboard Bodega Dos Hemisferios · Julio 2026 (13-jul)</title>
 <style>
   :root{
     --bg:#0f1115;
@@ -144,6 +144,64 @@
     background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.35);
     color:var(--cyan);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
   }
+  .adset-perf .pill-warn{
+    background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.35);
+    color:var(--warn);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
+  }
+
+  /* ==== Plan Compliance table ==== */
+  .plan-compliance{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:22px 24px;margin-bottom:26px;
+  }
+  .plan-compliance h3{
+    font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .plan-compliance h3::before{content:"";width:3px;height:16px;background:var(--accent);border-radius:2px}
+  .plan-compliance .sub{color:var(--muted);font-size:12.5px;margin-bottom:14px}
+  .comp-summary-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;margin-bottom:16px;
+  }
+  .comp-tile{
+    background:var(--panel-2);border:1px solid var(--border-2);border-radius:10px;
+    padding:12px 14px;
+  }
+  .comp-tile .lbl{
+    font-size:10px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:0.08em;font-weight:600;margin-bottom:6px;
+  }
+  .comp-tile .val{font-size:20px;font-weight:700;letter-spacing:-0.02em}
+  .comp-tile .val.money::before{content:"$";color:var(--accent)}
+  .comp-tile .foot{font-size:11px;color:var(--muted);margin-top:2px}
+  .comp-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  .comp-table th{
+    text-align:left;padding:10px 12px;background:var(--panel-3);
+    color:var(--muted);font-weight:600;text-transform:uppercase;
+    letter-spacing:0.06em;font-size:10.5px;border-bottom:1px solid var(--border-2);
+  }
+  .comp-table th.num{text-align:right}
+  .comp-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  .comp-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .comp-table tr:last-child td{border-bottom:none}
+  .comp-line{font-weight:600}
+  .comp-nota{font-size:11px;color:var(--muted);margin-top:2px}
+  .status-pill{
+    display:inline-block;padding:3px 9px;border-radius:20px;
+    font-size:11px;font-weight:700;letter-spacing:0.02em;
+  }
+  .status-pill.ok{background:rgba(74,222,128,0.15);color:var(--good);border:1px solid rgba(74,222,128,0.35)}
+  .status-pill.watch{background:rgba(251,191,36,0.15);color:var(--warn);border:1px solid rgba(251,191,36,0.35)}
+  .status-pill.risk{background:rgba(248,113,113,0.15);color:var(--bad);border:1px solid rgba(248,113,113,0.35)}
+  .status-pill.pending{background:rgba(138,148,166,0.15);color:var(--muted);border:1px solid rgba(138,148,166,0.35)}
+  .bar{
+    height:6px;background:var(--panel-3);border-radius:4px;
+    overflow:hidden;margin-top:4px;min-width:80px;
+  }
+  .bar>span{display:block;height:100%;border-radius:4px}
+  .bar.ok>span{background:var(--good)}
+  .bar.watch>span{background:var(--warn)}
+  .bar.risk>span{background:var(--bad)}
 
   .ads-grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
@@ -389,7 +447,7 @@
     <h1>Bodega Dos Hemisferios · Meta Ads</h1>
     <div class="sub">Cuenta: B2H Ads · <code>act_2836455319797730</code></div>
     <div class="meta-bar">
-      <span>Período: <strong>1 – 8 julio 2026</strong></span>
+      <span>Período: <strong>1 – 13 julio 2026</strong></span>
       <span>Moneda: <strong>USD</strong></span>
       <span>Zona: <strong>America/Guayaquil</strong></span>
     </div>
@@ -415,33 +473,33 @@
 <div class="kpi-grid">
   <div class="kpi">
     <div class="label">Inversión del mes</div>
-    <div class="value money">740.42</div>
-    <div class="foot">6 campañas activas gastando</div>
+    <div class="value money">1,128.29</div>
+    <div class="foot">53% del plan Meta ($2,110) · 42% del mes transcurrido</div>
   </div>
   <div class="kpi">
     <div class="label">Impresiones</div>
-    <div class="value">678,900</div>
-    <div class="foot">Alcance combinado: ~310,000 personas</div>
+    <div class="value">1,273,640</div>
+    <div class="foot">Cuentas de Meta alcanzadas: 357,714</div>
   </div>
   <div class="kpi">
-    <div class="label">Clics en enlace</div>
-    <div class="value">16,296</div>
-    <div class="foot">CTR promedio ponderado: 2.40%</div>
+    <div class="label">Contactos por mensajes</div>
+    <div class="value">249</div>
+    <div class="foot">243 desde WhatsApp · 6 desde otras campañas</div>
   </div>
   <div class="kpi">
     <div class="label">Visitas a landing</div>
-    <div class="value">6,023</div>
-    <div class="foot">Principalmente Tráfico Web</div>
+    <div class="value">10,161</div>
+    <div class="foot">Motor Tráfico Web · CPC $0.01</div>
   </div>
   <div class="kpi">
     <div class="label">Conversaciones WhatsApp</div>
-    <div class="value">155</div>
-    <div class="foot">Costo promedio: $2.46 / conversación</div>
+    <div class="value">233</div>
+    <div class="foot">Costo promedio: $2.39 / conversación</div>
   </div>
   <div class="kpi">
     <div class="label">Anuncios activos</div>
     <div class="value">23</div>
-    <div class="foot">Distribuidos en 14 conjuntos · 6 campañas</div>
+    <div class="foot">Distribuidos en 19 conjuntos · 6 campañas</div>
   </div>
 </div>
 
@@ -449,8 +507,8 @@
 <div class="highlight-strip">
   <div class="icon">✨</div>
   <div class="txt">
-    <strong>Actualización clave:</strong> <b>Packs_Padres</b> sigue liderando con <b>$1.19/conv</b> · <b>Casa Juliana</b> (adset nuevo) sumó fuerte con $82.80 en un día · Juliana v2/v3 se dividió en 2 adsets nuevos · <b>Tráfico Web</b> mantiene CTR 5.09% y CPC $0.010.
-    <div>Total campaña WhatsApp: <b>155 conversaciones · $2.46 costo promedio</b> · Datos del 8 julio · +56 conversaciones vs día anterior.</div>
+    <strong>Actualización clave (13-jul):</strong> <b>Packs_Padres</b> lidera CPA · <b>Juliana v3</b> sumando fuerte con costo por conv. mejorando · <b>Casa Juliana</b> con el mejor CPA de las Julianas · <b>Tráfico Web</b> mantiene CTR 5.06% y CPC $0.01 (10,161 visitas al sitio).
+    <div>Total campaña WhatsApp: <b>233 conversaciones · $2.39 costo promedio</b> · +78 conversaciones vs corte del 8-jul. Ojo con <b>Promos City Winery</b> que ya consumió $247.49 de $250 (revisar refuerzo).</div>
   </div>
 </div>
 
@@ -466,26 +524,26 @@
     <span class="badge b-engagement">Engagement</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$380.98</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">72,843</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">31,888</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.28</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$5.23</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">1,476</div></div>
-    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">155</div></div>
-    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$2.46</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$556.48</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">129,956</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">44,770</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.90</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$4.28</div></div>
+    <div class="cm"><div class="lbl">Contactos msj</div><div class="val">243</div></div>
+    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">233</div></div>
+    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$2.39</div></div>
   </div>
 
-  <!-- Adset: Juliana v2/v3 -->
+  <!-- Adset: Juliana (Casa + v2 + v3) -->
   <div class="adset-block">
     <div class="adset-head">
-      <div class="adset-name">Juliana v2/v3 <span class="badge badge-stable">Activo</span></div>
+      <div class="adset-name">Juliana (Casa + v2 + v3) <span class="badge badge-stable">Activo</span></div>
       <div class="adset-perf">
-        <span>Gasto <b>$29.27</b></span>
-        <span><b>15</b> conversaciones</span>
-        <span><b>$1.95</b> / conv.</span>
-        <span class="pill-info">Evento Chef 16 jul · Rampa final</span>
-        <span class="pill-budget">$5 / día</span>
+        <span>Gasto <b>$293.25</b></span>
+        <span><b>114</b> conversaciones</span>
+        <span><b>$2.57</b> / conv.</span>
+        <span class="pill-info">Evento Chef 16 jul · A 3 días de cierre</span>
+        <span class="pill-budget">$5–$10 / día</span>
       </div>
     </div>
     <div class="ads-grid">
@@ -533,10 +591,11 @@
     <div class="adset-head">
       <div class="adset-name">Packs_Padres <span class="badge badge-star">Estrella del mes</span></div>
       <div class="adset-perf">
-        <span><b>70</b> conversaciones (mes)</span>
-        <span><b>$1.21</b> / conv promedio</span>
-        <span class="pill-good">Ad principal pausado — ahora Copia activa</span>
-        <span class="pill-budget">$8 / día</span>
+        <span>Gasto <b>$131.31</b></span>
+        <span><b>80</b> conversaciones</span>
+        <span><b>$1.64</b> / conv promedio</span>
+        <span class="pill-good">Mejor CPA del portafolio</span>
+        <span class="pill-budget">$10 / día</span>
       </div>
     </div>
     <div class="ads-grid">
@@ -567,9 +626,10 @@
     <div class="adset-head">
       <div class="adset-name">VIÑEDO General (FULL DAY)</div>
       <div class="adset-perf">
-        <span>Gasto <b>$112.80</b></span>
-        <span><b>21</b> conversaciones</span>
-        <span><b>$5.37</b> / conv.</span>
+        <span>Gasto <b>$131.71</b></span>
+        <span><b>28</b> conversaciones</span>
+        <span><b>$4.70</b> / conv.</span>
+        <span class="pill-info">Costo por conv. mejorando (baja de $5.37 → $4.70)</span>
         <span class="pill-budget">$10 / día</span>
       </div>
     </div>
@@ -624,22 +684,24 @@
     <span class="badge b-traffic">Traffic</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$211.87</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">137,394</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">88,322</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.56</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$1.54</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">7,593</div></div>
-    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.028</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">5.53%</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$247.49</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">153,201</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">91,383</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.68</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$1.62</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">9,534</div></div>
+    <div class="cm"><div class="lbl">Costo / visita</div><div class="val">$0.03</div></div>
+    <div class="cm"><div class="lbl">Contactos msj</div><div class="val">3</div></div>
   </div>
 
   <div class="adset-block">
     <div class="adset-head">
       <div class="adset-name">Visitas al perfil_AON / Historias PROMOS – City Winery</div>
       <div class="adset-perf">
-        <span>CTR promedio <b>13.3%</b></span>
-        <span class="pill-good">Alto CTR</span>
+        <span>Gasto <b>$144.47</b></span>
+        <span>CTR <b>12.97%</b></span>
+        <span>CPC <b>$0.018</b></span>
+        <span class="pill-good">Historias · Alto CTR sostenido</span>
         <span class="pill-budget">$5 / día</span>
       </div>
     </div>
@@ -694,14 +756,14 @@
     <span class="badge b-awareness">Awareness</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$55.82</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">250,656</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">113,057</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.22</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.22</div></div>
-    <div class="cm"><div class="lbl">Video views</div><div class="val">14,827</div></div>
-    <div class="cm"><div class="lbl">Landing views</div><div class="val">116</div></div>
-    <div class="cm"><div class="lbl">Post engagement</div><div class="val">15,058</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$101.11</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">435,562</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">148,416</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.93</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.23</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">25,911</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">224</div></div>
+    <div class="cm"><div class="lbl">Clics enlace</div><div class="val">302</div></div>
   </div>
 
   <div class="adset-block">
@@ -922,24 +984,25 @@
     <span class="badge b-sales">Sales</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$71.93</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">146,851</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">47,738</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.08</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.49</div></div>
-    <div class="cm"><div class="lbl">Clics enlace</div><div class="val">7,431</div></div>
-    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.010</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">5.09%</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$128.06</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">253,665</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">61,981</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">4.09</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.50</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">10,161</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.01</div></div>
+    <div class="cm"><div class="lbl">Contactos msj</div><div class="val">3</div></div>
   </div>
 
   <div class="adset-block">
     <div class="adset-head">
       <div class="adset-name">Web Vinos – Performance</div>
       <div class="adset-perf">
-        <span><b>5,512</b> visitas a landing</span>
+        <span>Gasto <b>$127.86</b></span>
+        <span><b>10,149</b> visitas a landing</span>
         <span>CPC <b>$0.010</b></span>
-        <span class="pill-good">CPC bajo</span>
-        <span class="pill-info">Nuevo anuncio hoy</span>
+        <span>CTR <b>5.06%</b></span>
+        <span class="pill-good">Motor de tráfico web · Escalable</span>
       </div>
     </div>
     <div class="ads-grid">
@@ -993,22 +1056,22 @@
     <span class="badge b-awareness">Awareness</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$12.36</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">61,098</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">45,670</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.34</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.20</div></div>
-    <div class="cm"><div class="lbl">Video views</div><div class="val">5,303</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">34</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">0.06%</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$58.36</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">253,330</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">114,833</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">2.21</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.23</div></div>
+    <div class="cm"><div class="lbl">CPM x 1000 pers.</div><div class="val">$0.51</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">21,017</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">145</div></div>
   </div>
 
   <div class="adset-block">
     <div class="adset-head">
       <div class="adset-name">Lunch $12.99 – Urdesa</div>
       <div class="adset-perf">
-        <span>Gasto <b>$2.82</b></span>
-        <span class="pill-info">CPM $0.21 · 1,041 vv</span>
+        <span>Gasto <b>$14.61</b></span>
+        <span class="pill-info">CPM $0.24 · 4,295 vv</span>
         <span class="pill-budget">$1 / día</span>
       </div>
     </div>
@@ -1037,8 +1100,8 @@
     <div class="adset-head">
       <div class="adset-name">Lunch $12.99 – Batán</div>
       <div class="adset-perf">
-        <span>Gasto <b>$3.26</b></span>
-        <span class="pill-info">CPM $0.20 · 1,185 vv</span>
+        <span>Gasto <b>$14.59</b></span>
+        <span class="pill-info">CPM $0.22 · 4,389 vv</span>
         <span class="pill-budget">$1 / día</span>
       </div>
     </div>
@@ -1067,8 +1130,8 @@
     <div class="adset-head">
       <div class="adset-name">Wine O'Clock – Batán</div>
       <div class="adset-perf">
-        <span>Gasto <b>$3.27</b></span>
-        <span class="pill-info">CPM $0.19 · 1,537 vv</span>
+        <span>Gasto <b>$14.56</b></span>
+        <span class="pill-info">CPM $0.24 · 6,076 vv</span>
         <span class="pill-budget">$1 / día</span>
       </div>
     </div>
@@ -1097,8 +1160,8 @@
     <div class="adset-head">
       <div class="adset-name">Wine O'Clock – Urdesa</div>
       <div class="adset-perf">
-        <span>Gasto <b>$3.01</b></span>
-        <span class="pill-info">CPM $0.21 · 1,540 vv</span>
+        <span>Gasto <b>$14.51</b></span>
+        <span class="pill-info">CPM $0.22 · 6,267 vv</span>
         <span class="pill-budget">$1 / día</span>
       </div>
     </div>
@@ -1134,22 +1197,24 @@
     <span class="badge b-traffic">Traffic</span>
   </div>
   <div class="camp-metrics">
-    <div class="cm"><div class="lbl">Inversión</div><div class="val">$7.46</div></div>
-    <div class="cm"><div class="lbl">Impresiones</div><div class="val">10,058</div></div>
-    <div class="cm"><div class="lbl">Alcance</div><div class="val">7,980</div></div>
-    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.26</div></div>
-    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.74</div></div>
-    <div class="cm"><div class="lbl">Clics</div><div class="val">293</div></div>
-    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.025</div></div>
-    <div class="cm"><div class="lbl">CTR</div><div class="val">2.70%</div></div>
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$36.79</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">47,926</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">28,088</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.71</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.77</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">1,176</div></div>
+    <div class="cm"><div class="lbl">Costo / visita</div><div class="val">$0.03</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">2.39%</div></div>
   </div>
 
   <div class="adset-block">
     <div class="adset-head">
       <div class="adset-name">Visitas al perfil_AON – BODEGA</div>
       <div class="adset-perf">
-        <span>Gasto <b>$7.46</b></span>
-        <span class="pill-info">CTR 2.70% · CPC $0.025</span>
+        <span>Gasto <b>$36.79</b></span>
+        <span><b>1,176</b> visitas al perfil</span>
+        <span class="pill-info">$0.03 / visita · CTR 2.39%</span>
+        <span class="pill-warn">Bajo consumo · 25% del plan mensual ($150)</span>
         <span class="pill-budget">$1 / día</span>
       </div>
     </div>
@@ -1200,7 +1265,7 @@
       <div class="ico">⏳</div>
       <div>
         <span class="lb">Vigencia parcial</span>
-        <b>Juliana</b> corre solo del <b>1 al 16 de julio</b> (evento del 16 con chef Luis Cerón). Después del 16, ese presupuesto se libera al buffer para escalar ganadores.
+        <b>Juliana</b> corre solo del <b>1 al 16 de julio</b> (evento del 16 con chef Luis Cerón). A 3 días del cierre: ya suma <b>114 conversaciones a $2.57/conv</b>. Después del 16, ~$130 se liberan al buffer.
       </div>
     </div>
     <div class="plan-alert new">
@@ -1209,6 +1274,208 @@
         <span class="lb">Canal nuevo</span>
         <b>LinkedIn $200</b> — Awareness corporativo. Enfoque B2B: catas privadas para empresas, eventos corporativos, viñedo como venue premium.
       </div>
+    </div>
+  </div>
+
+  <!-- ============ CUMPLIMIENTO DEL PLAN (Jul 1-13) ============ -->
+  <div class="plan-compliance">
+    <h3>Cumplimiento del Plan — al 13 de julio</h3>
+    <div class="sub">Comparación línea por línea entre lo planificado en julio y lo ejecutado hasta hoy (13 días / 31 = 42% del mes transcurrido).</div>
+
+    <div class="comp-summary-row">
+      <div class="comp-tile">
+        <div class="lbl">Presupuesto plan Meta</div>
+        <div class="val money">2,110</div>
+        <div class="foot">Sin LinkedIn ($200) ni buffer ($190)</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">Ejecutado Meta</div>
+        <div class="val money">1,128.29</div>
+        <div class="foot">53.5% del plan Meta consumido</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">Ritmo esperado (42%)</div>
+        <div class="val money">886</div>
+        <div class="foot">Prorrateo a 13/31 días</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">Desvío</div>
+        <div class="val" style="color:var(--warn)">+$242</div>
+        <div class="foot">Adelantados por concentración de Juliana</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Línea</th>
+          <th class="num">Plan Julio</th>
+          <th class="num">Ejecutado</th>
+          <th class="num">% consumido</th>
+          <th>Estado</th>
+          <th>Lectura</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="comp-line">1. Visitas al perfil — BODEGA</div>
+            <div class="comp-nota">Comunidad marca principal</div>
+          </td>
+          <td class="num">$150</td>
+          <td class="num">$36.79</td>
+          <td class="num">
+            25%
+            <div class="bar ok"><span style="width:25%"></span></div>
+          </td>
+          <td><span class="status-pill watch">Bajo ritmo</span></td>
+          <td>Va lento vs 42% esperado. Espacio para subir a $2/día si el CTR se mantiene sobre 2%.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">2. City Winery — ALCANCE</div>
+            <div class="comp-nota">Awareness restaurante</div>
+          </td>
+          <td class="num">$100</td>
+          <td class="num">$58.36</td>
+          <td class="num">
+            58%
+            <div class="bar ok"><span style="width:58%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En ritmo</span></td>
+          <td>Adelantado moderadamente. 4 adsets a $1/día cumpliendo distribución. Va a cerrar el mes en línea.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">3. Promos City Winery</div>
+            <div class="comp-nota">Historias promocionales @citywinery.ec</div>
+          </td>
+          <td class="num">$250</td>
+          <td class="num">$247.49</td>
+          <td class="num">
+            99%
+            <div class="bar risk"><span style="width:99%"></span></div>
+          </td>
+          <td><span class="status-pill risk">Agotado</span></td>
+          <td><b>Riesgo:</b> consumió el mes entero en 13 días. CTR del 12.97% justifica ampliar: sugerido subir plan a $500 o pausar hasta agosto.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">4. Tráfico Web</div>
+            <div class="comp-nota">E-commerce vinos + Juliana Tráfico</div>
+          </td>
+          <td class="num">$340</td>
+          <td class="num">$128.06</td>
+          <td class="num">
+            38%
+            <div class="bar ok"><span style="width:38%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En ritmo</span></td>
+          <td>10,161 visitas al sitio, CPC $0.01, CTR 5.06%. Motor de tráfico probado — hay margen para acelerar 2ª quincena.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">5. WhatsApp — Juliana (Casa + v2 + v3)</div>
+            <div class="comp-nota">Vigencia 1–16 jul · Evento chef</div>
+          </td>
+          <td class="num">$320</td>
+          <td class="num">$293.25</td>
+          <td class="num">
+            92%
+            <div class="bar watch"><span style="width:92%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En objetivo</span></td>
+          <td>~120 conversaciones a ~$2.45/conv. Cerrando en línea con el plan al 16-jul. Juliana v2 con CPA alto ($39.33) — pausar.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">6. WhatsApp — Packs_Padres</div>
+            <div class="comp-nota">Estrella del portafolio</div>
+          </td>
+          <td class="num">$250</td>
+          <td class="num">$131.31</td>
+          <td class="num">
+            53%
+            <div class="bar ok"><span style="width:53%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En ritmo</span></td>
+          <td>80 conversaciones a $1.64/conv — mejor CPA del mes. Va sobreejecutar el plan a este ritmo (proyectado $313).</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">7. WhatsApp — Viñedo (Full Day)</div>
+            <div class="comp-nota">Línea con más peso del plan</div>
+          </td>
+          <td class="num">$400</td>
+          <td class="num">$131.71</td>
+          <td class="num">
+            33%
+            <div class="bar watch"><span style="width:33%"></span></div>
+          </td>
+          <td><span class="status-pill watch">Bajo ritmo</span></td>
+          <td>28 conv a $4.70/conv (mejorando vs $5.37 del corte anterior). Proyectado cerrar en $314 — $86 sin ejecutar.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">8. BDH — Autoservicio</div>
+            <div class="comp-nota">Distribución offline · 4 adsets $1/día</div>
+          </td>
+          <td class="num">$300</td>
+          <td class="num">$101.11</td>
+          <td class="num">
+            34%
+            <div class="bar watch"><span style="width:34%"></span></div>
+          </td>
+          <td><span class="status-pill watch">Bajo ritmo</span></td>
+          <td>A $2/día por adset debería estar en ~$104 — está exactamente ahí. El plan de $300 asumía $2.50/día promedio: hay que subir presupuestos o ajustar plan.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">9. Buffer / Reserva</div>
+            <div class="comp-nota">Escalado 17–31 jul (post-Juliana)</div>
+          </td>
+          <td class="num">$190</td>
+          <td class="num">—</td>
+          <td class="num">0%</td>
+          <td><span class="status-pill pending">Sin liberar</span></td>
+          <td>Se activa el 17-jul cuando cierre Juliana. Ganadores identificados: Packs_Padres y Tráfico Web.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">10. LinkedIn — Awareness B2B</div>
+            <div class="comp-nota">Catas privadas + eventos corporativos</div>
+          </td>
+          <td class="num">$200</td>
+          <td class="num">$0</td>
+          <td class="num">
+            0%
+            <div class="bar risk"><span style="width:0%"></span></div>
+          </td>
+          <td><span class="status-pill risk">Sin iniciar</span></td>
+          <td><b>Riesgo de no ejecución:</b> quedan 18 días de mes sin arrancar. Confirmar si el piloto sigue en pie o se reasigna.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:var(--panel-3)">
+          <td class="comp-line">Total plan</td>
+          <td class="num">$2,500</td>
+          <td class="num">$1,128.29</td>
+          <td class="num">45%</td>
+          <td colspan="2" class="comp-nota">Consumo global 45% con 42% del mes corrido — <b>+3 pp adelantado</b>, principalmente por Promos City Winery y Juliana.</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div style="margin-top:18px;padding:14px 16px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:10px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">Acciones sugeridas para la 2ª quincena</div>
+      <ul style="padding-left:18px;font-size:12.5px;line-height:1.7;color:var(--text)">
+        <li><b>Promos City Winery (línea 3):</b> decidir si se amplía plan a $500 (aprovechar CTR 12.97%) o se apaga hasta agosto para no rebasar.</li>
+        <li><b>Perfil BODEGA (línea 1):</b> subir a $2/día para consumir plan de $150 — hay CTR sano (2.39%) para justificar.</li>
+        <li><b>Autoservicio (línea 8):</b> revisar si los $300 planeados son realistas con 4 adsets a $1/día — proyección real cierra en ~$240.</li>
+        <li><b>Buffer $190 (línea 9):</b> reasignar el 17-jul a Packs_Padres (+$100) y Tráfico Web (+$90) — son los que mejor están escalando.</li>
+        <li><b>LinkedIn $200 (línea 10):</b> decisión pendiente: lanzar esta semana o mover al plan de agosto.</li>
+        <li><b>Juliana v2 (dentro línea 5):</b> pausar — CPA $39.33 vs Juliana v3 en $2.27. No aporta.</li>
+      </ul>
     </div>
   </div>
 
@@ -1413,7 +1680,7 @@
 
 
 <footer>
-  <strong>Bodega Dos Hemisferios · Dashboard de Pautas + Plan de Medios</strong> · Datos en vivo desde Meta Marketing API · Período: 1–8 julio 2026 · Inversión mes: $740.42
+  <strong>Bodega Dos Hemisferios · Dashboard de Pautas + Plan de Medios</strong> · Datos Meta Ads Manager · Período: 1–13 julio 2026 · Inversión mes: $1,128.29 · Plan Meta ejecutado: 53%
   <br>Click en la miniatura de video → reproduce embed inline · Click en "Ver video en Facebook" → abre en Facebook directamente
 </footer>
 
