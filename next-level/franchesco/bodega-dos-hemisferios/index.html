@@ -216,22 +216,15 @@
   .ad-media{
     position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;
     background:
-      radial-gradient(circle at 30% 20%, rgba(200,161,101,0.18), transparent 55%),
-      radial-gradient(circle at 75% 80%, rgba(167,139,250,0.14), transparent 55%),
+      radial-gradient(circle at 30% 20%, rgba(200,161,101,0.22), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(167,139,250,0.16), transparent 55%),
       linear-gradient(135deg,#1a1f28 0%, #0f1319 100%);
   }
-  .ad-media img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
-  .ad-media::after{
+  .ad-media::before{
     content:"🍷";
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    font-size:44px;opacity:0.35;filter:grayscale(0.2);z-index:0;
-  }
-  .ad-media.failed img{display:none}
-  .ad-media.failed .fallback-label{
-    position:absolute;left:0;right:0;bottom:10px;text-align:center;
-    font-size:10.5px;color:var(--muted);letter-spacing:0.06em;
-    text-transform:uppercase;font-weight:600;z-index:2;
-    padding:0 8px;line-height:1.3;
+    font-size:58px;opacity:0.35;z-index:0;
+    text-shadow:0 4px 20px rgba(0,0,0,0.55);
   }
   .ad-media .type-tag{
     position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.75);
@@ -569,7 +562,6 @@
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
           <span class="top-badge">Estrella del adset</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/741820573_1675322917022869_603823982324717546_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=JSy4gn6_LAwQ7kNvwEJ3H0g&_nc_oc=AdouqFJa3UNbwFpY3aLwUu_CKABIlOeh9XzTbmv8XxLwMiC-DvHS2ltD4avnMOG92xOYukBZyytzTHAppFmH_hFk&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=w0eoGjk5L7yn86ib045IxQ&_nc_tpa=Q5bMBQHJbedQ1TuqGnG5L9Dhyu6l40Xbg-5FdtktVHSfG3rT4ue6n_jetHtKUqdsU829Wa5yBU7msi1VfA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_AQC0MusDelwqqYBAQUfC6Y2XRMyervxml0K69BDp3sVtVw&oe=6A5392F8" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Juliana v2 (video)</div>
@@ -587,7 +579,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">IMG</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/739312524_10162625084497330_8742976361716954656_n.png?_nc_cat=107&ccb=1-7&_nc_ohc=si7URUscRi4Q7kNvwG7ZO73&_nc_oc=AdoQDtsGcUOgt55FuMu6w6Ra-SeSR5bOI7GNYlIshN6ebDHzhiYx8L482amuOcranQpy4mV-DCX8Dcqz8IcQYzzy&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=NG6QKRImUKnQam68KLAbvA&_nc_tpa=Q5bMBQH5fTJpG1Fs3CYfl6f7OfzupJmJy-a3cZoXhezeH3eOoMBjKUCqsvUmh-VRtvq4tu2b72RYHK2ckw&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=52f3c4&_nc_sid=58080a&oh=00_AQAZ1r7zZwP1uX4n-Pa609JAabkmAHaRKxYZejrF44bNTg&oe=6A53761E" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Juliana v3 (imagen)</div>
@@ -621,7 +612,6 @@
         <div class="ad-media">
           <span class="type-tag">IMG</span>
           <span class="top-badge">Mejor performance</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736314072_10162607803312330_8743003671914465420_n.png?stp=dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=1dP5EzPcViYQ7kNvwFHOkq7&_nc_oc=AdpDawPsS_e-h7zh253EvHQ71SqjwsTyhEOpPt0sgas6lNKdleGigZ1drXzTw-hJMzc6VQ2qPx8xE7niMtnB_j1B&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=0K4D3kB0KjEZ0COG06QPlw&_nc_tpa=Q5bMBQF-qtQZ_TSFw8upIOr764Tn8keYTzvV63lVx7VwzkwcLz9dJ9NvgKXZ1jvg7GpdO8fexFwXU7YZ2A&oh=00_AQAcZZg7Wi4h4Pl3oT2RGYhJdHG867Le8W2crmJWsnzwCg&oe=6A51ACD6" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Packs_Padres — Copia</div>
@@ -655,7 +645,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">IMG</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/561827467_24430411933327731_7633182467769239666_n.png?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=8JficPtZou8Q7kNvwHhIpqa&_nc_oc=Adr5UlwHlmlhxiEZzhkoeMHxt5fx8cvrbD18S6jFzutv27IY67xEUbPExCfw2caOsqI1l2OXG86l9waj06Eij4nI&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=nAeDK1957oVQhbbQlUvJKg&_nc_tpa=Q5bMBQGD027PQ3oJlh60-xCWybXL9Mk9E2keuUZsJKdaf_acrs7KaMa2VKP2qoy8Z-7tUCcz4ZbLwCSHDw&oh=00_AQBcOqqaB9OGm6IMq_ax-Zya2Rml8ZvjpTg4QuXYx-SErg&oe=6A51D664" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">FULL DAY — Copia</div>
@@ -673,7 +662,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.13418-10/464307858_1196143231855745_1367795886568354588_n.jpg?_nc_cat=104&ccb=1-7&_nc_ohc=zkhRQ5L9w2sQ7kNvwFiN85E&_nc_oc=AdqUfUHpYKTmmUizIftIfMcOosGTu3o1Pzau43AE4D3kHYjIguW0SYX5slhQAyOnOBHOFBso9TjFBjaOZL0Ptrw1&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=2zBC8l1tpwT4oGF7edHBSg&_nc_tpa=Q5bMBQFjyrTsWF28difz3gIhk4X0DkrZ5JISuDFiURlgsfl714mymO7hI7RgBimEsBgre7FFZyG40F8bdA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=7ca6ff&_nc_sid=58080a&oh=00_AQDny5CMm8ygqlzI9DRnBtQaAtYqLK1hgMgO07Mtjo-eTA&oe=6A51A82C" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">FULL DAY (video)</div>
@@ -727,7 +715,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">IMG</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736201704_10162598368707330_889138536163743415_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=amnVBNwzTPkQ7kNvwFzXkch&_nc_oc=AdoVZpRrqbd3D-KDID_S4cJ_ulh5lRwZHa0Kc4InpGyZ37GKmfvSMhLOgNe33cQ3BbJThJ9HC2FJ3BIue1HRvv9_&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=0L4eT2g6svYA6uvxOXYSoQ&_nc_tpa=Q5bMBQE1UkdMhfhmdxMrHM2T5P66ar5bLB51G7VdcSETJSb_YLZlULVrP5Apu_vQ-AFL4K8qC4TRy4OCkA&oh=00_AQCeWEyS8pIYnv2kOzOVpBzNDGdcTgTt4DddOrdrkPpkvQ&oe=6A51C64E" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Visitas al perfil_AON — 3</div>
@@ -745,7 +732,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">IMG</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/736289291_10162598727477330_3678175595474723535_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=4FqsEts5j6cQ7kNvwGfavo5&_nc_oc=AdrprMmVvlv55552aY6wShBK-wAKPnp7t8XWB7kkGhk-vqKDVwFh1k24sXaSNbWBjPKtfww0jBtgFaSfLKRvm8GZ&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=lMA6RlNv9Wq5sAv9RDDjEA&_nc_tpa=Q5bMBQHSMwRTCgCWHi7tfQrfiUTvHyhP5EmXFLTlQedaj-JLDRghMDY4-joaxudU6DaWA3GYTb1M2bSXRw&oh=00_AQDfBd4OekHveQHgIiwmaNrjcH6Za_med9u0Gq2MVnnluQ&oe=6A51CD52" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
@@ -796,7 +782,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664365115_2485641811854134_8313138335241626136_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=PtVHaXJ3UD8Q7kNvwHwsuN7&_nc_oc=AdoM_N4KVv-1wojx_HxctB7IFrP3BtxzHXVIV_IEUUJ0jPQwY8gxs0ccHewHQ6bIlqfEzpf4MgpcHod86ae1QzMK&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=mORGR8XLG7pjyLk-ylHXZw&_nc_tpa=Q5bMBQE6A7AGsBrnPFZzZThoanwTVAbF3Juwx-i6djmGQuOXKWmwCQQBCijAx_OGGkgKPsLsG0vPTFQ_Jg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCbfod3pisx5LbIcqkpa5hGgV2sL1pGEh56uFLgYgdvVQ&oe=6A51CB87" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 5 — Un recorrido que vale la pena</div>
@@ -814,7 +799,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/738976584_4348978605366949_5701256051070524328_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=mcWeonMdqagQ7kNvwECD6bK&_nc_oc=Adq50JBugEiHCEtDWuPkPkaQhGxrQXsJm8jXLTEMVW4m9RMA1lo9VVMCyO3PO-TjRfteBvEpZKE14RQnZlrABVTn&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=YtmRh1j_AfYYNLRVNSjZXw&_nc_tpa=Q5bMBQGfUzHXmP_o4-SjinmazTwSdU_343QsFo-dWOvuWCsOvW1VQH1ilEYEpNCWcBgn9BK8ONbyuG45XA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQAYmPsst2KnNYBjmRnlwTjyAOK_7E9zd8LfMfS3aVUeRA&oe=6A54616E" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 5 — Maridaje Perfecto</div>
@@ -843,7 +827,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/734591499_988426713992219_8055430540959227135_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=rmoKve_nAzsQ7kNvwFb3NCI&_nc_oc=Adqzq5eWcVhNgShgJsp6H2mqn8B0GfQ7PJht2ItT_D0y6T33f-Vw4MS9MGQ_TsS4aT8qMRCGnQhOHuaELeTKUUrQ&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=bzN21h0Tocw6P0AaB63l7g&_nc_tpa=Q5bMBQFWhY0BU5ay9uTucL2aqmC6jqkXDS89KD4H5pZIPMkHT8ifA4pA-y0NowoUp8V8ea17soS-GkW4dA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCd55Ca7weeyY0NYx_IqfOkeBZJsbeTi0dAimNW1iyKhw&oe=6A51B0E2" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD3 — Mi Comisariato</div>
@@ -861,7 +844,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/729867452_1320119363605765_8033063400605478718_n.jpg?_nc_cat=109&ccb=1-7&_nc_ohc=oRShudv8xQ0Q7kNvwEOWIe3&_nc_oc=AdrocaKLGuoCqR0vWCffTyptCzPFGtMl1HRm3qef8bQ9776cK8tcUby1ZEog1C6aOfZLzKprq-8aDrZ1ymrGZ4Px&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=kjG4bahmfNwooCGaCmApZw&_nc_tpa=Q5bMBQHtegXd54K3p4AjKTKyXOIeud3b3DADcKf6mB-z7LS3JiAf7u0bJgwI-92zij6acLjemMxMWK23Hg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQDPrx8xp5T9dPRdTVzxfRivxDpKC1tcIVBsxMKE8GqmfA&oe=6A51D099" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 2 — Mi Comisariato</div>
@@ -890,7 +872,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/664741969_759151347133098_1248916725157907617_n.jpg?_nc_cat=107&ccb=1-7&_nc_ohc=chAy-x4K-sIQ7kNvwFN9D-g&_nc_oc=AdoVE28wFXGAu3Ux7MBw6fjjFqlbZ3_GY2cHy6J4Jee1le-opJG41zAvg1h-s9g7Zhzg4osJes6ElCidbZHb2-qZ&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=V-XMcTTleES0bMnLPzWdfQ&_nc_tpa=Q5bMBQHToMRZoraVJWqxWzZZzuntdwnDuCi77JAiasltvTwJWCjvmFb7_3LZm7fNAtpAXaUfgi-tRwDceQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQB8Z5F-qSTYAutOMx6bHRkqiZQDekkYDk-f0b8qCPByiA&oe=6A51D159" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 1 — Del Portal</div>
@@ -919,7 +900,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/738745312_1046213621697062_2876816875708877131_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=xN0DpW_EJCoQ7kNvwGhfPsl&_nc_oc=AdobVFpB1-9GcAGN4_BLCnPEBTBr_uP5KCI0f15WrykJAQBxRFbxg-cCAyVQ2QbNGNp88bIZrO05Gvt1ikUVRt0a&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=-t_lSD_BYy5IFgrZzBIhcA&_nc_tpa=Q5bMBQHNVoZxxuU0KFnkbeHPxXmxrtyrcEL7SP7eAjEiDQ9VIf3xOhY5xXr8Al5PYXcJn-slalkRvtyotg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCbiiDBfgb-BY7IfKTNJXd6Q0QmW6KtT7V7IR1IVwcvAg&oe=6A51CE57" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 2 — Copia (Favoritos)</div>
@@ -937,7 +917,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/729348655_1304856311424138_7086472045059081164_n.jpg?_nc_cat=106&ccb=1-7&_nc_ohc=BX0Dz6ZghuMQ7kNvwFF1OjS&_nc_oc=AdrR4KLD8tnGKvkXK0ODd06Q90buW_IWyG_kCtLRgxBz5vpjCN96JLjlRQjBwkOO3sacmV7pEg3abRyesdbxrej3&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=bCnxgQiG6JO_8YVWjLLCNQ&_nc_tpa=Q5bMBQEPuzJycY-x6G6bBRy9Mr5f-P_qN4duNYlKfvQLUXv1aEzjrtksKO3xp0833vM9hN8w9ip5QrHQqg&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQDX9pcgCKOuZZWsMbZZ2kgxHFkgEMOy-Fy9RBnY156uUg&oe=6A51CC20" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 1 — Casa Juliana</div>
@@ -955,7 +934,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/730083168_2377062302826210_1250450146326970664_n.jpg?_nc_cat=105&ccb=1-7&_nc_ohc=arFdKx7gPbIQ7kNvwFExbuK&_nc_oc=Adp5l3YnYrqBDGdNTZWw9xX43s_vVyXaVgQdBplpTa1-tARJeSXNNHlrcXMZIoYxRvL5jH80H-TsgsTEROhtT924&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=tcrnR094a4IVDEBH5bCjQg&_nc_tpa=Q5bMBQEpvF3nuIS6OQZ5ksT4cPBz5aasGHthLnDt0b_4aiLUCCzi8KpCpOqGdX0bWLJsByCwcqOVjPAV0w&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCsLfS1fCCtvsmQfVi5NlpXPXZli0ZfIkbNLykLhWUiMw&oe=6A51ACE1" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 2 — Recorrido Ecuador</div>
@@ -973,7 +951,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/741402676_1198157685775674_4578692923003091772_n.jpg?_nc_cat=108&ccb=1-7&_nc_ohc=e1nBhE0q6skQ7kNvwGZRVEq&_nc_oc=Adq_SkhWsaxpJCalC1V_WEwCfu2o8f3f-tVXcrerrdgGjR-QHzZMRgGCwGtk3xe2nYPrbUvJEIJgHegnPmJPrSxb&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=GGxsrvVlKjJjstice_LP2g&_nc_tpa=Q5bMBQF6rnDU2FFxDing4-I6G2gO5iBoJGy3JEwve142Ns0e0pUUIh3oeb-ROce07iNOe-C82rQh3O8c6w&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQBQ63sIM1hD_I6kzHjpHyDLsmPBcov29VLFYHiZOfBsRw&oe=6A544C41" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">AD 4 — Mensaje / Lista de Compras</div>
@@ -1027,7 +1004,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/695281120_914686814867090_4234448961506741965_n.jpg?_nc_cat=110&ccb=1-7&_nc_ohc=rdyMIiycIQoQ7kNvwHDU45f&_nc_oc=AdqFd3vh-iYrakYBcq2Lxwf9BT0C0RRAuitdwvZ5qZQY_PhTEk1tDUKDVDwbyqjak9-2Qd_cTkwS6TR3bFl9Di8D&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=eEXNtSp-aRUiVUOKwxdtMg&_nc_tpa=Q5bMBQHPI4-FrufEBhIdD-67iim9MYmr1-ei54uLAIKAJxAqAjwL0nv6qRq2JAlnyI1JzTI10wKgY9s81g&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_AQABjSbG_gZ4RAthn7cdDcH3RGHXFclDolcO7BWMPPq5DQ&oe=6A51AA92" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Performance Web</div>
@@ -1046,7 +1022,6 @@
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
           <span class="top-badge">Nuevo hoy</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/741678791_1031520859259965_7616669941454521433_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=hOfPXYX4_-IQ7kNvwEw1zMJ&_nc_oc=AdrIXRRZ9O4mtXVxsCuXYN2fIBqYCpvmOu-ooNNFkQL_av_BclyoywK3OiObxFXgcx8kH7atVmDLYec7atdIx4Gj&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=PxmdW7pn2pkLwMwnPjU0rg&_nc_tpa=Q5bMBQF3s8KBQ8Z9WqycsO-R1UFCAIlG0KH5t_6b0xqra_gfhBXPPs7ybW7GlVKa5HzpXgt1NIGrlbi3YQ&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=a7ce7f&_nc_sid=58080a&oh=00_AQBJsNiUemm4eV-835o4hphUQ8s34fQnMj_3k7pAKaXKpA&oe=6A53A780" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Juliana Trafico</div>
@@ -1097,7 +1072,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/698859136_1581252137355200_469574063910077909_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=ZJ4_WDs7Kp4Q7kNvwHsUGyC&_nc_oc=AdrWvpE-VTEDNkJHSOxwq_8zUbWPNcXYNSn-L8d3C1voK_D92QgMtwFthHvJiTdfnYVGAxjvwpnf6QEpntofekxD&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=OzXk2sKVt7iQfQJPYKYOaw&_nc_tpa=Q5bMBQEV-v7HhEM2W82eR3FGBm72QCj2wzYsfspWJlEPlPQ-Ry_KBGNxesWYO66rwMPQ7yeY9OPZjx0e3g&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQC17_xtFOQkdIE1QMrdYSOjog8LzjbKrqbTxFlTsGMBAA&oe=6A546F79" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Lunch $12.99 — Urdesa</div>
@@ -1127,7 +1101,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/698859136_1581252137355200_469574063910077909_n.jpg?_nc_cat=100&ccb=1-7&_nc_ohc=ZJ4_WDs7Kp4Q7kNvwHsUGyC&_nc_oc=AdrWvpE-VTEDNkJHSOxwq_8zUbWPNcXYNSn-L8d3C1voK_D92QgMtwFthHvJiTdfnYVGAxjvwpnf6QEpntofekxD&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=2n9DGJEd9taLa-Jft_N9Zg&_nc_tpa=Q5bMBQGkuuH6m--oMB_qTbZ1GCpcmfYP-5bNY_L_MmQKSACNAqZdHT7k4VKHzGdR6asYVpexJxbjxqc8qA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCYfSYtNRZjavFvNaU8UHnzQ39bGXJN48HeKfzFrEbmvQ&oe=6A546F79" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Lunch $12.99 — Batán</div>
@@ -1157,7 +1130,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/736172636_1339084691703025_7968678413024041983_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=5FNYe0hY1PUQ7kNvwG5oREk&_nc_oc=Adrl4Uj6LGpjjD5bjK7JZOVU8uiHn1PdO-GotQZpaeAal9116zcB1KlBGrz3eeklJwBG2C7iFrQGVKB9UqZA48qk&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=U0wLU2w2nRiCziI-12d4HA&_nc_tpa=Q5bMBQGYihAjUCQwjhUVgYPkolbuc90VeJYcWJx53R3dCUspf5w0O3r-I2hhi_sr8SbJjOR5NBywu3GaeA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQCe3BLWgY707V7zO6L0l_fz-IJ5UxRZvcP7T9_HslTyzQ&oe=6A5448E3" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Wine O'Clock — Batán</div>
@@ -1187,7 +1159,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">VIDEO</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t15.5256-10/736172636_1339084691703025_7968678413024041983_n.jpg?_nc_cat=103&ccb=1-7&_nc_ohc=5FNYe0hY1PUQ7kNvwG5oREk&_nc_oc=Adrl4Uj6LGpjjD5bjK7JZOVU8uiHn1PdO-GotQZpaeAal9116zcB1KlBGrz3eeklJwBG2C7iFrQGVKB9UqZA48qk&_nc_zt=23&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=w8hycFR9ac9_wzR7IJb9BA&_nc_tpa=Q5bMBQHMDJrFwQR_b-CAQGc4I-s0iRY6DRE5GPsIalvD5RQdayaHZAFRiBIqe3mk9jdvSQvKlydsT2_PYA&stp=c0.5000x0.5000f_dst-emg0_p64x64_q75_tt6&ur=5fad0e&_nc_sid=58080a&oh=00_AQD_eE9bVwJtLRUnYpoBZRJoeDXBVFueave1oJQilwCexQ&oe=6A5448E3" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Wine O'Clock — Urdesa</div>
@@ -1240,7 +1211,6 @@
       <div class="ad">
         <div class="ad-media">
           <span class="type-tag">IMG</span>
-          <img src="https://scontent.fgye4-1.fna.fbcdn.net/v/t45.1600-4/739312524_10162625084497330_8742976361716954656_n.png?stp=dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=d5bd00&_nc_ohc=si7URUscRi4Q7kNvwG7ZO73&_nc_oc=AdoQDtsGcUOgt55FuMu6w6Ra-SeSR5bOI7GNYlIshN6ebDHzhiYx8L482amuOcranQpy4mV-DCX8Dcqz8IcQYzzy&_nc_zt=1&_nc_ht=scontent.fgye4-1.fna&edm=AAT1rw8EAAAA&_nc_gid=BjkfeczISLUlRuAFTOCciQ&_nc_tpa=Q5bMBQE8dMSG-Wo5wSswRhqiopjbP87YANiuBNCoqVA3v5lHpyHxHOtqjxBGNOCmk0MSKz4Sy9dRenLTiw&oh=00_AQCETn205WUN6RVOEGunU7y_It5ykzO5WwwjlGQzy1aaBA&oe=6A54571E" alt="">
         </div>
         <div class="ad-body">
           <div class="ad-name">Visitas al perfil_AON — 3</div>
@@ -1711,55 +1681,17 @@
     ' · ' +
     ts.toLocaleTimeString('es-EC', {hour:'2-digit',minute:'2-digit'});
 
-  // Detectar imgs de FB CDN caídas (URLs firmadas expiran) y mostrar placeholder
-  document.querySelectorAll('.ad-media img').forEach(img => {
-    const markFailed = () => {
-      const media = img.closest('.ad-media');
-      if (!media || media.classList.contains('failed')) return;
-      media.classList.add('failed');
-      // Nombre del anuncio como label del placeholder
-      const card = media.closest('.ad');
-      const nameEl = card && card.querySelector('.ad-name');
-      const typeEl = media.querySelector('.type-tag');
-      if (nameEl){
-        const lbl = document.createElement('div');
-        lbl.className = 'fallback-label';
-        lbl.textContent = (typeEl ? typeEl.textContent.trim() + ' · ' : '') + nameEl.textContent.trim();
-        media.appendChild(lbl);
-      }
-    };
-    if (img.complete && img.naturalWidth === 0) markFailed();
-    img.addEventListener('error', markFailed);
-  });
-
-  const VIDEO_MAP = [
-    {key: '741820573_1675322917022869', videoId: '1675322890356205'},
-    {key: '741678791_1031520859259965', videoId: '1031520825926635'},
-    {key: '464307858_1196143231855745', videoId: '1970254033590332'},
-    {key: '736172636_1339084691703025', videoId: '1760482035305313'},
-    {key: '664365115_2485641811854134', videoId: '4180893862043998'},
-    {key: '664741969_759151347133098',  videoId: '1486526686500323'},
-    {key: '734591499_988426713992219',  videoId: '1006516898907027'},
-    {key: '738745312_1046213621697062', videoId: '1688053166378090'},
-    {key: '729867452_1320119363605765', videoId: '1325192102482754'},
-    {key: '729348655_1304856311424138', videoId: '1723743655304658'},
-    {key: '730083168_2377062302826210', videoId: '3111204602561516'},
-    {key: '695281120_914686814867090',  videoId: '914686794867092'},
-    {key: '698859136_1581252137355200', videoId: '2194949611265500'},
-    {key: '738976584_4348978605366949', videoId: '1978262016172082'},
-    {key: '741402676_1198157685775674', videoId: '4487991374861393'},
-  ];
-
-  function findVideoId(imgSrc){
-    for (const item of VIDEO_MAP){
-      if (imgSrc.includes(item.key)) return item.videoId;
-    }
-    return null;
-  }
-
   function buildEmbedUrl(videoId){
     const inner = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
     return `https://www.facebook.com/plugins/video.php?href=${inner}&show_text=false&width=400&t=0`;
+  }
+
+  // Extraer videoId del link "Ver video en Facebook" del propio card
+  function findVideoIdInCard(card){
+    const link = card.querySelector('a.ad-cta.video[href*="watch/?v="]');
+    if (!link) return null;
+    const m = link.href.match(/[?&]v=(\d+)/);
+    return m ? m[1] : null;
   }
 
   document.querySelectorAll('.ad').forEach(card => {
@@ -1767,11 +1699,7 @@
     const tag = media && media.querySelector('.type-tag');
     if (!media || !tag || tag.textContent.trim() !== 'VIDEO') return;
 
-    const img = media.querySelector('img');
-    if (!img) return;
-    const src = img.getAttribute('src') || '';
-
-    const videoId = findVideoId(src);
+    const videoId = findVideoIdInCard(card);
     if (!videoId) return;
 
     media.dataset.videoId = videoId;
