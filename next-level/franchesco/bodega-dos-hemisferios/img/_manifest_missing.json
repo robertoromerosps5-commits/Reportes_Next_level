@@ -1,0 +1,112 @@
+[
+  {
+    "ad_id": "120245689939650772",
+    "ad_name": "Visitas al perfil_AON",
+    "campaign_id": "120245689939630772",
+    "creative_id": "1731812987971267",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120245689939650772.jpg",
+    "size_bytes": 255267,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120245690090830772",
+    "ad_name": "Visitas al perfil_AON - 2",
+    "campaign_id": "120245689939630772",
+    "creative_id": "4652357081717357",
+    "object_type": "VIDEO",
+    "video_id": "2582670298820278",
+    "local_image": "img/120245690090830772.jpg",
+    "size_bytes": 1704,
+    "status": "NEEDS_PLACEHOLDER"
+  },
+  {
+    "ad_id": "120245690120970772",
+    "ad_name": "Visitas al perfil_AON - 4",
+    "campaign_id": "120245689939630772",
+    "creative_id": "1358774409463096",
+    "object_type": "VIDEO",
+    "video_id": "27252228304419552",
+    "local_image": "img/120245690120970772.jpg",
+    "size_bytes": 1804,
+    "status": "NEEDS_PLACEHOLDER"
+  },
+  {
+    "ad_id": "120245690113450772",
+    "ad_name": "Visitas al perfil_AON - 3",
+    "campaign_id": "120245689939630772",
+    "creative_id": "1350172377246560",
+    "object_type": "VIDEO",
+    "video_id": "1719691155827822",
+    "local_image": "img/120245690113450772.jpg",
+    "size_bytes": 1867,
+    "status": "NEEDS_PLACEHOLDER"
+  },
+  {
+    "ad_id": "120245996363210772",
+    "ad_name": "Visitas al perfil_AON - 3",
+    "campaign_id": "120245689939630772",
+    "creative_id": "1040184081799266",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120245996363210772.jpg",
+    "size_bytes": 121687,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120245996480230772",
+    "ad_name": "Visitas al perfil_AON - 3 - Copia",
+    "campaign_id": "120245689939630772",
+    "creative_id": "27964601539791571",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120245996480230772.jpg",
+    "size_bytes": 138642,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120246253301680772",
+    "ad_name": "Visitas al perfil_AON - 3",
+    "campaign_id": "120246253301640772",
+    "creative_id": "1552443112920623",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120246253301680772.jpg",
+    "size_bytes": 320724,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120244382091060772",
+    "ad_name": "Packs_Padres",
+    "campaign_id": "120243034970160772",
+    "creative_id": "4471896333047438",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120244382091060772.jpg",
+    "size_bytes": 189231,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120246099005670772",
+    "ad_name": "Packs_Padres - Copia",
+    "campaign_id": "120243034970160772",
+    "creative_id": "1290302596228443",
+    "object_type": "SHARE",
+    "video_id": null,
+    "local_image": "img/120246099005670772.jpg",
+    "size_bytes": 266751,
+    "status": "OK"
+  },
+  {
+    "ad_id": "120246135467460772",
+    "ad_name": "Juliana v2",
+    "campaign_id": "120243034970160772",
+    "creative_id": "2267571050696962",
+    "object_type": "VIDEO",
+    "video_id": "1019288633981492",
+    "local_image": "img/120246135467460772.jpg",
+    "size_bytes": 1123,
+    "status": "NEEDS_PLACEHOLDER"
+  }
+]
