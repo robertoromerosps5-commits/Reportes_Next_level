@@ -1,0 +1,4 @@
+2026-07-13T00:00:00Z | get_insights | acct=act_2836455319797730 | level=campaign | range=2026-07-01,2026-07-13 | exit=0 | points_used=2 | usage=1% | remaining=~59 | summary=6 campanias, spend total $1127.61
+2026-07-13T00:00:03Z | get_insights | acct=act_2836455319797730 | level=adset | range=2026-07-01,2026-07-13 | exit=0 | points_used=2 | usage=1% | remaining=~57 | summary=19 adsets
+2026-07-13T00:00:06Z | SESSION_SUMMARY | acct=act_2836455319797730 | points_total=4 | calls=2 | avg_per_call=2 | usage_final=~2% | status=OK
+2026-08-03T16:07:54Z | download_thumbs_v2.py | acct=act_2836455319797730 | exit=0 | out_bytes=- | error=none | summary=16 ads OK; 1 low-res (Performance Web/Reels source)
