@@ -1,7 +1,2725 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Bodega Dos Hemisferios · Cierre Julio 2026 + Plan Agosto</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a21;
+    --panel-2:#1d222c;
+    --panel-3:#232936;
+    --border:#262d3a;
+    --border-2:#2f3646;
+    --text:#e7ecf3;
+    --muted:#8a94a6;
+    --accent:#c8a165;
+    --accent-2:#e5c58a;
+    --good:#4ade80;
+    --warn:#fbbf24;
+    --bad:#f87171;
+    --purple:#a78bfa;
+    --blue:#60a5fa;
+    --pink:#f472b6;
+    --cyan:#22d3ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,sans-serif;
+    line-height:1.5;padding:24px;min-height:100vh;
+  }
+  .container{max-width:1400px;margin:0 auto}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border);
+    flex-wrap:wrap;gap:16px;
+  }
+  .brand{display:flex;flex-direction:column;gap:4px}
+  .brand h1{
+    font-size:26px;font-weight:700;letter-spacing:-0.02em;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .brand .sub{color:var(--muted);font-size:13px}
+  .live{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;background:rgba(74,222,128,0.12);
+    border:1px solid rgba(74,222,128,0.3);border-radius:20px;
+    font-size:12px;color:var(--good);font-weight:500;
+  }
+  .live::before{
+    content:"";width:8px;height:8px;background:var(--good);border-radius:50%;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .meta-bar{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+  .meta-bar strong{color:var(--text)}
+
+  .kpi-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;margin-bottom:26px;
+  }
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .kpi .label{
+    font-size:11px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:0.08em;font-weight:600;margin-bottom:8px;
+  }
+  .kpi .value{font-size:26px;font-weight:700;letter-spacing:-0.02em}
+  .kpi .value.money::before{content:"$";color:var(--accent)}
+  .kpi .foot{font-size:12px;color:var(--muted);margin-top:4px}
+
+  .highlight-strip{
+    background:linear-gradient(135deg,rgba(74,222,128,0.10),rgba(200,161,101,0.06));
+    border:1px solid rgba(74,222,128,0.28);border-radius:12px;
+    padding:16px 22px;margin-bottom:32px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .highlight-strip .icon{font-size:26px}
+  .highlight-strip .txt{flex:1;min-width:220px}
+  .highlight-strip .txt strong{color:var(--good);font-weight:700}
+  .highlight-strip .txt div{color:var(--muted);font-size:12.5px;margin-top:2px}
+
+  h2.section{font-size:18px;font-weight:600;margin:8px 0 16px;display:flex;align-items:center;gap:8px}
+  h2.section::before{content:"";width:3px;height:18px;background:var(--accent);border-radius:2px}
+
+  .campaign-block{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    margin-bottom:26px;overflow:hidden;
+  }
+  .camp-head{
+    padding:18px 22px;display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:12px;
+    background:linear-gradient(180deg,rgba(200,161,101,0.06),transparent);
+    border-bottom:1px solid var(--border);
+  }
+  .camp-title{display:flex;flex-direction:column;gap:2px}
+  .camp-title .name{font-size:17px;font-weight:700}
+  .camp-title .obj{font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
+  .badge{
+    display:inline-block;padding:3px 8px;font-size:10px;border-radius:6px;
+    font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  }
+  .b-traffic{background:rgba(167,139,250,0.15);color:var(--purple);border:1px solid rgba(167,139,250,0.35)}
+  .b-sales{background:rgba(74,222,128,0.15);color:var(--good);border:1px solid rgba(74,222,128,0.35)}
+  .b-awareness{background:rgba(251,191,36,0.15);color:var(--warn);border:1px solid rgba(251,191,36,0.35)}
+  .b-engagement{background:rgba(96,165,250,0.15);color:var(--blue);border:1px solid rgba(96,165,250,0.35)}
+  .b-new{background:rgba(34,211,238,0.15);color:var(--cyan);border:1px solid rgba(34,211,238,0.35)}
+  .badge-star{background:rgba(74,222,128,0.15);color:var(--good);border:1px solid rgba(74,222,128,0.35);margin-left:6px}
+  .badge-stable{background:rgba(34,211,238,0.15);color:var(--cyan);border:1px solid rgba(34,211,238,0.35);margin-left:6px}
+
+  .camp-metrics{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:6px;padding:14px 22px;background:var(--panel-2);border-bottom:1px solid var(--border);
+  }
+  .cm{padding:6px 8px}
+  .cm .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:600;letter-spacing:0.05em}
+  .cm .val{font-size:16px;font-weight:600;margin-top:2px}
+
+  .adset-block{border-top:1px solid var(--border);padding:0}
+  .adset-block:first-of-type{border-top:none}
+  .adset-head{
+    padding:14px 22px;display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:10px;background:var(--panel-3);border-bottom:1px solid var(--border);
+  }
+  .adset-head::before{
+    content:"CONJUNTO";font-size:9px;color:var(--muted);letter-spacing:0.12em;font-weight:700;
+    padding:3px 7px;background:rgba(255,255,255,0.05);border-radius:4px;margin-right:12px;
+  }
+  .adset-name{
+    flex:1;min-width:0;font-size:14px;font-weight:600;color:var(--text);
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  }
+  .adset-perf{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap;align-items:center}
+  .adset-perf b{color:var(--text);font-weight:600}
+  .adset-perf .pill-budget{
+    background:rgba(200,161,101,0.12);border:1px solid rgba(200,161,101,0.3);
+    color:var(--accent);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
+  }
+  .adset-perf .pill-good{
+    background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.35);
+    color:var(--good);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
+  }
+  .adset-perf .pill-info{
+    background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.35);
+    color:var(--cyan);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
+  }
+  .adset-perf .pill-warn{
+    background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.35);
+    color:var(--warn);padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;
+  }
+
+  /* ==== Plan Compliance table ==== */
+  .plan-compliance{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:22px 24px;margin-bottom:26px;
+  }
+  .plan-compliance h3{
+    font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .plan-compliance h3::before{content:"";width:3px;height:16px;background:var(--accent);border-radius:2px}
+  .plan-compliance .sub{color:var(--muted);font-size:12.5px;margin-bottom:14px}
+  .comp-summary-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;margin-bottom:16px;
+  }
+  .comp-tile{
+    background:var(--panel-2);border:1px solid var(--border-2);border-radius:10px;
+    padding:12px 14px;
+  }
+  .comp-tile .lbl{
+    font-size:10px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:0.08em;font-weight:600;margin-bottom:6px;
+  }
+  .comp-tile .val{font-size:20px;font-weight:700;letter-spacing:-0.02em}
+  .comp-tile .val.money::before{content:"$";color:var(--accent)}
+  .comp-tile .foot{font-size:11px;color:var(--muted);margin-top:2px}
+  .comp-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  .comp-table th{
+    text-align:left;padding:10px 12px;background:var(--panel-3);
+    color:var(--muted);font-weight:600;text-transform:uppercase;
+    letter-spacing:0.06em;font-size:10.5px;border-bottom:1px solid var(--border-2);
+  }
+  .comp-table th.num{text-align:right}
+  .comp-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  .comp-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .comp-table tr:last-child td{border-bottom:none}
+  .comp-line{font-weight:600}
+  .comp-nota{font-size:11px;color:var(--muted);margin-top:2px}
+  .status-pill{
+    display:inline-block;padding:3px 9px;border-radius:20px;
+    font-size:11px;font-weight:700;letter-spacing:0.02em;
+  }
+  .status-pill.ok{background:rgba(74,222,128,0.15);color:var(--good);border:1px solid rgba(74,222,128,0.35)}
+  .status-pill.watch{background:rgba(251,191,36,0.15);color:var(--warn);border:1px solid rgba(251,191,36,0.35)}
+  .status-pill.risk{background:rgba(248,113,113,0.15);color:var(--bad);border:1px solid rgba(248,113,113,0.35)}
+  .status-pill.pending{background:rgba(138,148,166,0.15);color:var(--muted);border:1px solid rgba(138,148,166,0.35)}
+  .bar{
+    height:6px;background:var(--panel-3);border-radius:4px;
+    overflow:hidden;margin-top:4px;min-width:80px;
+  }
+  .bar>span{display:block;height:100%;border-radius:4px}
+  .bar.ok>span{background:var(--good)}
+  .bar.watch>span{background:var(--warn)}
+  .bar.risk>span{background:var(--bad)}
+
+  .ads-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:12px;padding:16px 22px 22px;
+  }
+  .ad{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform 0.15s ease,border-color 0.15s ease;
+  }
+  .ad:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .ad-media{
+    position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(200,161,101,0.22), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(167,139,250,0.16), transparent 55%),
+      linear-gradient(135deg,#1a1f28 0%, #0f1319 100%);
+  }
+  .ad-media .type-tag{
+    position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.75);
+    color:#fff;font-size:10px;padding:3px 7px;border-radius:5px;
+    font-weight:600;letter-spacing:0.05em;z-index:3;
+  }
+  .ad-media .top-badge{
+    position:absolute;top:8px;right:8px;
+    background:rgba(74,222,128,0.9);color:#0a0d13;
+    font-size:9px;padding:3px 7px;border-radius:5px;
+    font-weight:700;letter-spacing:0.05em;z-index:3;
+  }
+  .ad-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .ad-name{
+    font-size:13px;font-weight:600;line-height:1.3;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .ad-copy{
+    font-size:11px;color:var(--muted);line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .ad-stats{
+    display:grid;grid-template-columns:1fr 1fr;gap:6px;
+    margin-top:auto;padding-top:8px;border-top:1px solid var(--border);
+  }
+  .ad-stats .st{display:flex;flex-direction:column;font-size:10px}
+  .ad-stats .st .k{color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+  .ad-stats .st .v{color:var(--text);font-size:13px;font-weight:600;margin-top:1px}
+  .ad-stats .st .v.money::before{content:"$";color:var(--accent);margin-right:1px}
+  .ad-cta{
+    display:block;text-align:center;font-size:11px;font-weight:600;
+    text-decoration:none;padding:8px;border-radius:6px;margin-top:6px;
+    background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.3);
+    color:var(--blue);transition:background .15s ease;
+  }
+  .ad-cta:hover{background:rgba(96,165,250,0.2)}
+  .ad-cta.video{background:rgba(244,114,182,0.12);border-color:rgba(244,114,182,0.3);color:var(--pink)}
+  .ad-cta.video:hover{background:rgba(244,114,182,0.2)}
+  .no-spend{opacity:0.7}
+
+  /* Compact ads (no media) - for ads without creative preview */
+  .ad.compact{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:110px}
+  .ad.compact .ad-tag-row{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .ad.compact .type-mini{background:rgba(255,255,255,0.05);color:var(--muted);font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700;letter-spacing:0.05em}
+  .ad.compact .ad-name{font-size:12.5px;font-weight:600;line-height:1.35;color:var(--text)}
+  .ad.compact .ad-meta{font-size:10px;color:var(--muted);font-style:italic}
+  .ad.compact .ad-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto;padding-top:8px;border-top:1px solid var(--border)}
+  .ad.compact .ad-stats .st{display:flex;flex-direction:column;font-size:10px}
+  .ad.compact .ad-stats .st .k{color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+  .ad.compact .ad-stats .st .v{color:var(--text);font-size:12.5px;font-weight:600;margin-top:1px}
+  .ad.compact .ad-stats .st .v.money::before{content:"$";color:var(--accent);margin-right:1px}
+  .ads-grid.compact-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+
+  .ad-media[data-video-id]{cursor:pointer}
+  .play-btn{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(0,0,0,0.72);color:#fff;font-size:20px;
+    border:2px solid rgba(255,255,255,0.9);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    padding-left:4px;line-height:1;
+    transition:transform .15s ease,background .15s ease;z-index:2;
+  }
+  .ad-media[data-video-id]:hover .play-btn{
+    transform:translate(-50%,-50%) scale(1.1);
+    background:var(--accent);color:#0a0d13;border-color:var(--accent);
+  }
+  .ad-media.playing img,.ad-media.playing .play-btn,.ad-media.playing .type-tag,.ad-media.playing .top-badge{display:none}
+  .ad-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+
+  .mini-camp-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:14px;margin-bottom:26px;
+  }
+  .mini-camp{
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;
+  }
+  .mini-camp h3{
+    font-size:14px;font-weight:700;margin-bottom:8px;
+    display:flex;justify-content:space-between;align-items:center;gap:8px;
+  }
+  .mini-camp .mini-obj{font-size:11px;color:var(--muted);margin-bottom:12px}
+  .mini-camp .mini-metrics{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11px;
+  }
+  .mini-camp .mini-metrics div{display:flex;flex-direction:column}
+  .mini-camp .mini-metrics .mk{color:var(--muted);text-transform:uppercase;font-size:9px;letter-spacing:0.05em;font-weight:600}
+  .mini-camp .mini-metrics .mv{font-size:15px;font-weight:600;margin-top:2px}
+  .mini-camp .mini-note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+
+  footer{
+    text-align:center;padding:24px 0 8px;color:var(--muted);font-size:12px;
+    border-top:1px solid var(--border);margin-top:24px;
+  }
+  footer strong{color:var(--text)}
+
+  /* ============ TABS ============ */
+  .tabs-nav{
+    display:flex;gap:2px;margin-bottom:26px;
+    border-bottom:1px solid var(--border);
+    overflow-x:auto;
+  }
+  .tab-btn{
+    background:none;border:none;padding:14px 22px;font-size:13.5px;
+    font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;
+    border-bottom:2px solid transparent;transition:color .15s,border-color .15s;
+    letter-spacing:0.02em;white-space:nowrap;
+  }
+  .tab-btn:hover{color:var(--text)}
+  .tab-btn.is-active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab-panel{display:none}
+  .tab-panel.is-active{display:block}
+
+  /* ============ PLAN DE MEDIOS ============ */
+  .plan-header{
+    background:linear-gradient(135deg,rgba(200,161,101,0.12),rgba(74,222,128,0.05));
+    border:1px solid rgba(200,161,101,0.30);border-radius:14px;
+    padding:22px 26px;margin-bottom:22px;
+  }
+  .plan-header h2{
+    font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .plan-header .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .plan-header-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:16px}
+  .plan-header-item{background:rgba(0,0,0,0.15);border-radius:8px;padding:10px 14px}
+  .plan-header-item .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:700}
+  .plan-header-item .val{font-size:14px;font-weight:600;color:var(--text);margin-top:3px}
+  .plan-header-item .val.money::before{content:"$";color:var(--accent);margin-right:1px}
+
+  .plan-alerts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:22px}
+  .plan-alert{
+    background:rgba(96,165,250,0.10);border:1px solid rgba(96,165,250,0.32);
+    border-radius:10px;padding:14px 16px;font-size:13px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .plan-alert.warn{background:rgba(251,191,36,0.10);border-color:rgba(251,191,36,0.32)}
+  .plan-alert.new{background:rgba(34,211,238,0.10);border-color:rgba(34,211,238,0.32)}
+  .plan-alert .ico{font-size:18px;flex-shrink:0;line-height:1}
+  .plan-alert b{color:var(--text)}
+  .plan-alert .lb{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:2px}
+
+  .plan-table-wrap{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    overflow-x:auto;margin-bottom:22px;
+  }
+  .plan-table{width:100%;border-collapse:collapse;font-size:13px;min-width:820px}
+  .plan-table thead{background:var(--panel-3)}
+  .plan-table th{
+    text-align:left;padding:14px 14px;font-size:10.5px;font-weight:700;
+    color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;
+    border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  .plan-table th.num{text-align:right}
+  .plan-table td{padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .plan-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .plan-table tbody tr:hover{background:var(--panel-2)}
+  .plan-table .linea{font-weight:600;color:var(--text)}
+  .plan-table .nota{font-size:11.5px;color:var(--muted)}
+  .plan-table .invest{font-weight:700;color:var(--accent);font-size:14px}
+  .plan-table .invest::before{content:"$";margin-right:1px}
+  .plan-table tfoot td{
+    padding:16px 14px;font-weight:700;background:var(--panel-3);
+    border-top:2px solid var(--accent);font-size:15px;
+  }
+  .plan-table tfoot td.total{color:var(--accent);font-size:17px}
+  .plan-table tfoot td.total::before{content:"$";margin-right:1px}
+
+  .ch-badge{display:inline-block;padding:3px 9px;font-size:10px;border-radius:5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap}
+  .ch-meta{background:rgba(96,165,250,0.15);color:var(--blue);border:1px solid rgba(96,165,250,0.35)}
+  .ch-linkedin{background:rgba(34,211,238,0.15);color:var(--cyan);border:1px solid rgba(34,211,238,0.35)}
+  .ch-buffer{background:rgba(167,139,250,0.15);color:var(--purple);border:1px solid rgba(167,139,250,0.35)}
+  .obj-badge{display:inline-block;padding:2px 8px;font-size:10px;border-radius:5px;font-weight:600;letter-spacing:0.04em}
+  .obj-conv{background:rgba(74,222,128,0.12);color:var(--good)}
+  .obj-traf{background:rgba(167,139,250,0.12);color:var(--purple)}
+  .obj-awa{background:rgba(251,191,36,0.12);color:var(--warn)}
+
+  .plan-notes{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+  .plan-notes h3{font-size:13px;margin-bottom:12px;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase}
+  .plan-notes ul{list-style:none;padding:0;margin:0}
+  .plan-notes li{padding:7px 0 7px 20px;font-size:13px;color:var(--text);position:relative;line-height:1.55}
+  .plan-notes li::before{content:"◆";color:var(--accent);position:absolute;left:2px;font-size:10px;top:10px}
+  .plan-notes li b{color:var(--accent-2)}
+
+  /* ============ COMENTARIOS (Netlify Forms) ============ */
+  .comments-block{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--border);border-radius:14px;
+    padding:24px 26px;margin-bottom:24px;
+  }
+  .comments-block h3{font-size:16px;margin-bottom:4px;font-weight:700}
+  .comments-block .cs-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .comments-form{display:flex;flex-direction:column;gap:14px}
+  .comments-form label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:6px}
+  .comments-form input[type=text],.comments-form input[type=email],.comments-form textarea{
+    width:100%;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:8px;
+    padding:11px 13px;color:var(--text);font-family:inherit;font-size:13.5px;transition:border-color .15s,background .15s;
+  }
+  .comments-form input:focus,.comments-form textarea:focus{outline:none;border-color:var(--accent);background:rgba(0,0,0,0.35)}
+  .comments-form textarea{resize:vertical;min-height:110px;line-height:1.55}
+  .comments-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .comments-form button{
+    align-self:flex-start;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0d13;border:none;border-radius:8px;
+    padding:12px 26px;font-weight:700;font-size:13px;cursor:pointer;transition:transform .15s,box-shadow .15s;
+    font-family:inherit;letter-spacing:0.04em;text-transform:uppercase;
+  }
+  .comments-form button:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(200,161,101,0.25)}
+  .sent-msg{
+    background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.4);color:var(--good);
+    padding:14px 18px;border-radius:10px;font-size:13.5px;margin-bottom:16px;
+    display:flex;gap:10px;align-items:center;
+  }
+  .sent-msg .ico{font-size:20px}
+
+  @media (max-width:640px){
+    body{padding:16px}
+    .brand h1{font-size:22px}
+    .ads-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    .comments-form .form-row{grid-template-columns:1fr}
+    .tab-btn{padding:12px 14px;font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="brand">
+    <h1>Bodega Dos Hemisferios · Meta Ads</h1>
+    <div class="sub">Cuenta: B2H Ads · <code>act_2836455319797730</code></div>
+    <div class="meta-bar">
+      <span>Período: <strong>Julio 2026 (cierre)</strong></span>
+      <span>Moneda: <strong>USD</strong></span>
+      <span>Zona: <strong>America/Guayaquil</strong></span>
+    </div>
+  </div>
+  <div>
+    <div class="live">CIERRE MENSUAL · Julio 2026</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:right">
+      Actualizado: <span id="ts"></span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TABS NAV ============ -->
+<nav class="tabs-nav" role="tablist">
+  <button class="tab-btn is-active" role="tab" data-tab="tab-dashboard-julio">Dashboard Julio</button>
+  <button class="tab-btn" role="tab" data-tab="tab-plan-julio">Plan de medios Julio</button>
+  <button class="tab-btn" role="tab" data-tab="tab-dashboard-agosto">Dashboard Agosto</button>
+  <button class="tab-btn" role="tab" data-tab="tab-plan-agosto">Plan de medios Agosto</button>
+</nav>
+
+<!-- ============ TAB · DASHBOARD JULIO ============ -->
+<section id="tab-dashboard-julio" class="tab-panel is-active">
+
+<!-- KPIs GLOBALES -->
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="label">Inversión Meta (Julio)</div>
+    <div class="value money">2,351.88</div>
+    <div class="foot">+$200 LinkedIn = <b>$2,551.88</b> total · 102% del plan ($2,500)</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Impresiones</div>
+    <div class="value">3,383,406</div>
+    <div class="foot">Alcance total (deduplicado): ~883,700 cuentas</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Conversaciones WhatsApp</div>
+    <div class="value">333</div>
+    <div class="foot">Costo promedio: $3.03 / conversación</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Visitas al sitio web</div>
+    <div class="value">29,765</div>
+    <div class="foot">Motor Tráfico Web · CPC $0.012 · 37,076 clics</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Video views</div>
+    <div class="value">186,747</div>
+    <div class="foot">Awareness + Autoservicio · Alcance masivo</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Campañas activas</div>
+    <div class="value">7</div>
+    <div class="foot">6 en Meta + 1 en LinkedIn (B2B)</div>
+  </div>
+</div>
+
+<!-- HIGHLIGHT BANNER -->
+<div class="highlight-strip">
+  <div class="icon">✨</div>
+  <div class="txt">
+    <strong>Cierre Julio:</strong> mes cerró en <b>$2,351.88 en Meta + $200 LinkedIn = $2,551.88</b> (102% del plan de $2,500). <b>Packs Always on</b> cerró como estrella con <b>134 conv a $2.36/conv</b> · <b>Juliana v3</b> con 75 conv a $2.40/conv · <b>Tráfico Web</b> escaló a <b>29,765 visitas al sitio con CPC $0.012</b>.
+    <div>Total WhatsApp: <b>333 conversaciones · $3.03 costo promedio</b> · City Winery ALCANCE consumió $318.78 (arriba del plan por escalamiento de video views). Se paga LinkedIn en agosto como piloto B2B repetido.</div>
+  </div>
+</div>
+
+<h2 class="section">Campañas ejecutadas en Julio</h2>
+
+<!-- Campaign 1: WhatsApp -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">2026 – WhatsApp</div>
+      <div class="obj">Objetivo: Interacción · Destino: Conversaciones WhatsApp</div>
+    </div>
+    <span class="badge b-engagement">Engagement</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$1,008.14</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">226,557</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">75,428</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.00</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$4.45</div></div>
+    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">333</div></div>
+    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$3.03</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">37</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Packs Always on <span class="badge badge-star">Estrella del mes</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$316.46</b></span>
+        <span><b>134</b> conversaciones</span>
+        <span><b>$2.36</b> / conv promedio</span>
+        <span class="pill-good">Mejor CPA del portafolio</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Mejor CPA</span>
+          <img src="img/120244382091060772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs Always on (original)</div>
+          <div class="ad-copy">Packs Día del Padre · CTA WhatsApp · Ad principal</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">66.66</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">67</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">0.99</span></div>
+            <div class="st"><span class="k">Compras</span><span class="v">1</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120246099005670772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs Always on — Copia</div>
+          <div class="ad-copy">Reserva Ahora · Packs Día del Padre · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">111.32</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">26</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">4.28</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">11</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993974243256679" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Más gasto</span>
+          <img src="img/120246822934490772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs_nuevos</div>
+          <div class="ad-copy">Packs Día del Padre · CTA WhatsApp · Iteración final</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">138.40</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">41</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">3.38</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">6</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">VIÑEDO General (Full Day)</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$350.21</b></span>
+        <span><b>68</b> conversaciones</span>
+        <span><b>$5.15</b> / conv</span>
+        <span class="pill-info">Costo alto — revisar audiencia</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">IMG</span><img src="img/120246099254600772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">FULL DAY — Copia</div>
+          <div class="ad-copy">Reserva Full Day · Viñedo · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">350.21</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">68</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">5.15</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">5</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993983279922442" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034970640772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">FULL DAY (video)</div>
+          <div class="ad-copy">Video Full Day Viñedo · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">15,581</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">739</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">2.62%</span></div>
+            <div class="st"><span class="k">Link clicks</span><span class="v">233</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1970254033590332" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Juliana (Casa + v2 + v3) <span class="badge b-engagement">Evento chef 16-jul cerrado</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$341.47</b></span>
+        <span><b>131</b> conversaciones</span>
+        <span><b>$2.61</b> / conv promedio</span>
+        <span class="pill-info">Juliana v3 la mejor: 75 conv a $2.40/conv</span>
+        <span class="pill-budget">Concentrada 1-16 jul</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Mejor CPA</span>
+          <img src="img/120246279648360772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana v3 (imagen — mejor CPA)</div>
+          <div class="ad-copy">Reserva ahora · Juliana + chef Luis Cerón · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">180.02</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">75</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">2.40</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">12</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">VIDEO</span>
+          <img src="img/120246049814690772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana Casa (video)</div>
+          <div class="ad-copy">Casa Juliana + chef · Video para reserva WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">82.80</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">54</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">1.53</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">2</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">VIDEO</span>
+          <img src="img/120246279648360772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana v2 (pausada)</div>
+          <div class="ad-copy">CPA alto — pausada tras evaluación</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">78.65</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">2</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">39.33</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Pausada</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 2: Promos City Winery -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON – Promos City Winery</div>
+      <div class="obj">Objetivo: Tráfico · Destino: Instagram @citywinery.ec</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$281.70</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">167,363</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">94,048</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.78</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$1.68</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">11,550</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">6.87%</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.025</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Historias PROMOS – City Winery <span class="badge badge-star">Estrella CTR</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$178.76</b></span>
+        <span>CTR <b>12.88%</b></span>
+        <span>CPC <b>$0.018</b></span>
+        <span class="pill-good">Historias · Alto CTR sostenido</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">CTR 12.56%</span>
+          <img src="img/120245996363210772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3</div>
+          <div class="ad-copy">Historia promocional · @citywinery.ec · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">144.89</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">12.56%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.018</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">8,080</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118032301260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120245996480230772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
+          <div class="ad-copy">Historia promocional · @citywinery.ec · Versión alternativa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">33.80</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">14.51%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.018</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">1,880</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118030447260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Visitas al perfil_AON – Post</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$102.94</b></span>
+        <span>CTR <b>1.70%</b></span>
+        <span>CPC <b>$0.067</b></span>
+        <span class="pill-info">Format Post · Menor CTR que Historias</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120245689939650772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON</div>
+          <div class="ad-copy">Post principal · @citywinery.ec · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">24.64</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">1.23%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.056</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">441</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.instagram.com/citywinery.ec" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 3: Trafico Web -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Tráfico Web</div>
+      <div class="obj">Objetivo: Ventas · Destino: doshemisferios.com</div>
+    </div>
+    <span class="badge b-sales">Sales</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$453.85</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">733,681</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">140,348</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">5.23</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.62</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">29,765</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.012</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.05%</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Web Vinos – Performance <span class="badge badge-star">Motor del mes</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$453.85</b></span>
+        <span><b>29,765</b> visitas landing</span>
+        <span>CPC <b>$0.012</b></span>
+        <span>CTR <b>5.05%</b></span>
+        <span class="pill-good">Escalable — mejor CPC del portafolio</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243548679420772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Performance Web</div>
+          <div class="ad-copy">Antojo de vino resuelto en segundos · e-commerce Dos Hemisferios</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">733,681</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">29,765</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.012</span></div>
+            <div class="st"><span class="k">Clicks</span><span class="v">37,076</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=914686794867092" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 4: City Winery ALCANCE -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">City Winery – ALCANCE</div>
+      <div class="obj">Objetivo: Awareness · Enfoque restaurante</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$318.78</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">1,232,791</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">313,331</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.93</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.26</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">106,722</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">676</div></div>
+    <div class="cm"><div class="lbl">Adsets</div><div class="val">4</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Lunch $12.99 – Urdesa</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.68</b></span>
+        <span class="pill-info">CPM $0.26 · 23,086 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253087380772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Lunch $12.99 — Urdesa</div>
+          <div class="ad-copy">$12.99 escoges entrada + plato fuerte + postre + bebida · Av. Las Lomas Urdesa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">302,237</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">23,086</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">168</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">124,547</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=984548920719522" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Lunch $12.99 – Batán</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.71</b></span>
+        <span class="pill-info">CPM $0.26 · 20,974 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253087490772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Lunch $12.99 — Batán</div>
+          <div class="ad-copy">$12.99 escoges menú completo · Batán Town Center Samborondón</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">311,930</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">20,974</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">170</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">155,177</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1845146309779016" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Wine O'Clock – Urdesa</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.69</b></span>
+        <span class="pill-info">CPM $0.25 · 30,600 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253111680772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Wine O'Clock — Urdesa</div>
+          <div class="ad-copy">Lun-jue 4-6pm · refill ilimitado vino + snack sorpresa · Av. Las Lomas Urdesa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">316,272</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">30,600</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">172</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">149,639</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1790487528782992" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Wine O'Clock – Batán</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.70</b></span>
+        <span class="pill-info">CPM $0.26 · 32,062 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253116760772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Wine O'Clock — Batán</div>
+          <div class="ad-copy">Lun-jue 4-6pm · refill ilimitado + snack · Batán Town Center</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">302,352</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">32,062</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">166</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">129,569</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1516541176184374" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 5: BDH Alcance Autoservicio -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">BDH – Alcance – Autoservicio</div>
+      <div class="obj">Objetivo: Awareness · Distribución multicanal offline</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$241.06</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">961,092</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">225,921</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">4.25</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.25</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">59,183</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">481</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">5</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">SUPERMAXI – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$60.08</b></span>
+        <span class="pill-info">CPM $0.23 · 15,911 vv · 141 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034666310772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 5 — Un recorrido</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Vinos ecuatorianos en Supermaxi</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">60.08</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">15,911</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">141</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">110,488</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=4180893862043998" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246241819950772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 5 — Copia (Maridaje)</div>
+          <div class="ad-copy">El maridaje perfecto empieza con la elección correcta</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">SUPERMAXI</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1978009419565959" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">COMISARIATO – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$60.25</b></span>
+        <span class="pill-info">CPM $0.23 · 13,558 vv · 119 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246136383910772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 3 — Mi Comisariato</div>
+          <div class="ad-copy">El vino perfecto ya está en Mi Comisariato</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">60.25</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">13,558</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">119</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">107,692</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1006516898907027" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245660880860772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 2 — Mi Comisariato</div>
+          <div class="ad-copy">Vinos ecuatorianos esperándote en Mi Comisariato</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">COMISARIATO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1325192102482754" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">DELPORTAL – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$59.84</b></span>
+        <span class="pill-info">CPM $0.33 · 12,509 vv · 159 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034666350772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 1 — Del Portal</div>
+          <div class="ad-copy">Si vas a llenar el carrito, que sea con lo mejor · Vinos ecuatorianos Del Portal</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">59.84</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">12,509</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">159</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">74,185</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1486526686500323" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">AUTOSERVICIO OFF (multi-supermercado)</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$59.95</b></span>
+        <span class="pill-info">CPM $0.23 · 16,856 vv · 62 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246281026020772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 4 — Lista de Compras</div>
+          <div class="ad-copy">Cuando sabes que habrá buena compañía, no puede faltar un gran vino</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">59.95</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">16,856</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">62</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">109,457</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=2565478873878144" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245689606300772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 1 — Casa Juliana</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Los mejores vinos ecuatorianos</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">AUTOSERVICIO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1723743655304658" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245689742090772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 2 — Recorrido Ecuador</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Vinos Dos Hemisferios</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">AUTOSERVICIO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=3111204602561516" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 6: BODEGA perfil -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON – BODEGA</div>
+      <div class="obj">Objetivo: Tráfico · Perfil Bodega Dos Hemisferios</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$48.35</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">61,922</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">34,613</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.79</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.78</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">1,542</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.033</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">2.38%</div></div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Historias BODEGA</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$48.35</b></span>
+        <span><b>1,542</b> visitas al perfil</span>
+        <span class="pill-warn">Bajo consumo — 32% del plan ($150)</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120246253301680772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3</div>
+          <div class="ad-copy">Historia · @bodegadoshemisferios · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">48.35</span></div>
+            <div class="st"><span class="k">Visitas perfil</span><span class="v">1,542</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">2.38%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.033</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/998203479500422" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 7: LinkedIn -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">LinkedIn – Awareness B2B (Piloto)</div>
+      <div class="obj">Objetivo: Reconocimiento · Catas privadas + eventos corporativos</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$200.00</div></div>
+    <div class="cm"><div class="lbl">Canal</div><div class="val">LinkedIn</div></div>
+    <div class="cm"><div class="lbl">Segmentación</div><div class="val">C-Level / Mkt</div></div>
+    <div class="cm"><div class="lbl">Formato</div><div class="val">Sponsored Post</div></div>
+    <div class="cm"><div class="lbl">Duración</div><div class="val">Todo el mes</div></div>
+    <div class="cm"><div class="lbl">Estado</div><div class="val">Ejecutado</div></div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Segmento Corporate — Guayaquil + Quito</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$200.00</b></span>
+        <span class="pill-good">Piloto ejecutado al 100%</span>
+        <span class="pill-info">Métricas de detalle en LinkedIn Campaign Manager</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+<!-- ============ /TAB · DASHBOARD JULIO ============ -->
+
+
+<!-- ============ TAB · PLAN DE MEDIOS JULIO ============ -->
+<section id="tab-plan-julio" class="tab-panel">
+
+  <div class="plan-header">
+    <h2>Plan de Medios — Julio 2026</h2>
+    <div class="sub">Bodega Dos Hemisferios · Campaña AON + Performance · Ecuador</div>
+    <div class="plan-header-grid">
+      <div class="plan-header-item"><div class="lbl">Campaña</div><div class="val">AON + Performance</div></div>
+      <div class="plan-header-item"><div class="lbl">Vigencia</div><div class="val">Julio 2026</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Principal</div><div class="val">Conversaciones WhatsApp · Tráfico Web</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Secundario</div><div class="val">Reconocimiento · Visitas al Perfil · B2B</div></div>
+      <div class="plan-header-item"><div class="lbl">Presupuesto Total</div><div class="val money">2,500</div></div>
+      <div class="plan-header-item"><div class="lbl">Canales</div><div class="val">Meta Ads · LinkedIn</div></div>
+    </div>
+  </div>
+
+  <div class="plan-alerts">
+    <div class="plan-alert warn">
+      <div class="ico">⏳</div>
+      <div>
+        <span class="lb">Vigencia parcial</span>
+        <b>Juliana</b> corre solo del <b>1 al 16 de julio</b> (evento del 16 con chef Luis Cerón). A 3 días del cierre: ya suma <b>114 conversaciones a $2.57/conv</b>. Después del 16, ~$130 se liberan al buffer.
+      </div>
+    </div>
+    <div class="plan-alert new">
+      <div class="ico">✨</div>
+      <div>
+        <span class="lb">Canal nuevo</span>
+        <b>LinkedIn $200</b> — Awareness corporativo. Enfoque B2B: catas privadas para empresas, eventos corporativos, viñedo como venue premium.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CUMPLIMIENTO DEL PLAN — CIERRE JULIO ============ -->
+  <div class="plan-compliance">
+    <h3>Cumplimiento del Plan — Cierre Julio 2026</h3>
+    <div class="sub">Comparación final entre lo planificado y lo ejecutado en el mes completo. LinkedIn incluido.</div>
+
+    <div class="comp-summary-row">
+      <div class="comp-tile">
+        <div class="lbl">Presupuesto total</div>
+        <div class="val money">2,500</div>
+        <div class="foot">Meta $2,110 + Buffer $190 + LinkedIn $200</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">Ejecutado total</div>
+        <div class="val money">2,551.88</div>
+        <div class="foot">Meta $2,351.88 + LinkedIn $200</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">% de cumplimiento</div>
+        <div class="val" style="color:var(--good)">102%</div>
+        <div class="foot">Ligera sobreejecución (+$51.88)</div>
+      </div>
+      <div class="comp-tile">
+        <div class="lbl">Conversaciones WhatsApp</div>
+        <div class="val">333</div>
+        <div class="foot">Costo promedio: $3.03 / conv</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Línea</th>
+          <th class="num">Plan Julio</th>
+          <th class="num">Ejecutado</th>
+          <th class="num">% consumido</th>
+          <th>Estado</th>
+          <th>Lectura del mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="comp-line">1. Visitas al perfil — BODEGA</div>
+            <div class="comp-nota">Comunidad marca principal</div>
+          </td>
+          <td class="num">$150</td>
+          <td class="num">$48.35</td>
+          <td class="num">
+            32%
+            <div class="bar watch"><span style="width:32%"></span></div>
+          </td>
+          <td><span class="status-pill watch">Bajo consumo</span></td>
+          <td>1,542 visitas al perfil con CPC $0.033 y CTR 2.38%. Presupuesto no se agotó — subir a $2/día en agosto.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">2. City Winery — ALCANCE</div>
+            <div class="comp-nota">Awareness restaurante</div>
+          </td>
+          <td class="num">$100</td>
+          <td class="num">$318.78</td>
+          <td class="num">
+            319%
+            <div class="bar risk"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill risk">Sobreejecutado</span></td>
+          <td>Se escaló a mediados de mes vía ajuste manual. 106,722 video views y 313,331 personas alcanzadas — awareness muy fuerte del restaurante.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">3. Promos City Winery</div>
+            <div class="comp-nota">Historias promocionales @citywinery.ec</div>
+          </td>
+          <td class="num">$250</td>
+          <td class="num">$281.70</td>
+          <td class="num">
+            113%
+            <div class="bar watch"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill ok">Sobre plan</span></td>
+          <td>11,550 visitas al perfil con CTR 6.87%. Historias con CTR 12.88% siguen siendo el mejor formato. Presupuesto agosto debe subir.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">4. Tráfico Web</div>
+            <div class="comp-nota">E-commerce doshemisferios.com</div>
+          </td>
+          <td class="num">$340</td>
+          <td class="num">$453.85</td>
+          <td class="num">
+            133%
+            <div class="bar watch"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill ok">Motor del mes</span></td>
+          <td><b>29,765 visitas al sitio</b> con CPC $0.012 y CTR 5.05%. Escaló bien post-Juliana — mantener a $15/día en agosto.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">5. WhatsApp — Juliana (Casa + v2 + v3)</div>
+            <div class="comp-nota">Vigencia 1–16 jul · Evento chef Luis Cerón</div>
+          </td>
+          <td class="num">$320</td>
+          <td class="num">$341.47</td>
+          <td class="num">
+            107%
+            <div class="bar ok"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill ok">Cumplido</span></td>
+          <td>131 conversaciones a $2.61/conv promedio. <b>Juliana v3 lideró con 75 conv a $2.40</b>. Juliana v2 se pausó con CPA $39.33.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">6. WhatsApp — Packs Always on</div>
+            <div class="comp-nota">Estrella del portafolio</div>
+          </td>
+          <td class="num">$250</td>
+          <td class="num">$316.46</td>
+          <td class="num">
+            127%
+            <div class="bar ok"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill ok">Estrella</span></td>
+          <td><b>134 conversaciones a $2.36/conv</b> — mejor CPA del mes. Se recibió boost por buffer post-16-jul. Mantener en agosto con creatividad renovada.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">7. WhatsApp — Viñedo (Full Day)</div>
+            <div class="comp-nota">Línea con más peso del plan</div>
+          </td>
+          <td class="num">$400</td>
+          <td class="num">$350.21</td>
+          <td class="num">
+            88%
+            <div class="bar ok"><span style="width:88%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En objetivo</span></td>
+          <td>68 conversaciones a $5.15/conv. CPA alto vs Packs — <b>revisar segmentación</b> en agosto.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">8. BDH — Autoservicio</div>
+            <div class="comp-nota">Distribución offline · 4 adsets</div>
+          </td>
+          <td class="num">$300</td>
+          <td class="num">$241.06</td>
+          <td class="num">
+            80%
+            <div class="bar ok"><span style="width:80%"></span></div>
+          </td>
+          <td><span class="status-pill ok">En línea</span></td>
+          <td>961,092 impresiones y 59,183 video views. SUPERMAXI, COMISARIATO, DEL PORTAL y AUTOSERVICIO cumplieron distribución multicanal.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">9. Buffer / Reserva</div>
+            <div class="comp-nota">Escalado 17–31 jul (post-Juliana)</div>
+          </td>
+          <td class="num">$190</td>
+          <td class="num">$0</td>
+          <td class="num">0%</td>
+          <td><span class="status-pill pending">Reasignado</span></td>
+          <td>Se redistribuyó a Packs Always on, Tráfico Web y City Winery ALCANCE que necesitaban escalar. No quedó reserva sin usar.</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="comp-line">10. LinkedIn — Awareness B2B</div>
+            <div class="comp-nota">Catas privadas + eventos corporativos</div>
+          </td>
+          <td class="num">$200</td>
+          <td class="num">$200.00</td>
+          <td class="num">
+            100%
+            <div class="bar ok"><span style="width:100%"></span></div>
+          </td>
+          <td><span class="status-pill ok">Ejecutado</span></td>
+          <td>Piloto B2B ejecutado al 100%. Métricas de detalle en LinkedIn Campaign Manager.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="background:var(--panel-3)">
+          <td class="comp-line">Total mes</td>
+          <td class="num">$2,500</td>
+          <td class="num">$2,551.88</td>
+          <td class="num">102%</td>
+          <td colspan="2" class="comp-nota">Cumplimiento total del plan mensual con ligera sobreejecución de <b>+$51.88</b>. Reasignaciones internas equilibraron el mes.</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div style="margin-top:18px;padding:14px 16px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:10px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">Lecciones aprendidas del mes</div>
+      <ul style="padding-left:18px;font-size:12.5px;line-height:1.7;color:var(--text)">
+        <li><b>Tráfico Web fue el gran ganador:</b> escaló a $453 con CPC $0.012 · llevar a $500 en agosto.</li>
+        <li><b>Packs Always on cerró como estrella:</b> $2.36/conv con 134 conversaciones · replicar creatividad para agosto.</li>
+        <li><b>Juliana v3 fue el mejor creativo de WhatsApp:</b> $2.40/conv · usar como referencia post-evento chef.</li>
+        <li><b>Juliana v2 confirmó su bajo rendimiento:</b> $39.33/conv · descartado para agosto.</li>
+        <li><b>Historias PROMOS mantuvo CTR 12.88%:</b> formato Historia > Post en awareness.</li>
+        <li><b>Perfil BODEGA subejecutado:</b> $48.35 de $150 · aumentar presupuesto diario en agosto.</li>
+        <li><b>City Winery ALCANCE se escaló mid-month:</b> se decidió consolidar awareness del restaurante → +319% vs plan inicial. Ajustar plan agosto al monto realista.</li>
+        <li><b>LinkedIn B2B ejecutó completo:</b> mantener como línea permanente en agosto.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plan-table-wrap">
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Canal</th>
+          <th>Línea / Campaña</th>
+          <th>Objetivo</th>
+          <th>Formato</th>
+          <th>Vigencia</th>
+          <th class="num">Inversión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Visitas al perfil_AON — BODEGA</div>
+            <div class="nota">Perfil de Bodega Dos Hemisferios · Crecimiento de comunidad marca principal</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Tráfico IG</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">150</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">City Winery — ALCANCE</div>
+            <div class="nota">Awareness del restaurante · CPM bajo · Enfoque local</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">100</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Visitas al perfil_AON — Promos City Winery</div>
+            <div class="nota">@citywinery.ec · CTR 5.53% · Crecimiento comunidad restaurante</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Tráfico IG</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">250</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Tráfico Web (E-commerce + Juliana)</div>
+            <div class="nota">doshemisferios.com · CTR 5.09% · CPC $0.010 · Incluye continuidad "Juliana Tráfico"</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Ventas / Tráfico</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">340</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Juliana</div>
+            <div class="nota">Adset Casa Juliana + Juliana v2/v3 · Evento chef Luis Cerón</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">1 – 16 jul</td>
+          <td class="num invest">320</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Packs Always on</div>
+            <div class="nota">Estrella del portafolio · $1.21 / conv · 70 conversaciones en julio</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">250</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Viñedo</div>
+            <div class="nota">Full Day Viñedo · $5.37/conv · 21 conversaciones · Línea con más peso del portafolio</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">400</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">BDH |ALCANCE| AUTOSERVICIO</div>
+            <div class="nota">Distribución multicanal offline · CPM $0.22 · 4 adsets activos ($2/día c/u)</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">300</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="ch-badge ch-buffer">Buffer</span></td>
+          <td>
+            <div class="linea">Reserva / Optimización</div>
+            <div class="nota">Escalado post-Juliana (17-31 jul) para ganadores identificados · Ajustes en marcha</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Flexible</span></td>
+          <td>—</td>
+          <td class="nota">17 – 31 jul</td>
+          <td class="num invest">190</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="ch-badge ch-linkedin">LinkedIn</span></td>
+          <td>
+            <div class="linea">Awareness B2B — Corporativo</div>
+            <div class="nota">Catas privadas · Eventos corporativos · Viñedo premium · Segmentación por cargo (Gerencias)</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Sponsored Post / Video</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">200</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">TOTAL INVERSIÓN — JULIO 2026</td>
+          <td class="num total">2,500</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="plan-notes">
+    <h3>Notas y Estrategia</h3>
+    <ul>
+      <li><b>Orden de líneas:</b> refleja el orden exacto de las campañas activas en Meta Ads Manager (BODEGA → City Winery ALCANCE → Promos City Winery → Tráfico Web → WhatsApp → Autoservicio).</li>
+      <li><b>Meta – Visitas al perfil BODEGA (línea 1):</b> $150 para consolidar el crecimiento de comunidad de la marca principal.</li>
+      <li><b>Meta – City Winery ALCANCE (línea 2):</b> $100 para mantener presencia orgánica del restaurante.</li>
+      <li><b>Meta – Promos City Winery (línea 3):</b> $250 — sostener el ritmo de crecimiento con CTR 5.53% del canal.</li>
+      <li><b>Meta – Tráfico Web E-commerce + Juliana (línea 4):</b> conservar continuidad con el contenido de "Juliana Tráfico" que ya escaló bien (CTR 5.09%, CPC $0.010). Destino: e-commerce de vinos.</li>
+      <li><b>Meta – WhatsApp (líneas 5-7):</b> <b>Viñedo (Full Day) toma la línea con más peso ($400)</b> — ya lleva 21 conversaciones a $5.37/conv. Juliana concentrada al 16 de julio por el evento del chef Luis Cerón. Packs Always on mantiene $250.</li>
+      <li><b>Meta – BDH Autoservicio (línea 8):</b> subió a $300 para reforzar la distribución multicanal offline (SUPERMAXI, COMISARIATO, DEL PORTAL, AUTOSERVICIO).</li>
+      <li><b>Buffer $190 (línea 9):</b> reserva estratégica para escalar los adsets ganadores en la segunda quincena, una vez cerrada Juliana. Se decide en revisión del 17 de julio.</li>
+      <li><b>LinkedIn $200 (línea 10):</b> primer piloto B2B. Segmentación por cargo (C-Level, Marketing, RRHH corporativo), industrias premium (banca, consultoría, tecnología). Métrica de éxito inicial: CTR + costo por lead corporativo.</li>
+      <li><b>Rango de presupuesto por adset:</b> todos entre $1 y $10 USD/día según política de seguridad Meta.</li>
+    </ul>
+  </div>
+
+  <!-- ============ COMENTARIOS DEL CLIENTE (Netlify Forms) ============ -->
+  <div class="comments-block">
+    <h3>Comentarios del Cliente</h3>
+    <div class="cs-sub">¿Alguna observación sobre el plan? ¿Ajustes que quieras proponer? Déjanos tu comentario y llegará directo al equipo.</div>
+
+    <div id="sentMsg" class="sent-msg" style="display:none">
+      <span class="ico">✓</span>
+      <div><b>¡Gracias!</b> Recibimos tu comentario. El equipo lo revisará y te contactaremos si es necesario.</div>
+    </div>
+
+    <form name="comentarios-plan" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="comments-form" action="?enviado=1">
+      <input type="hidden" name="form-name" value="comentarios-plan">
+      <input type="hidden" name="cliente" value="Bodega Dos Hemisferios">
+      <input type="hidden" name="periodo" value="Julio 2026">
+      <p style="display:none"><label>No completar: <input name="bot-field"></label></p>
+
+      <div class="form-row">
+        <div>
+          <label for="c-nombre">Nombre</label>
+          <input type="text" id="c-nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label for="c-email">Email (opcional)</label>
+          <input type="email" id="c-email" name="email" placeholder="tu@email.com">
+        </div>
+      </div>
+
+      <div>
+        <label for="c-mensaje">Comentario</label>
+        <textarea id="c-mensaje" name="comentario" placeholder="Escribe aquí tu observación, ajuste sugerido o pregunta sobre el plan de medios…" required></textarea>
+      </div>
+
+      <button type="submit">Enviar comentario</button>
+    </form>
+  </div>
+
+</section>
+<!-- ============ /TAB · PLAN DE MEDIOS JULIO ============ -->
+
+
+<!-- ============ TAB · PLAN DE MEDIOS AGOSTO ============ -->
+<section id="tab-plan-agosto" class="tab-panel">
+
+  <div class="plan-header">
+    <h2>Plan de Medios — Agosto 2026</h2>
+    <div class="sub">Bodega Dos Hemisferios · Campaña AON + Performance · Ecuador · Basado en aprendizajes de Julio</div>
+    <div class="plan-header-grid">
+      <div class="plan-header-item"><div class="lbl">Campaña</div><div class="val">AON + Performance</div></div>
+      <div class="plan-header-item"><div class="lbl">Vigencia</div><div class="val">Agosto 2026</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Principal</div><div class="val">Ventas Web · Conversaciones WhatsApp</div></div>
+      <div class="plan-header-item"><div class="lbl">Objetivo Secundario</div><div class="val">Awareness restaurante · B2B Corporate</div></div>
+      <div class="plan-header-item"><div class="lbl">Presupuesto Total</div><div class="val money">2,500</div></div>
+      <div class="plan-header-item"><div class="lbl">Canales</div><div class="val">Meta Ads · LinkedIn</div></div>
+    </div>
+  </div>
+
+  <div class="plan-alerts">
+    <div class="plan-alert new">
+      <div class="ico">📅</div>
+      <div>
+        <span class="lb">Eventos confirmados</span>
+        <b>Aprender a catar Nivel 3</b> — 18 agosto · <b>Evento cata Ceibo</b> — 2 septiembre. Pautada inversión en awareness pre-evento.
+      </div>
+    </div>
+    <div class="plan-alert warn">
+      <div class="ico">❓</div>
+      <div>
+        <span class="lb">Eventos pendientes de confirmación</span>
+        <b>Game Night Batán</b> (24 agosto) · <b>Book Club</b> (agosto-septiembre). Presupuesto reservado en buffer para activación si se confirman.
+      </div>
+    </div>
+    <div class="plan-alert new">
+      <div class="ico">💼</div>
+      <div>
+        <span class="lb">LinkedIn continúa</span>
+        <b>$200</b> — Segunda edición del piloto B2B con creativos nuevos y expansión a Quito.
+      </div>
+    </div>
+  </div>
+
+  <div class="plan-table-wrap">
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Canal</th>
+          <th>Línea / Campaña</th>
+          <th>Objetivo</th>
+          <th>Formato</th>
+          <th>Vigencia</th>
+          <th class="num">Inversión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Visitas al perfil — BODEGA</div>
+            <div class="nota">Comunidad marca principal · <b>Subir a $2/día</b> vs $1 julio</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Tráfico IG</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">150</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">City Winery — ALCANCE</div>
+            <div class="nota">Awareness restaurante · Reajustado al ritmo real observado en julio</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">250</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Visitas al perfil — Promos City Winery</div>
+            <div class="nota">@citywinery.ec · CTR 12.88% en Historias · Ampliar por buen performance</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Tráfico IG</span></td>
+          <td>Historias (formato ganador)</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">350</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Tráfico Web (E-commerce)</div>
+            <div class="nota"><b>Motor del mes</b> · doshemisferios.com · CPC $0.012 · Escalar por buen ROAS</div>
+          </td>
+          <td><span class="obj-badge obj-traf">Ventas / Tráfico</span></td>
+          <td>Video / Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">500</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Packs (nueva creatividad)</div>
+            <div class="nota"><b>Estrella julio</b> · Continuar Packs Always on pero refresh de creatividad + concepto Agosto</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Imagen / Carrusel</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">350</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">Conv. WhatsApp — Viñedo (Full Day)</div>
+            <div class="nota">Revisar segmentación · CPA julio $5.15 alto vs Packs $2.36 — test A/B audiencias</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Interacción</span></td>
+          <td>Imagen / Video</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">300</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="ch-badge ch-meta">Meta</span></td>
+          <td>
+            <div class="linea">BDH — Alcance Autoservicio</div>
+            <div class="nota">Distribución offline · 4 adsets multicanal · $2/día · Mantener CPM $0.25</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Video</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">300</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="ch-badge ch-buffer">Buffer</span></td>
+          <td>
+            <div class="linea">Reserva / Optimización</div>
+            <div class="nota">Escalar ganadores identificados a mid-month · Test creativos nuevos</div>
+          </td>
+          <td><span class="obj-badge obj-conv">Flexible</span></td>
+          <td>—</td>
+          <td class="nota">15 – 31 ago</td>
+          <td class="num invest">300</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="ch-badge ch-linkedin">LinkedIn</span></td>
+          <td>
+            <div class="linea">Awareness B2B — Corporate (edición 2)</div>
+            <div class="nota">Ampliar segmentación a Quito · Nuevo creativo enfocado en catas privadas</div>
+          </td>
+          <td><span class="obj-badge obj-awa">Reconocimiento</span></td>
+          <td>Sponsored Post</td>
+          <td class="nota">Todo el mes</td>
+          <td class="num invest">200</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">TOTAL INVERSIÓN — AGOSTO 2026</td>
+          <td class="num total">2,500</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="plan-notes">
+    <h3>Estrategia Agosto 2026</h3>
+    <ul>
+      <li><b>Presupuesto mantiene $2,500 vs Julio:</b> mantener austeridad operativa. Enfoque en optimización de canales probados: Tráfico Web, Packs Always on y Eventos.</li>
+      <li><b>Meta – Tráfico Web (línea 4):</b> <b>$500 (+$160 vs julio)</b> — motor del mes con CPC $0.012 y CTR 5.05%. Escalar a $16/día promedio.</li>
+      <li><b>Meta – Promos City Winery (línea 3):</b> $350 (+$100 vs julio). Historias con CTR 12.88% justifica ampliar el buffer del formato ganador.</li>
+      <li><b>Meta – WhatsApp Packs (línea 5):</b> $350 (+$100 vs julio Packs Always on). Refresh de creatividad — no repetir concepto Día del Padre.</li>
+      <li><b>Meta – WhatsApp Viñedo (línea 6):</b> $300 (-$100 vs julio). Reducir presupuesto y hacer A/B test de audiencias para bajar CPA de $5.15 a target $3.50.</li>
+      <li><b>Meta – City Winery ALCANCE (línea 2):</b> $250 realistas vs $100 plan-julio / $318 ejecutado. Reflejar el ritmo real observado.</li>
+      <li><b>Meta – Perfil BODEGA (línea 1):</b> $150 mantiene, pero subir presupuesto diario a $5/día para consumir plan completo.</li>
+      <li><b>Meta – Autoservicio (línea 7):</b> $300 mantiene esquema de 4 adsets multicanal a $2/día c/u.</li>
+      <li><b>Buffer $300 (línea 8):</b> sube $110 vs julio para reasignación mid-month. Usar en Packs / Tráfico Web si el ritmo lo permite.</li>
+      <li><b>LinkedIn $200 (línea 9):</b> repetir piloto B2B con creativos frescos + expansión geográfica a Quito.</li>
+      <li><b>Sin evento Juliana:</b> la línea concentrada del chef Cerón (julio) desaparece — su presupuesto se reasigna a Packs y Viñedo.</li>
+      <li><b>Rango de presupuesto por adset:</b> todos entre $1 y $10 USD/día según política de seguridad Meta.</li>
+    </ul>
+  </div>
+
+  <!-- ============ COMENTARIOS DEL CLIENTE (Netlify Forms) ============ -->
+  <div class="comments-block">
+    <h3>Comentarios del Cliente</h3>
+    <div class="cs-sub">¿Alguna observación sobre el plan de agosto? ¿Ajustes que quieras proponer? Déjanos tu comentario y llegará directo al equipo.</div>
+
+    <form name="comentarios-plan-agosto" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="comments-form" action="?enviado=1">
+      <input type="hidden" name="form-name" value="comentarios-plan-agosto">
+      <input type="hidden" name="cliente" value="Bodega Dos Hemisferios">
+      <input type="hidden" name="periodo" value="Agosto 2026">
+      <p style="display:none"><label>No completar: <input name="bot-field"></label></p>
+
+      <div class="form-row">
+        <div>
+          <label for="c-nombre-ago">Nombre</label>
+          <input type="text" id="c-nombre-ago" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label for="c-email-ago">Email (opcional)</label>
+          <input type="email" id="c-email-ago" name="email" placeholder="tu@email.com">
+        </div>
+      </div>
+
+      <div>
+        <label for="c-mensaje-ago">Comentario</label>
+        <textarea id="c-mensaje-ago" name="comentario" placeholder="Escribe aquí tu observación, ajuste sugerido o pregunta sobre el plan de agosto…" required></textarea>
+      </div>
+
+      <button type="submit">Enviar comentario</button>
+    </form>
+  </div>
+
+</section>
+<!-- ============ /TAB · PLAN DE MEDIOS AGOSTO ============ -->
+
+
+<!-- ============ TAB · DASHBOARD AGOSTO ============ -->
+<section id="tab-dashboard-agosto" class="tab-panel ">
+
+<!-- KPIs GLOBALES -->
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="label">Inversión Meta (Agosto)</div>
+    <div class="value money">2,351.88</div>
+    <div class="foot">+$200 LinkedIn = <b>$2,551.88</b> total · 102% del plan ($2,500)</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Impresiones</div>
+    <div class="value">3,383,406</div>
+    <div class="foot">Alcance total (deduplicado): ~883,700 cuentas</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Conversaciones WhatsApp</div>
+    <div class="value">333</div>
+    <div class="foot">Costo promedio: $3.03 / conversación</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Visitas al sitio web</div>
+    <div class="value">29,765</div>
+    <div class="foot">Motor Tráfico Web · CPC $0.012 · 37,076 clics</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Video views</div>
+    <div class="value">186,747</div>
+    <div class="foot">Awareness + Autoservicio · Alcance masivo</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Campañas activas</div>
+    <div class="value">7</div>
+    <div class="foot">6 en Meta + 1 en LinkedIn (B2B)</div>
+  </div>
+</div>
+
+<!-- HIGHLIGHT BANNER -->
+<div class="highlight-strip">
+  <div class="icon">✨</div>
+  <div class="txt">
+    <strong>Agosto en progreso:</strong> mes cerró en <b>$2,351.88 en Meta + $200 LinkedIn = $2,551.88</b> (102% del plan de $2,500). <b>Packs Always on</b> cerró como estrella con <b>134 conv a $2.36/conv</b> · <b>Juliana v3</b> con 75 conv a $2.40/conv · <b>Tráfico Web</b> escaló a <b>29,765 visitas al sitio con CPC $0.012</b>.
+    <div>Total WhatsApp: <b>333 conversaciones · $3.03 costo promedio</b> · City Winery ALCANCE consumió $318.78 (arriba del plan por escalamiento de video views). Se paga LinkedIn en agosto como piloto B2B repetido.</div>
+  </div>
+</div>
+
+<h2 class="section">Campañas en ejecución Agosto</h2>
+
+<!-- Campaign 1: WhatsApp -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">2026 – WhatsApp</div>
+      <div class="obj">Objetivo: Interacción · Destino: Conversaciones WhatsApp</div>
+    </div>
+    <span class="badge b-engagement">Engagement</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$1,008.14</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">226,557</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">75,428</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.00</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$4.45</div></div>
+    <div class="cm"><div class="lbl">Conversaciones</div><div class="val">333</div></div>
+    <div class="cm"><div class="lbl">Costo / conv.</div><div class="val">$3.03</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">37</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Packs Always on <span class="badge badge-star">Estrella del mes</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$316.46</b></span>
+        <span><b>134</b> conversaciones</span>
+        <span><b>$2.36</b> / conv promedio</span>
+        <span class="pill-good">Mejor CPA del portafolio</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Mejor CPA</span>
+          <img src="img/120244382091060772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs Always on (original)</div>
+          <div class="ad-copy">Packs Día del Padre · CTA WhatsApp · Ad principal</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">66.66</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">67</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">0.99</span></div>
+            <div class="st"><span class="k">Compras</span><span class="v">1</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120246099005670772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs Always on — Copia</div>
+          <div class="ad-copy">Reserva Ahora · Packs Día del Padre · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">111.32</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">26</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">4.28</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">11</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993974243256679" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Más gasto</span>
+          <img src="img/120246822934490772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Packs_nuevos</div>
+          <div class="ad-copy">Packs Día del Padre · CTA WhatsApp · Iteración final</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">138.40</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">41</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">3.38</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">6</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">VIÑEDO General (Full Day)</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$350.21</b></span>
+        <span><b>68</b> conversaciones</span>
+        <span><b>$5.15</b> / conv</span>
+        <span class="pill-info">Costo alto — revisar audiencia</span>
+        <span class="pill-budget">$10 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">IMG</span><img src="img/120246099254600772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">FULL DAY — Copia</div>
+          <div class="ad-copy">Reserva Full Day · Viñedo · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">350.21</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">68</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">5.15</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">5</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/993983279922442" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034970640772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">FULL DAY (video)</div>
+          <div class="ad-copy">Video Full Day Viñedo · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">15,581</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">739</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">2.62%</span></div>
+            <div class="st"><span class="k">Link clicks</span><span class="v">233</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1970254033590332" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Juliana (Casa + v2 + v3) <span class="badge b-engagement">Evento chef 16-jul cerrado</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$341.47</b></span>
+        <span><b>131</b> conversaciones</span>
+        <span><b>$2.61</b> / conv promedio</span>
+        <span class="pill-info">Juliana v3 la mejor: 75 conv a $2.40/conv</span>
+        <span class="pill-budget">Concentrada 1-16 jul</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">Mejor CPA</span>
+          <img src="img/120246279648360772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana v3 (imagen — mejor CPA)</div>
+          <div class="ad-copy">Reserva ahora · Juliana + chef Luis Cerón · CTA WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">180.02</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">75</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">2.40</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">12</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455" target="_blank" rel="noopener">Ver en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">VIDEO</span>
+          <img src="img/120246049814690772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana Casa (video)</div>
+          <div class="ad-copy">Casa Juliana + chef · Video para reserva WhatsApp</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">82.80</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">54</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">1.53</span></div>
+            <div class="st"><span class="k">Leads</span><span class="v">2</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">VIDEO</span>
+          <img src="img/120246279648360772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Juliana v2 (pausada)</div>
+          <div class="ad-copy">CPA alto — pausada tras evaluación</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">78.65</span></div>
+            <div class="st"><span class="k">Conversaciones</span><span class="v">2</span></div>
+            <div class="st"><span class="k">Costo / conv.</span><span class="v money">39.33</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Pausada</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 2: Promos City Winery -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON – Promos City Winery</div>
+      <div class="obj">Objetivo: Tráfico · Destino: Instagram @citywinery.ec</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$281.70</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">167,363</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">94,048</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.78</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$1.68</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">11,550</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">6.87%</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.025</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Historias PROMOS – City Winery <span class="badge badge-star">Estrella CTR</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$178.76</b></span>
+        <span>CTR <b>12.88%</b></span>
+        <span>CPC <b>$0.018</b></span>
+        <span class="pill-good">Historias · Alto CTR sostenido</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <span class="top-badge">CTR 12.56%</span>
+          <img src="img/120245996363210772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3</div>
+          <div class="ad-copy">Historia promocional · @citywinery.ec · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">144.89</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">12.56%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.018</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">8,080</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118032301260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120245996480230772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3 (Copia)</div>
+          <div class="ad-copy">Historia promocional · @citywinery.ec · Versión alternativa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">33.80</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">14.51%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.018</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">1,880</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/1045153998674387/posts/122118030447260479" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Visitas al perfil_AON – Post</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$102.94</b></span>
+        <span>CTR <b>1.70%</b></span>
+        <span>CPC <b>$0.067</b></span>
+        <span class="pill-info">Format Post · Menor CTR que Historias</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120245689939650772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON</div>
+          <div class="ad-copy">Post principal · @citywinery.ec · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">24.64</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">1.23%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.056</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">441</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.instagram.com/citywinery.ec" target="_blank" rel="noopener">Ver en Instagram →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 3: Trafico Web -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Tráfico Web</div>
+      <div class="obj">Objetivo: Ventas · Destino: doshemisferios.com</div>
+    </div>
+    <span class="badge b-sales">Sales</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$453.85</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">733,681</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">140,348</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">5.23</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.62</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">29,765</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.012</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">5.05%</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Web Vinos – Performance <span class="badge badge-star">Motor del mes</span></div>
+      <div class="adset-perf">
+        <span>Gasto <b>$453.85</b></span>
+        <span><b>29,765</b> visitas landing</span>
+        <span>CPC <b>$0.012</b></span>
+        <span>CTR <b>5.05%</b></span>
+        <span class="pill-good">Escalable — mejor CPC del portafolio</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243548679420772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Performance Web</div>
+          <div class="ad-copy">Antojo de vino resuelto en segundos · e-commerce Dos Hemisferios</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">733,681</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">29,765</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.012</span></div>
+            <div class="st"><span class="k">Clicks</span><span class="v">37,076</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=914686794867092" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 4: City Winery ALCANCE -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">City Winery – ALCANCE</div>
+      <div class="obj">Objetivo: Awareness · Enfoque restaurante</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$318.78</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">1,232,791</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">313,331</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">3.93</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.26</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">106,722</div></div>
+    <div class="cm"><div class="lbl">Clics</div><div class="val">676</div></div>
+    <div class="cm"><div class="lbl">Adsets</div><div class="val">4</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Lunch $12.99 – Urdesa</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.68</b></span>
+        <span class="pill-info">CPM $0.26 · 23,086 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253087380772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Lunch $12.99 — Urdesa</div>
+          <div class="ad-copy">$12.99 escoges entrada + plato fuerte + postre + bebida · Av. Las Lomas Urdesa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">302,237</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">23,086</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">168</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">124,547</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=984548920719522" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Lunch $12.99 – Batán</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.71</b></span>
+        <span class="pill-info">CPM $0.26 · 20,974 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253087490772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Lunch $12.99 — Batán</div>
+          <div class="ad-copy">$12.99 escoges menú completo · Batán Town Center Samborondón</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">311,930</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">20,974</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">170</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">155,177</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1845146309779016" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Wine O'Clock – Urdesa</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.69</b></span>
+        <span class="pill-info">CPM $0.25 · 30,600 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253111680772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Wine O'Clock — Urdesa</div>
+          <div class="ad-copy">Lun-jue 4-6pm · refill ilimitado vino + snack sorpresa · Av. Las Lomas Urdesa</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">316,272</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">30,600</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">172</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">149,639</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1790487528782992" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Wine O'Clock – Batán</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$79.70</b></span>
+        <span class="pill-info">CPM $0.26 · 32,062 vv</span>
+        <span class="pill-budget">$1-4 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246253116760772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">Wine O'Clock — Batán</div>
+          <div class="ad-copy">Lun-jue 4-6pm · refill ilimitado + snack · Batán Town Center</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Impresiones</span><span class="v">302,352</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">32,062</span></div>
+            <div class="st"><span class="k">Clics</span><span class="v">166</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">129,569</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1516541176184374" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 5: BDH Alcance Autoservicio -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">BDH – Alcance – Autoservicio</div>
+      <div class="obj">Objetivo: Awareness · Distribución multicanal offline</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$241.06</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">961,092</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">225,921</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">4.25</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.25</div></div>
+    <div class="cm"><div class="lbl">Video views</div><div class="val">59,183</div></div>
+    <div class="cm"><div class="lbl">Landing views</div><div class="val">481</div></div>
+    <div class="cm"><div class="lbl">Leads</div><div class="val">5</div></div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">SUPERMAXI – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$60.08</b></span>
+        <span class="pill-info">CPM $0.23 · 15,911 vv · 141 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034666310772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 5 — Un recorrido</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Vinos ecuatorianos en Supermaxi</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">60.08</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">15,911</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">141</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">110,488</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=4180893862043998" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246241819950772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 5 — Copia (Maridaje)</div>
+          <div class="ad-copy">El maridaje perfecto empieza con la elección correcta</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">SUPERMAXI</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1978009419565959" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">COMISARIATO – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$60.25</b></span>
+        <span class="pill-info">CPM $0.23 · 13,558 vv · 119 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246136383910772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 3 — Mi Comisariato</div>
+          <div class="ad-copy">El vino perfecto ya está en Mi Comisariato</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">60.25</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">13,558</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">119</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">107,692</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1006516898907027" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245660880860772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 2 — Mi Comisariato</div>
+          <div class="ad-copy">Vinos ecuatorianos esperándote en Mi Comisariato</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">COMISARIATO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1325192102482754" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">DELPORTAL – Offline</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$59.84</b></span>
+        <span class="pill-info">CPM $0.33 · 12,509 vv · 159 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120243034666350772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 1 — Del Portal</div>
+          <div class="ad-copy">Si vas a llenar el carrito, que sea con lo mejor · Vinos ecuatorianos Del Portal</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">59.84</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">12,509</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">159</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">74,185</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1486526686500323" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">AUTOSERVICIO OFF (multi-supermercado)</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$59.95</b></span>
+        <span class="pill-info">CPM $0.23 · 16,856 vv · 62 landing</span>
+        <span class="pill-budget">$2 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120246281026020772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 4 — Lista de Compras</div>
+          <div class="ad-copy">Cuando sabes que habrá buena compañía, no puede faltar un gran vino</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset gasto</span><span class="v money">59.95</span></div>
+            <div class="st"><span class="k">Video views</span><span class="v">16,856</span></div>
+            <div class="st"><span class="k">Landing</span><span class="v">62</span></div>
+            <div class="st"><span class="k">Alcance</span><span class="v">109,457</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=2565478873878144" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245689606300772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 1 — Casa Juliana</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Los mejores vinos ecuatorianos</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">AUTOSERVICIO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=1723743655304658" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+      <div class="ad">
+        <div class="ad-media"><span class="type-tag">VIDEO</span><img src="img/120245689742090772.jpg" alt=""></div>
+        <div class="ad-body">
+          <div class="ad-name">AD 2 — Recorrido Ecuador</div>
+          <div class="ad-copy">Un recorrido que vale la pena · Vinos Dos Hemisferios</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Adset</span><span class="v">AUTOSERVICIO</span></div>
+            <div class="st"><span class="k">Estado</span><span class="v">Activo</span></div>
+            <div class="st"><span class="k">Tipo</span><span class="v">Video</span></div>
+            <div class="st"><span class="k">Rotación</span><span class="v">A/B</span></div>
+          </div>
+          <a class="ad-cta video" href="https://www.facebook.com/watch/?v=3111204602561516" target="_blank" rel="noopener">▶ Ver video en Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 6: BODEGA perfil -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">Visitas al perfil_AON – BODEGA</div>
+      <div class="obj">Objetivo: Tráfico · Perfil Bodega Dos Hemisferios</div>
+    </div>
+    <span class="badge b-traffic">Traffic</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$48.35</div></div>
+    <div class="cm"><div class="lbl">Impresiones</div><div class="val">61,922</div></div>
+    <div class="cm"><div class="lbl">Alcance</div><div class="val">34,613</div></div>
+    <div class="cm"><div class="lbl">Frecuencia</div><div class="val">1.79</div></div>
+    <div class="cm"><div class="lbl">CPM</div><div class="val">$0.78</div></div>
+    <div class="cm"><div class="lbl">Visitas al perfil</div><div class="val">1,542</div></div>
+    <div class="cm"><div class="lbl">CPC</div><div class="val">$0.033</div></div>
+    <div class="cm"><div class="lbl">CTR</div><div class="val">2.38%</div></div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Historias BODEGA</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$48.35</b></span>
+        <span><b>1,542</b> visitas al perfil</span>
+        <span class="pill-warn">Bajo consumo — 32% del plan ($150)</span>
+        <span class="pill-budget">$1 / día</span>
+      </div>
+    </div>
+    <div class="ads-grid">
+      <div class="ad">
+        <div class="ad-media">
+          <span class="type-tag">IMG</span>
+          <img src="img/120246253301680772.jpg" alt="">
+        </div>
+        <div class="ad-body">
+          <div class="ad-name">Visitas al perfil_AON — 3</div>
+          <div class="ad-copy">Historia · @bodegadoshemisferios · CTA Ver perfil IG</div>
+          <div class="ad-stats">
+            <div class="st"><span class="k">Gasto</span><span class="v money">48.35</span></div>
+            <div class="st"><span class="k">Visitas perfil</span><span class="v">1,542</span></div>
+            <div class="st"><span class="k">CTR</span><span class="v">2.38%</span></div>
+            <div class="st"><span class="k">CPC</span><span class="v money">0.033</span></div>
+          </div>
+          <a class="ad-cta" href="https://www.facebook.com/146173162217455/posts/998203479500422" target="_blank" rel="noopener">Ver publicación en Facebook →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Campaign 7: LinkedIn -->
+<div class="campaign-block">
+  <div class="camp-head">
+    <div class="camp-title">
+      <div class="name">LinkedIn – Awareness B2B (Piloto)</div>
+      <div class="obj">Objetivo: Reconocimiento · Catas privadas + eventos corporativos</div>
+    </div>
+    <span class="badge b-awareness">Awareness</span>
+  </div>
+  <div class="camp-metrics">
+    <div class="cm"><div class="lbl">Inversión</div><div class="val">$200.00</div></div>
+    <div class="cm"><div class="lbl">Canal</div><div class="val">LinkedIn</div></div>
+    <div class="cm"><div class="lbl">Segmentación</div><div class="val">C-Level / Mkt</div></div>
+    <div class="cm"><div class="lbl">Formato</div><div class="val">Sponsored Post</div></div>
+    <div class="cm"><div class="lbl">Duración</div><div class="val">Todo el mes</div></div>
+    <div class="cm"><div class="lbl">Estado</div><div class="val">Ejecutado</div></div>
+  </div>
+  <div class="adset-block">
+    <div class="adset-head">
+      <div class="adset-name">Segmento Corporate — Guayaquil + Quito</div>
+      <div class="adset-perf">
+        <span>Gasto <b>$200.00</b></span>
+        <span class="pill-good">Piloto ejecutado al 100%</span>
+        <span class="pill-info">Métricas de detalle en LinkedIn Campaign Manager</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- ============ /TAB · DASHBOARD AGOSTO ============ -->="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Bodega Dos Hemisferios · Cierre Julio 2026 + Plan Agosto</title>
 <style>
