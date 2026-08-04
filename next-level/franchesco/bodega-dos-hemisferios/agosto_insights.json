@@ -1,0 +1,650 @@
+{
+  "period": "2026-08-01 a 2026-08-04",
+  "timestamp": "2026-08-04T17:19:53.964561",
+  "campaigns": [
+    {
+      "campaign_name": "Tr\u00e1fico_web",
+      "campaign_id": "120243548679410772",
+      "spend": "101.79",
+      "impressions": "168652",
+      "reach": "69883",
+      "clicks": "9125",
+      "ctr": "5.41055",
+      "cpc": "0.011155",
+      "frequency": "2.413348",
+      "cpm": "0.603551",
+      "actions": [
+        {
+          "action_type": "link_click",
+          "value": "8903"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "1"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "7438"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "7438"
+        },
+        {
+          "action_type": "onsite_conversion.total_messaging_connection",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "8915"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "1"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "8915"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_started_7d",
+          "value": "1"
+        },
+        {
+          "action_type": "video_view",
+          "value": "11"
+        }
+      ],
+      "cost_per_action_type": [
+        {
+          "action_type": "video_view",
+          "value": "9.253636"
+        },
+        {
+          "action_type": "link_click",
+          "value": "0.011433"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "101.79"
+        },
+        {
+          "action_type": "onsite_conversion.total_messaging_connection",
+          "value": "101.79"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "0.011418"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "0.011418"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "0.013685"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "0.013685"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_started_7d",
+          "value": "101.79"
+        }
+      ],
+      "quality_ranking": "UNKNOWN",
+      "engagement_rate_ranking": "UNKNOWN",
+      "date_start": "2026-08-01",
+      "date_stop": "2026-08-04",
+      "campaign": {
+        "id": "120243548679410772",
+        "name": "Tr\u00e1fico_web",
+        "status": "ACTIVE",
+        "objective": "OUTCOME_SALES",
+        "daily_budget": "1000"
+      }
+    },
+    {
+      "campaign_name": "2026 - WHATSAPP",
+      "campaign_id": "120243034970160772",
+      "spend": "154.81",
+      "impressions": "48988",
+      "reach": "30656",
+      "clicks": "630",
+      "ctr": "1.286029",
+      "cpc": "0.24573",
+      "frequency": "1.597991",
+      "cpm": "3.160162",
+      "actions": [
+        {
+          "action_type": "onsite_conversion.lead",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_purchase",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "329"
+        },
+        {
+          "action_type": "initiate_checkout",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_search_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "add_to_cart",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_initiate_checkout",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_custom",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_initiate_checkout_add_20_s_calls",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_add_to_cart",
+          "value": "1"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "123"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_replied_7d",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "407"
+        },
+        {
+          "action_type": "onsite_app_purchase",
+          "value": "1"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "6"
+        },
+        {
+          "action_type": "onsite_web_lead",
+          "value": "10"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "6"
+        },
+        {
+          "action_type": "onsite_conversion.total_messaging_connection",
+          "value": "48"
+        },
+        {
+          "action_type": "onsite_conversion.post_unlike",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "489"
+        },
+        {
+          "action_type": "like",
+          "value": "5"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "152"
+        },
+        {
+          "action_type": "onsite_web_app_purchase",
+          "value": "1"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "494"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "407"
+        },
+        {
+          "action_type": "onsite_web_add_to_cart",
+          "value": "1"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "153"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_2_message_send",
+          "value": "7"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_first_reply",
+          "value": "45"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "407"
+        },
+        {
+          "action_type": "post",
+          "value": "18"
+        },
+        {
+          "action_type": "view_content",
+          "value": "407"
+        },
+        {
+          "action_type": "onsite_conversion.post_save",
+          "value": "11"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_3_message_send",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_web_app_add_to_cart",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_save",
+          "value": "11"
+        },
+        {
+          "action_type": "onsite_conversion.purchase",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "122"
+        },
+        {
+          "action_type": "onsite_web_initiate_checkout",
+          "value": "7"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_5_message_send",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_initiated_checkout",
+          "value": "7"
+        },
+        {
+          "action_type": "omni_add_to_cart",
+          "value": "1"
+        },
+        {
+          "action_type": "lead",
+          "value": "10"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "408"
+        },
+        {
+          "action_type": "onsite_web_purchase",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_started_7d",
+          "value": "48"
+        },
+        {
+          "action_type": "onsite_conversion.lead_grouped",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_add_to_cart_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "video_view",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_lead",
+          "value": "9"
+        },
+        {
+          "action_type": "offsite_lead_add_20_s_calls",
+          "value": "9"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "407"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "407"
+        }
+      ],
+      "action_values": [
+        {
+          "action_type": "onsite_web_app_add_to_cart",
+          "value": "37.95"
+        },
+        {
+          "action_type": "onsite_web_add_to_cart",
+          "value": "37.95"
+        },
+        {
+          "action_type": "omni_initiated_checkout",
+          "value": "4322.7"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "19565.07"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_add_to_cart",
+          "value": "37.95"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "19565.07"
+        },
+        {
+          "action_type": "onsite_web_initiate_checkout",
+          "value": "4322.7"
+        },
+        {
+          "action_type": "add_to_cart",
+          "value": "37.95"
+        },
+        {
+          "action_type": "view_content",
+          "value": "19565.07"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_initiate_checkout",
+          "value": "4322.7"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "19565.07"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "19565.07"
+        },
+        {
+          "action_type": "initiate_checkout",
+          "value": "4322.7"
+        },
+        {
+          "action_type": "omni_add_to_cart",
+          "value": "37.95"
+        }
+      ],
+      "cost_per_action_type": [
+        {
+          "action_type": "onsite_conversion.lead",
+          "value": "154.81"
+        },
+        {
+          "action_type": "omni_purchase",
+          "value": "154.81"
+        },
+        {
+          "action_type": "initiate_checkout",
+          "value": "22.115714"
+        },
+        {
+          "action_type": "offsite_submit_application_add_meta_leads",
+          "value": "154.81"
+        },
+        {
+          "action_type": "offsite_search_add_meta_leads",
+          "value": "154.81"
+        },
+        {
+          "action_type": "offsite_initiate_checkout_add_20_s_calls",
+          "value": "22.115714"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "0.380369"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "154.81"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "0.380369"
+        },
+        {
+          "action_type": "offsite_lead_add_20_s_calls",
+          "value": "17.201111"
+        },
+        {
+          "action_type": "video_view",
+          "value": "19.35125"
+        },
+        {
+          "action_type": "link_click",
+          "value": "0.470547"
+        },
+        {
+          "action_type": "like",
+          "value": "30.962"
+        },
+        {
+          "action_type": "onsite_conversion.lead_grouped",
+          "value": "154.81"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "1.018487"
+        },
+        {
+          "action_type": "onsite_web_lead",
+          "value": "15.481"
+        },
+        {
+          "action_type": "onsite_conversion.total_messaging_connection",
+          "value": "3.225208"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "0.316585"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_5_message_send",
+          "value": "77.405"
+        },
+        {
+          "action_type": "onsite_web_initiate_checkout",
+          "value": "22.115714"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_2_message_send",
+          "value": "22.115714"
+        },
+        {
+          "action_type": "onsite_web_purchase",
+          "value": "154.81"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_user_depth_3_message_send",
+          "value": "77.405"
+        },
+        {
+          "action_type": "view_content",
+          "value": "0.380369"
+        },
+        {
+          "action_type": "lead",
+          "value": "15.481"
+        },
+        {
+          "action_type": "offsite_contact_website_add_meta_leads",
+          "value": "51.603333"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "0.313381"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_replied_7d",
+          "value": "154.81"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "0.379436"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "25.801667"
+        },
+        {
+          "action_type": "add_to_cart",
+          "value": "154.81"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "25.801667"
+        },
+        {
+          "action_type": "offsite_add_to_cart_add_20_s_calls",
+          "value": "154.81"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_first_reply",
+          "value": "3.440222"
+        },
+        {
+          "action_type": "omni_initiated_checkout",
+          "value": "22.115714"
+        },
+        {
+          "action_type": "omni_add_to_cart",
+          "value": "154.81"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_started_7d",
+          "value": "3.225208"
+        }
+      ],
+      "quality_ranking": "UNKNOWN",
+      "engagement_rate_ranking": "UNKNOWN",
+      "date_start": "2026-08-01",
+      "date_stop": "2026-08-04",
+      "campaign": {
+        "id": "120243034970160772",
+        "name": "2026 - WHATSAPP",
+        "status": "ACTIVE",
+        "objective": "OUTCOME_ENGAGEMENT"
+      }
+    },
+    {
+      "campaign_name": "BDH |ALCANCE| AUTOSERVICIO",
+      "campaign_id": "120243034666340772",
+      "spend": "0",
+      "actions": [
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "20"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "20"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "20"
+        },
+        {
+          "action_type": "view_content",
+          "value": "20"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "20"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "20"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "20"
+        }
+      ],
+      "action_values": [
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "1228.03"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "1228.03"
+        },
+        {
+          "action_type": "view_content",
+          "value": "1228.03"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "1228.03"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "1228.03"
+        }
+      ],
+      "cost_per_action_type": [
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "0"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "0"
+        },
+        {
+          "action_type": "view_content",
+          "value": "0"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "0"
+        }
+      ],
+      "quality_ranking": "UNKNOWN",
+      "engagement_rate_ranking": "UNKNOWN",
+      "date_start": "2026-08-01",
+      "date_stop": "2026-08-04",
+      "campaign": {
+        "id": "120243034666340772",
+        "name": "BDH |ALCANCE| AUTOSERVICIO",
+        "status": "ACTIVE",
+        "objective": "OUTCOME_AWARENESS"
+      }
+    }
+  ]
+}
